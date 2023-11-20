@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "926332260852",
+    "project_id": "subsparrow-4cca3",
+    "storage_bucket": "subsparrow-4cca3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926332260852:android:cddb4c6e4099432a14e9a1",
+        "android_client_info": {
+          "package_name": "com.yasinertekin.subsparrow.subsparrow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfimpavides0bLywqnIyYmhosD4SHbhJ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
