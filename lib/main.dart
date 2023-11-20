@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:subsparrow/feature/dashboard/view/dashboard_view.dart';
+import 'package:subsparrow/feature/auth/view/auth_view.dart';
 import 'package:subsparrow/product/initialize/app_initialize.dart';
 import 'package:subsparrow/product/initialize/theme/custom_dark_theme.dart';
 
@@ -18,7 +18,7 @@ final class _MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: CustomDarkTheme().themeData,
-      home: const DashboardView(),
+      home: const AuthView(),
     );
   }
 }

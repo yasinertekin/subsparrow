@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:subsparrow/feature/newsub/view/new_sub.dart';
+import 'package:subsparrow/feature/newsub/view/new_sub_view.dart';
 import 'package:subsparrow/product/model/sub_detail/subscription_detail.dart';
 import 'package:subsparrow/product/model/subscriptions.dart';
 import 'package:subsparrow/product/service/firebase_service.dart';
 
 /// NewSub
-mixin NewSubMixin on State<NewSub> {
+mixin NewSubMixin on State<NewSubView> {
   /// customShowBottomSheet
   void customShowBottomSheet(SubscriptionDetail? sub) {
     showModalBottomSheet<void>(

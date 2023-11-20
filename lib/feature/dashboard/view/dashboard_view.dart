@@ -3,7 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/dashboard/view/mixin/dashboard_mixin.dart';
 import 'package:subsparrow/feature/home/view/home_view.dart';
-import 'package:subsparrow/feature/newsub/view/new_sub.dart';
+import 'package:subsparrow/feature/newsub/view/new_sub_view.dart';
 import 'package:subsparrow/product/enum/tab_view.dart';
 import 'package:subsparrow/product/extensions/tab_icons.dart';
 
@@ -23,7 +23,7 @@ final class _DashboardViewState extends State<DashboardView> with DashBoardMixin
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.route.navigateToPage(const NewSub());
+            context.route.navigateToPage(const NewSubView());
           },
           child: const Icon(Icons.add),
         ),
