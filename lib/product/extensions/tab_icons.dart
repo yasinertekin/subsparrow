@@ -6,14 +6,14 @@ extension TabIcons on TabViews {
   /// Icon
   IconData get icon {
     switch (this) {
-      case TabViews.home:
-        return Icons.home;
-      case TabViews.chat:
-        return Icons.chat;
-      case TabViews.calendar:
-        return Icons.calendar_month_rounded;
-      case TabViews.notification:
+      case TabViews.subscriptions:
+        return Icons.subscriptions_outlined;
+      case TabViews.payments:
+        return Icons.payment;
+      case TabViews.notifications:
         return Icons.notifications;
+      case TabViews.profile:
+        return Icons.person;
     }
   }
 }

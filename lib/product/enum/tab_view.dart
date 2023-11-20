@@ -1,1 +1,1 @@
-enum TabViews { home, chat, calendar, notification }
+enum TabViews { subscriptions, payments, notifications, profile }
