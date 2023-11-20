@@ -16,7 +16,6 @@ dependencies:
   lottie: ^2.6.0
   envied: ^0.5.1
   equatable: ^2.0.5
-  # for network model
   vexana: ^3.5.4
 
 dev_dependencies:
