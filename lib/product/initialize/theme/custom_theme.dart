@@ -4,4 +4,6 @@ abstract class CustomTheme {
   ThemeData get themeData;
 
   FloatingActionButtonThemeData get floatingActionButtonThemeData;
+
+  TabBarTheme get tabBarTheme;
 }
