@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:subsparrow/feature/auth/view/auth_view.dart';
+import 'package:subsparrow/feature/auth/view_model/cubit/auth_cubit.dart';
 import 'package:subsparrow/product/initialize/app_initialize.dart';
 import 'package:subsparrow/product/initialize/theme/custom_dark_theme.dart';
+import 'package:subsparrow/product/service/auth_service.dart';
 
 Future<void> main() async {
   await AppInitialize().make();
@@ -18,7 +21,16 @@ final class _MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: CustomDarkTheme().themeData,
-      home: const AuthView(),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthCubit>(
+            create: (context) => AuthCubit(
+              authService: AuthServices(),
+            ),
+          ),
+        ],
+        child: AuthView(),
+      ),
     );
   }
 }

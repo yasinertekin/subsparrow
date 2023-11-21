@@ -10,10 +10,8 @@ final class _ForgotPasswordTextButton extends StatelessWidget {
       child: TextButton(
         onPressed: () {},
         child: Text(
-          ' StringConstants.forgotMyPassword',
-          style: context.general.textTheme.labelLarge?.copyWith(
-            decoration: TextDecoration.underline,
-          ),
+          'Şifremi Unuttum',
+          style: context.general.textTheme.labelLarge?.copyWith(),
         ),
       ),
     );

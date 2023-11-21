@@ -9,17 +9,29 @@ final class CustomDarkTheme implements CustomTheme {
         colorScheme: CustomColorScheme.darkColorScheme,
         floatingActionButtonTheme: floatingActionButtonThemeData,
         tabBarTheme: tabBarTheme,
+        inputDecorationTheme: inputDecorationTheme,
       );
 
   @override
-  // TODO: implement floatingActionButtonThemeData
   FloatingActionButtonThemeData get floatingActionButtonThemeData => const FloatingActionButtonThemeData();
 
   @override
-  // TODO: implement tabBarTheme
   TabBarTheme get tabBarTheme => const TabBarTheme(
         dividerColor: Colors.transparent,
         indicatorColor: Colors.transparent,
         labelPadding: EdgeInsets.zero,
+      );
+
+  @override
+  InputDecorationTheme get inputDecorationTheme => const InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+        ),
       );
 }

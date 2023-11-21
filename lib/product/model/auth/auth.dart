@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
-final class Auth with EquatableMixin {
-  Auth({
+final class UserModel with EquatableMixin {
+  UserModel({
     this.email,
     this.password,
   });
 
-  factory Auth.fromJson(Map<String, dynamic> json) {
-    return Auth(
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
       email: json['email'] as String?,
       password: json['password'] as String?,
     );
@@ -18,11 +18,11 @@ final class Auth with EquatableMixin {
   @override
   List<Object?> get props => [email, password];
 
-  Auth copyWith({
+  UserModel copyWith({
     String? email,
     String? password,
   }) {
-    return Auth(
+    return UserModel(
       email: email ?? this.email,
       password: password ?? this.password,
     );

@@ -9,13 +9,16 @@ final class _RegisterTextButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text(
-          'StringConstants.dontHaveAccount',
+          'Hesabınız yok mu?',
         ),
         TextButton(
           onPressed: () {},
           child: Text(
-            'StringConstants.register',
-            style: context.general.textTheme.labelLarge?.copyWith(),
+            'Hesap oluştur',
+            style: context.general.textTheme.labelLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: Colors.amber,
+            ),
           ),
         ),
       ],

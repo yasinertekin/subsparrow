@@ -1,91 +1,116 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/auth/view/mixin/auth_mixin.dart';
+import 'package:subsparrow/feature/auth/view_model/cubit/auth_cubit.dart';
+import 'package:subsparrow/feature/auth/view_model/state/auth_state.dart';
+import 'package:subsparrow/feature/dashboard/view/dashboard_view.dart';
+import 'package:subsparrow/product/model/auth/auth.dart';
 
-part './widget/email_text_field.dart';
+part 'widget/email_text_field.dart';
 part 'widget/forgot_password_text_button.dart';
 part 'widget/login_button.dart';
 part 'widget/password_text_field.dart';
 part 'widget/register_text_button.dart';
 
-///
+/// View for user authentication
 final class AuthView extends StatefulWidget {
-  ///  {@macro auth_view}
-  const AuthView({super.key});
+  /// Constructor for [AuthView]
+  const AuthView({
+    super.key,
+  });
 
   @override
-
-  /// {@macro auth_view_state}
-  // ignore: library_private_types_in_public_api
-  _AuthViewState createState() => _AuthViewState();
+  State<AuthView> createState() => _AuthViewState();
 }
 
-final class _AuthViewState extends State<AuthView> with AuthMixin {
+class _AuthViewState extends State<AuthView> with AuthMixin {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const _AuthViewHeader(),
-            _AuthViewBody(
-              emailController: emailController,
-              passwordController: passwordController,
-              onPressed: () => checkStatus(context),
-            ),
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('User Authentication'),
+      ),
+      body: BlocBuilder<AuthCubit, AuthState>(
+        builder: (context, state) {
+          switch (state.runtimeType) {
+            case AuthInitial:
+              return _AuthInit(
+                emailController: emailController,
+                passwordController: passwordController,
+              );
+            case AuthLoading:
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            case AuthSuccess:
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                context.route.navigateToPage(
+                  const DashboardView(),
+                );
+              });
+              return const SizedBox();
+
+            case AuthFailure:
+              return Center(
+                child: Column(
+                  children: [
+                    _AuthInit(
+                      emailController: emailController,
+                      passwordController: passwordController,
+                    ),
+                    Text(
+                      'Something went wrong: ${(state as AuthFailure).error}',
+                    ),
+                  ],
+                ),
+              );
+            default:
+              return Container();
+          }
+        },
       ),
     );
   }
 }
 
-final class _AuthViewBody extends StatelessWidget {
-  const _AuthViewBody({
+class _AuthInit extends StatelessWidget {
+  const _AuthInit({
     required this.emailController,
     required this.passwordController,
-    required this.onPressed,
   });
 
   final TextEditingController emailController;
   final TextEditingController passwordController;
-  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: context.padding.low,
+    return Center(
       child: Column(
         children: [
-          _EmailTextField(emailController: emailController),
-          _PasswordTextField(passwordController: passwordController),
-          const _ForgotPasswordTextButton(),
+          const Text(
+            'Enter your email and password to sign in',
+          ),
+          _EmailTextField(
+            emailController: emailController,
+          ),
+          _PasswordTextField(
+            passwordController: passwordController,
+          ),
           _LoginButton(
-            onPressed: onPressed,
+            onPressed: () {
+              context.read<AuthCubit>().signIn(
+                    UserModel(
+                      email: passwordController.text,
+                      password: passwordController.text,
+                    ),
+                    emailController,
+                    passwordController,
+                  );
+            },
           ),
         ],
       ),
-    );
-  }
-}
-
-final class _AuthViewHeader extends StatelessWidget {
-  const _AuthViewHeader();
-
-  @override
-  Widget build(BuildContext context) {
-    const height = 116.49;
-    const width = 105.82;
-    return Column(
-      children: [
-        Text(
-          ' StringConstants.login',
-          style: context.general.textTheme.displaySmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
     );
   }
 }

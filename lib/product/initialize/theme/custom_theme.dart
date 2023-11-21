@@ -6,4 +6,6 @@ abstract class CustomTheme {
   FloatingActionButtonThemeData get floatingActionButtonThemeData;
 
   TabBarTheme get tabBarTheme;
+
+  InputDecorationTheme get inputDecorationTheme;
 }

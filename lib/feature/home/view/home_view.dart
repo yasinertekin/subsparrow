@@ -19,6 +19,7 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: const Text(
             'Aboneliklerim',
           ),
