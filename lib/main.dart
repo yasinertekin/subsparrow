@@ -29,7 +29,7 @@ final class _MyApp extends StatelessWidget {
             ),
           ),
         ],
-        child: AuthView(),
+        child: const AuthView(),
       ),
     );
   }
