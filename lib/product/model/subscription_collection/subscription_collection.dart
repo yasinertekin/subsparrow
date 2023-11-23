@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:subsparrow/product/model/sub_detail/subscription_detail.dart';
 import 'package:subsparrow/product/utility/base/base_firebase_model.dart';
 
-part 'subscriptions.g.dart';
+part 'subscription_collection.g.dart';
 
 @JsonSerializable()
 class SubscriptionCollection extends Equatable with BaseFireBaseModel<SubscriptionCollection>, IdModel {

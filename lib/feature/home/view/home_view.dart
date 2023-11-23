@@ -1,89 +1,69 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:subsparrow/feature/home/mixin/home_view_mixin.dart';
-import 'package:subsparrow/product/model/subscriptions.dart';
+import 'package:subsparrow/feature/home/view/mixin/home_view_mixin.dart';
+import 'package:subsparrow/product/model/user/users.dart';
 
-/// HomeView
 final class HomeView extends StatefulWidget {
-  /// Default constructor for [HomeView].
   const HomeView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State createState() => _HomeViewState();
 }
 
 final class _HomeViewState extends State<HomeView> with HomeViewMixin {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: const Text(
-            'Aboneliklerim',
-          ),
-        ),
-        body: FutureBuilder(
-          future: getSubData(), // Bu fonksiyonun Firebase'den veri çekmesini bekliyoruz
-          builder: (
-            BuildContext context,
-            AsyncSnapshot<QuerySnapshot<SubscriptionCollection?>> snapshot,
-          ) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-                return const Center(
-                  child: Text('Bağlantı Durumu: None'),
-                );
+    return Scaffold(
+      body: StreamBuilder<DocumentSnapshot<Users>>(
+        stream: stopListening ? null : userDocument.snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active) {
+            if (snapshot.hasData) {
+              final users = snapshot.data!.data();
+              final subPriceStrings = users?.subscriptions.map((sub) => sub.subPrice.toString()).toList();
+              final subPrices = subPriceStrings?.map(double.parse).toList();
+              final totalSubPrice = subPrices?.fold(0.0, (previous, current) => previous + current);
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('User Subscriptions:'),
+                  if (users != null && users.subscriptions.isNotEmpty)
+                    ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: users.subscriptions.length,
+                      itemBuilder: (context, index) {
+                        final sub = users.subscriptions[index];
 
-              case ConnectionState.active:
-              case ConnectionState.waiting:
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-
-              case ConnectionState.done:
-                if (snapshot.hasData) {
-                  // Firestore'dan gelen veriyi işle
-                  final subscriptions = snapshot.data!.docs.map((e) => e.data()).toList();
-
-                  return ListView.builder(
-                    itemCount: subscriptions.first?.subscriptions?.length ?? 0,
-                    itemBuilder: (context, index) {
-                      final sub = subscriptions.first?.subscriptions?[index];
-
-                      return Card(
-                        child: ListTile(
-                          leading: SvgPicture.network(
-                            sub?.subIcon ?? '',
-                            height: 50,
-                            width: 50,
+                        return Card(
+                          child: ListTile(
+                            leading: SvgPicture.network(
+                              sub.subIcon.toString(),
+                              height: 50,
+                            ),
+                            title: Text(
+                              sub.subName.toString(),
+                            ),
+                            trailing: Text(
+                              '${sub.subPrice} TL',
+                            ),
                           ),
-                          title: Text(
-                            sub?.subName ?? '',
-                          ),
-                          subtitle: Text(
-                            '${sub?.subPrice} TL',
-                          ),
-                          trailing: IconButton(
-                            onPressed: () {
-                              print('${sub?.subName} silindi');
-                            },
-                            icon: const Icon(Icons.delete),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                } else {
-                  // Firestore'dan veri gelmediği durum
-                  return const Center(
-                    child: Text('Veri Bulunamadı'),
-                  );
-                }
+                        );
+                      },
+                    ),
+                  ListTile(
+                    trailing: Text(
+                      'Toplam: ${totalSubPrice.toString()} TL',
+                    ),
+                  )
+                ],
+              );
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
             }
-          },
-        ),
+          }
+          return const CircularProgressIndicator();
+        },
       ),
     );
   }

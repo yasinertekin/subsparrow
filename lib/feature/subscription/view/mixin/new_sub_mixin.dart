@@ -1,13 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:subsparrow/feature/newsub/view/new_sub_view.dart';
+import 'package:subsparrow/feature/subscription/view/subscription_view.dart';
 import 'package:subsparrow/product/model/sub_detail/subscription_detail.dart';
-import 'package:subsparrow/product/model/subscriptions.dart';
+import 'package:subsparrow/product/model/subscription_collection/subscription_collection.dart';
 import 'package:subsparrow/product/service/firebase_service.dart';
 
 /// NewSub
-mixin NewSubMixin on State<NewSubView> {
+mixin SubscriptionMixin on State<SubscriptionView> {
+  final CollectionReference<Map<String, dynamic>> _subscriptions =
+      FirebaseFirestore.instance.collection('subscriptions');
+  final FirebaseServices _firebaseServices = FirebaseServices();
+  final CollectionReference<Map<String, dynamic>> users = FirebaseFirestore.instance.collection('users');
+
   /// customShowBottomSheet
   void customShowBottomSheet(SubscriptionDetail? sub) {
     showModalBottomSheet<void>(
@@ -42,11 +47,16 @@ mixin NewSubMixin on State<NewSubView> {
     );
   }
 
-  final CollectionReference<Map<String, dynamic>> _subscriptions =
-      FirebaseFirestore.instance.collection('subscriptions');
-  final FirebaseServices _firebaseServices = FirebaseServices();
-
+  /// SubCardList
   Future<QuerySnapshot<SubscriptionCollection?>> getSubData() {
     return _firebaseServices.getSubscriptions(_subscriptions);
+  }
+
+  /// Add Subscription
+  Future<void> addSub(
+    String userId,
+    SubscriptionDetail? newSubDetail,
+  ) {
+    return _firebaseServices.addSubscriptionDetail(userId, newSubDetail, users);
   }
 }

@@ -1,4 +1,4 @@
-part of '../new_sub_view.dart';
+part of '../subscription_view.dart';
 
 final class _NewSubAppBar extends StatelessWidget implements PreferredSizeWidget {
   const _NewSubAppBar();
