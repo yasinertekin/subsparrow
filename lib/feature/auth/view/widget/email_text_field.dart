@@ -9,12 +9,15 @@ final class _EmailTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: emailController,
-      textInputAction: TextInputAction.next,
-      keyboardType: TextInputType.emailAddress,
-      decoration: const InputDecoration(
-        labelText: 'Email',
+    return Padding(
+      padding: context.padding.low,
+      child: TextField(
+        controller: emailController,
+        textInputAction: TextInputAction.next,
+        keyboardType: TextInputType.emailAddress,
+        decoration: const InputDecoration(
+          labelText: 'Email',
+        ),
       ),
     );
   }

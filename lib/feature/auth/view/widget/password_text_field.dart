@@ -1,6 +1,6 @@
 part of '../auth_view.dart';
 
-final class _PasswordTextField extends StatelessWidget {
+final class _PasswordTextField extends StatefulWidget {
   const _PasswordTextField({
     required this.passwordController,
   });
@@ -8,18 +8,35 @@ final class _PasswordTextField extends StatelessWidget {
   final TextEditingController passwordController;
 
   @override
+  State<_PasswordTextField> createState() => _PasswordTextFieldState();
+}
+
+class _PasswordTextFieldState extends State<_PasswordTextField> {
+  bool _obscureText = false;
+
+  @override
   Widget build(BuildContext context) {
-    return TextField(
-      textInputAction: TextInputAction.done,
-      controller: passwordController,
-      decoration: const InputDecoration(
-        labelText: 'Password',
-        suffixIcon: Icon(
-          Icons.visibility_off_outlined,
+    return Padding(
+      padding: context.padding.low,
+      child: TextField(
+        textInputAction: TextInputAction.done,
+        controller: widget.passwordController,
+        decoration: InputDecoration(
+          labelText: 'Password',
+          suffixIcon: IconButton(
+            icon: Icon(
+              _obscureText ? Icons.visibility_off : Icons.visibility,
+            ),
+            onPressed: () {
+              setState(() {
+                _obscureText = !_obscureText;
+              });
+            },
+          ),
         ),
+        obscureText: _obscureText, // Use the boolean here
+        keyboardType: TextInputType.visiblePassword,
       ),
-      obscureText: true,
-      keyboardType: TextInputType.visiblePassword,
     );
   }
 }

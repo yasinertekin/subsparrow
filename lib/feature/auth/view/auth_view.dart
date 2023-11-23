@@ -49,24 +49,23 @@ class _AuthViewState extends State<AuthView> with AuthMixin {
                   const DashboardView(),
                 );
               });
-              return const SizedBox();
+              return const SizedBox.shrink();
 
             case AuthFailure:
-              return Center(
-                child: Column(
-                  children: [
-                    _AuthInit(
-                      emailController: emailController,
-                      passwordController: passwordController,
-                    ),
-                    Text(
-                      'Something went wrong: ${(state as AuthFailure).error}',
-                    ),
-                  ],
-                ),
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _AuthInit(
+                    emailController: emailController,
+                    passwordController: passwordController,
+                  ),
+                  Text(
+                    'Something went wrong: ${(state as AuthFailure).error}',
+                  ),
+                ],
               );
             default:
-              return Container();
+              return const SizedBox.shrink();
           }
         },
       ),
@@ -87,9 +86,10 @@ class _AuthInit extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            'Enter your email and password to sign in',
+            'Welcome to Subsparrow',
           ),
           _EmailTextField(
             emailController: emailController,
@@ -99,18 +99,36 @@ class _AuthInit extends StatelessWidget {
           ),
           _LoginButton(
             onPressed: () {
-              context.read<AuthCubit>().signIn(
-                    UserModel(
-                      email: passwordController.text,
-                      password: passwordController.text,
-                    ),
-                    emailController,
-                    passwordController,
-                  );
+              _signInControl(context);
             },
           ),
+          const _RegisterTextButton(),
         ],
       ),
     );
+  }
+
+  void _signInControl(BuildContext context) {
+    emailController.text.isNotEmpty && passwordController.text.isNotEmpty
+        ? context.read<AuthCubit>().signIn(
+              UserModel(
+                email: passwordController.text,
+                password: passwordController.text,
+              ),
+              emailController,
+              passwordController,
+            )
+        : ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text(
+                'Email veya şifre boş olamaz',
+              ),
+              duration: const Duration(seconds: 2), // Snackbar'ın ekranda kalma süresi
+              action: SnackBarAction(
+                label: 'Kapat',
+                onPressed: () {},
+              ),
+            ),
+          );
   }
 }
