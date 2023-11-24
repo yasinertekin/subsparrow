@@ -1,10 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kartal/kartal.dart';
-import 'package:subsparrow/feature/Sub%20Detail/view/sub_detail_view.dart';
+import 'package:subsparrow/feature/sub%20detail/view/sub_detail_view.dart';
 import 'package:subsparrow/feature/subscription/view/mixin/subscription_mixin.dart';
 import 'package:subsparrow/product/model/subscription/subscription.dart';
 import 'package:subsparrow/product/model/subscription_collection/subscription_collection.dart';
@@ -72,7 +71,6 @@ final class _NewSubViewState extends State<SubscriptionView> with SubscriptionMi
       itemCount: subscriptions.first?.subscriptions?.length ?? 0,
       itemBuilder: (context, index) {
         final sub = subscriptions.first?.subscriptions?[index];
-        final user = FirebaseAuth.instance.currentUser?.uid;
 
         return _SubCard(
           onTap: () {

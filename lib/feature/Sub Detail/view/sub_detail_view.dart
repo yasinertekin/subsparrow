@@ -16,10 +16,6 @@ final class SubDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => print(subDetail?.subOnePrice),
-        child: const Icon(Icons.add),
-      ),
       appBar: AppBar(
         title: const Text('Abonelik Detayları'),
       ),
