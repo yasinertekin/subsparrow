@@ -21,9 +21,17 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
           if (snapshot.connectionState == ConnectionState.active) {
             if (snapshot.hasData) {
               final users = snapshot.data!.data();
-              final subPriceStrings = users?.subscriptions.map((sub) => sub.subPrice.toString()).toList();
+              /*    final subPriceStrings = users?.subscriptions
+                  .map(
+                    (sub) => sub.subBasePrice.toString(),
+                  )
+                  .toList();
+
               final subPrices = subPriceStrings?.map(double.parse).toList();
-              final totalSubPrice = subPrices?.fold(0.0, (previous, current) => previous + current);
+              final totalSubPrice = subPrices?.fold(
+                0.0,
+                (previous, current) => previous + current,
+              );*/
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -34,7 +42,6 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
                       itemCount: users.subscriptions.length,
                       itemBuilder: (context, index) {
                         final sub = users.subscriptions[index];
-
                         return Card(
                           child: ListTile(
                             leading: SvgPicture.network(
@@ -45,17 +52,12 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
                               sub.subName.toString(),
                             ),
                             trailing: Text(
-                              '${sub.subPrice} TL',
+                              '${sub.subBasePrice} TL',
                             ),
                           ),
                         );
                       },
                     ),
-                  ListTile(
-                    trailing: Text(
-                      'Toplam: ${totalSubPrice.toString()} TL',
-                    ),
-                  )
                 ],
               );
             } else if (snapshot.hasError) {

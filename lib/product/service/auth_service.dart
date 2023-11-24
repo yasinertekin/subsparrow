@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:subsparrow/product/model/auth/auth.dart';
+import 'package:subsparrow/product/service/auth_interface.dart';
 
-abstract class AuthService {
-  Future<bool> signIn(UserModel auth, TextEditingController emailController, TextEditingController passwordController);
-}
-
+/// This class is responsible for creating auth service object
 final class AuthServices extends AuthService {
   @override
   Future<bool> signIn(

@@ -3,8 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:subsparrow/feature/subscription/view/mixin/new_sub_mixin.dart';
-import 'package:subsparrow/product/model/sub_detail/subscription_detail.dart';
+import 'package:kartal/kartal.dart';
+import 'package:subsparrow/feature/Sub%20Detail/view/sub_detail_view.dart';
+import 'package:subsparrow/feature/subscription/view/mixin/subscription_mixin.dart';
+import 'package:subsparrow/product/model/subscription/subscription.dart';
 import 'package:subsparrow/product/model/subscription_collection/subscription_collection.dart';
 
 part 'widget/new_sub_app_bar.dart';
@@ -74,7 +76,10 @@ final class _NewSubViewState extends State<SubscriptionView> with SubscriptionMi
 
         return _SubCard(
           onTap: () {
-            addSub(user.toString(), sub);
+            context.route.navigateToPage(
+              SubDetailView(subDetail: sub),
+            );
+            //  addSub(user.toString(), sub);
           },
           sub: sub,
         );

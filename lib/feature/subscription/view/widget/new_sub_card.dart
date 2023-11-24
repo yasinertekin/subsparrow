@@ -6,7 +6,7 @@ final class _SubCard extends StatelessWidget {
     required this.sub,
   });
 
-  final SubscriptionDetail? sub;
+  final Subscription? sub;
 
   final void Function()? onTap;
 
@@ -39,7 +39,7 @@ final class _SubCardTitle extends StatelessWidget {
     required this.sub,
   });
 
-  final SubscriptionDetail? sub;
+  final Subscription? sub;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ final class _SubCardImage extends StatelessWidget {
     required this.sub,
   });
 
-  final SubscriptionDetail? sub;
+  final Subscription? sub;
 
   @override
   Widget build(BuildContext context) {

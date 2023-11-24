@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:subsparrow/feature/subscription/view/subscription_view.dart';
-import 'package:subsparrow/product/model/sub_detail/subscription_detail.dart';
+import 'package:subsparrow/product/model/subscription/subscription.dart';
 import 'package:subsparrow/product/model/subscription_collection/subscription_collection.dart';
 import 'package:subsparrow/product/service/firebase_service.dart';
 
@@ -14,7 +14,7 @@ mixin SubscriptionMixin on State<SubscriptionView> {
   final CollectionReference<Map<String, dynamic>> users = FirebaseFirestore.instance.collection('users');
 
   /// customShowBottomSheet
-  void customShowBottomSheet(SubscriptionDetail? sub) {
+  void customShowBottomSheet(Subscription? sub) {
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) => SizedBox(
@@ -55,8 +55,12 @@ mixin SubscriptionMixin on State<SubscriptionView> {
   /// Add Subscription
   Future<void> addSub(
     String userId,
-    SubscriptionDetail? newSubDetail,
+    Subscription? newSubDetail,
   ) {
-    return _firebaseServices.addSubscriptionDetail(userId, newSubDetail, users);
+    return _firebaseServices.addSubscriptionDetail(
+      userId,
+      newSubDetail,
+      users,
+    );
   }
 }

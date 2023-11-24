@@ -1,4 +1,4 @@
-import 'package:subsparrow/product/model/sub_detail/subscription_detail.dart';
+import 'package:subsparrow/product/model/subscription/subscription.dart';
 
 ///
 final class Users {
@@ -10,12 +10,12 @@ final class Users {
       : subscriptions = (json['subscriptionDetails'] as List<dynamic>?)
 
                 ///
-                ?.map((detailJson) => SubscriptionDetail.fromJson(detailJson as Map<String, dynamic>))
+                ?.map((detailJson) => Subscription.fromJson(detailJson as Map<String, dynamic>))
                 .toList() ??
             [];
 
   ///
-  final List<SubscriptionDetail> subscriptions;
+  final List<Subscription> subscriptions;
 
   Map<String, dynamic> toJson() {
     return {

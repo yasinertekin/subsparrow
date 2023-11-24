@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:subsparrow/feature/auth/view_model/state/auth_state.dart';
 import 'package:subsparrow/product/model/auth/auth.dart';
-import 'package:subsparrow/product/service/auth_service.dart';
+import 'package:subsparrow/product/service/auth_interface.dart';
 
 /// AuthCubit
 final class AuthCubit extends Cubit<AuthState> {

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:subsparrow/product/model/sub_detail/subscription_detail.dart';
+import 'package:subsparrow/product/model/subscription/subscription.dart';
 import 'package:subsparrow/product/model/subscription_collection/subscription_collection.dart';
 
 /// FirebaseService
@@ -9,12 +9,12 @@ abstract class FirebaseService {
   );
   Future<void> addUser(
     String documentId,
-    List<SubscriptionDetail> subDetails,
+    List<Subscription> subDetails,
     CollectionReference<Object?> users,
   );
   Future<void> addSubscriptionDetail(
     String userId,
-    SubscriptionDetail newSubDetail,
+    Subscription newSubDetail,
     CollectionReference<Object?> users,
   );
 }
@@ -46,7 +46,7 @@ class FirebaseServices extends FirebaseService {
   @override
   Future<void> addUser(
     String documentId,
-    List<SubscriptionDetail> subDetails,
+    List<Subscription> subDetails,
     CollectionReference<Object?> users,
   ) async {
     try {
@@ -60,7 +60,7 @@ class FirebaseServices extends FirebaseService {
   @override
   Future<void> addSubscriptionDetail(
     String userId,
-    SubscriptionDetail? newSubDetail,
+    Subscription? newSubDetail,
     CollectionReference users,
   ) async {
     try {
