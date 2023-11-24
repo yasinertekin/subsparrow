@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:subsparrow/feature/Sub%20Detail/view_model/sub_detail_notifier.dart';
+import 'package:subsparrow/feature/sub%20detail/view_model/sub_detail_notifier.dart';
 import 'package:subsparrow/product/model/subscription/subscription.dart';
 
 /// SubDetail
