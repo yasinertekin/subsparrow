@@ -2,32 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:subsparrow/feature/dashboard/view/dashboard_view.dart';
 import 'package:subsparrow/product/enum/tab_view.dart';
 
+/// DashBoardMixin
 mixin DashBoardMixin on State<DashboardView> implements TickerProvider {
-  late final TabController tabController;
+  late final TabController _tabController;
+
+  /// tabController
+  TabController get tabController => _tabController;
 
   @override
   void initState() {
     super.initState();
-    initTabController(TabViews.values.length, this);
+    _initTabController(TabViews.values.length, this);
   }
 
   @override
   void dispose() {
-    disposeTabController();
+    _disposeTabController();
     super.dispose();
   }
 
-  void initTabController(int length, TickerProvider vsync) {
-    tabController = TabController(
+  void _initTabController(int length, TickerProvider vsync) {
+    _tabController = TabController(
       length: length,
       vsync: vsync,
     );
   }
 
-  void disposeTabController() {
-    tabController.dispose();
+  void _disposeTabController() {
+    _tabController.dispose();
   }
 
+  /// Formats enum name to a more readable format
   String formatEnumName(String value) {
     final name = value;
     var formattedName = '';
