@@ -10,6 +10,7 @@ import 'package:subsparrow/product/model/user/users.dart';
 
 part './widget/home_app_bar.dart';
 part 'widget/home_sub_list_card.dart';
+part 'widget/home_total_price_card.dart';
 
 final class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -29,7 +30,8 @@ class _HomeViewState extends State<HomeView> with HomeViewMixin {
           if (snapshot.connectionState == ConnectionState.active) {
             if (snapshot.hasData) {
               final users = snapshot.data!.data();
-              /*    final subPriceStrings = users?.subscriptions
+
+              final subPriceStrings = users?.subscriptions
                   .map(
                     (sub) => sub.subBasePrice.toString(),
                   )
@@ -39,14 +41,25 @@ class _HomeViewState extends State<HomeView> with HomeViewMixin {
               final totalSubPrice = subPrices?.fold(
                 0.0,
                 (previous, current) => previous + current,
-              );*/
+              );
               return Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Gap(20),
+                  Padding(
+                    padding: context.padding.low,
+                    child: Text(
+                      'Aboneliklerim',
+                      style: context.general.textTheme.displaySmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                   if (users != null && users.subscriptions.isNotEmpty)
                     _SubscriptionList(
                       users: users,
                     ),
+                  _TotalPriceCard(totalSubPrice: totalSubPrice ?? 0.0),
                 ],
               );
             } else if (snapshot.hasError) {
