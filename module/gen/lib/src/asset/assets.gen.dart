@@ -25,22 +25,15 @@ class $AssetsColorGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/ic_date_picker.svg
+  SvgGenImage get icDatePicker =>
+      const SvgGenImage('assets/icons/ic_date_picker.svg');
+
   /// File path: assets/icons/ic_love.svg
   SvgGenImage get icLove => const SvgGenImage('assets/icons/ic_love.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [icLove];
-}
-
-class $AssetsImagesGen {
-  const $AssetsImagesGen();
-
-  /// File path: assets/images/img_flags.png
-  AssetGenImage get imgFlags =>
-      const AssetGenImage('assets/images/img_flags.png');
-
-  /// List of all assets
-  List<AssetGenImage> get values => [imgFlags];
+  List<SvgGenImage> get values => [icDatePicker, icLove];
 }
 
 class $AssetsLottieGen {
@@ -59,7 +52,6 @@ class Assets {
 
   static const $AssetsColorGen color = $AssetsColorGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
-  static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLottieGen lottie = $AssetsLottieGen();
 }
 

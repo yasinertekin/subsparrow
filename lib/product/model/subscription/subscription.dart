@@ -14,12 +14,13 @@ final class Subscription with EquatableMixin {
     this.subName,
     this.subType,
     this.subBasePrice,
-    this.subPrices,
+    // this.subPrices,
     this.startDate,
     this.endDate,
     this.status,
     this.subIcon,
     this.subOnePrice,
+    this.subBaseMonth,
   });
 
   factory Subscription.fromJson(Map<String, dynamic> json) => _$SubscriptionFromJson(
@@ -44,7 +45,7 @@ final class Subscription with EquatableMixin {
   // @JsonKey(name: 'subPrices')
 
   /// This property is responsible for holding subscription prices
-  final List<SubPrices>? subPrices;
+  // final List<SubPrices>? subPrices;
   @JsonKey(name: 'subStartDate')
 
   /// This property is responsible for holding subscription start date
@@ -66,6 +67,11 @@ final class Subscription with EquatableMixin {
   @JsonKey(name: 'subOnePrice')
   final bool? subOnePrice;
 
+  @JsonKey(name: 'subBaseMonth')
+
+  /// This property is responsible for holding subscription base month
+  final String? subBaseMonth;
+
   /// This function is responsible for converting subscription object to json
   Map<String, dynamic> toJson() => _$SubscriptionToJson(this);
 
@@ -75,11 +81,12 @@ final class Subscription with EquatableMixin {
         subName,
         subType,
         subBasePrice,
-        subPrices,
+        //      subPrices,
         startDate,
         endDate,
         status,
         subIcon,
+        subBaseMonth,
       ];
 
   ///This function is responsible for copying subscription object with new values
@@ -94,18 +101,20 @@ final class Subscription with EquatableMixin {
     bool? status,
     String? subIcon,
     bool? subOneMonth,
+    String? subBaseMonth,
   }) {
     return Subscription(
       subId: subId ?? this.subId,
       subName: subName ?? this.subName,
       subType: subType ?? this.subType,
       subBasePrice: subBasePrice ?? this.subBasePrice,
-      subPrices: subPrices ?? this.subPrices,
+      //   subPrices: subPrices ?? this.subPrices,
       startDate: startDate ?? this.startDate,
       endDate: endDate ?? this.endDate,
       status: status ?? this.status,
       subIcon: subIcon ?? this.subIcon,
       subOnePrice: subOneMonth ?? subOnePrice,
+      subBaseMonth: subBaseMonth ?? subBaseMonth,
     );
   }
 }
