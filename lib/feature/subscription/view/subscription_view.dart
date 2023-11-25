@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gen/gen.dart';
 import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/sub_detail/view/sub_detail_view.dart';
 import 'package:subsparrow/feature/subscription/view/mixin/subscription_mixin.dart';
@@ -39,8 +40,10 @@ final class _NewSubViewState extends State<SubscriptionView> with SubscriptionMi
         ) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
-              return const Center(
-                child: Text('Bağlantı Durumu: None'),
+              return Center(
+                child: Assets.images.imgSubSparrowLogo.image(
+                  package: 'gen',
+                ),
               );
 
             case ConnectionState.active:
@@ -69,7 +72,10 @@ final class _NewSubViewState extends State<SubscriptionView> with SubscriptionMi
     );
   }
 
-  ListView _subCardList(List<SubscriptionCollection?> subscriptions, Users? user) {
+  ListView _subCardList(
+    List<SubscriptionCollection?> subscriptions,
+    Users? user,
+  ) {
     return ListView.builder(
       itemCount: subscriptions.first?.subscriptions?.length ?? 0,
       itemBuilder: (context, index) {

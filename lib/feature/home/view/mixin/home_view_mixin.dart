@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:subsparrow/feature/home/view/home_view.dart';
 import 'package:subsparrow/product/model/user/users.dart';
 
-///
+/// Bu mixin, HomeView sınıfı için kullanılacak
 mixin HomeViewMixin on State<HomeView> {
   /// Bu mixin, HomeView sınıfı için kullanılacak
   late final String auth;

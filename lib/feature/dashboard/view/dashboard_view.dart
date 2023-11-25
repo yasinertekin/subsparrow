@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:gen/gen.dart';
 import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/dashboard/view/mixin/dashboard_mixin.dart';
 import 'package:subsparrow/feature/home/view/home_view.dart';
@@ -87,8 +88,8 @@ final class _DashboardView extends StatelessWidget {
       controller: _tabController,
       children: [
         const HomeView(),
-        Container(
-          color: Colors.red,
+        Assets.icons.icRobinBird.svg(
+          package: 'gen',
         ),
         Container(
           color: Colors.red,

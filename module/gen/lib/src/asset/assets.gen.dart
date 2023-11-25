@@ -32,8 +32,32 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_love.svg
   SvgGenImage get icLove => const SvgGenImage('assets/icons/ic_love.svg');
 
+  /// File path: assets/icons/ic_robin_bird.svg
+  SvgGenImage get icRobinBird =>
+      const SvgGenImage('assets/icons/ic_robin_bird.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [icDatePicker, icLove];
+  List<SvgGenImage> get values => [icDatePicker, icLove, icRobinBird];
+}
+
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/img_sub_logo.png
+  AssetGenImage get imgSubLogo =>
+      const AssetGenImage('assets/images/img_sub_logo.png');
+
+  /// File path: assets/images/img_sub_logo_two.png
+  AssetGenImage get imgSubLogoTwo =>
+      const AssetGenImage('assets/images/img_sub_logo_two.png');
+
+  /// File path: assets/images/img_sub_sparrow_logo.png
+  AssetGenImage get imgSubSparrowLogo =>
+      const AssetGenImage('assets/images/img_sub_sparrow_logo.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values =>
+      [imgSubLogo, imgSubLogoTwo, imgSubSparrowLogo];
 }
 
 class $AssetsLottieGen {
@@ -52,6 +76,7 @@ class Assets {
 
   static const $AssetsColorGen color = $AssetsColorGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLottieGen lottie = $AssetsLottieGen();
 }
 
