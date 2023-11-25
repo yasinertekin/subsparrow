@@ -8,7 +8,7 @@ final class SubDetailNotifier extends ChangeNotifier {
   /// SubDetailNotifier constructor
   SubDetailNotifier() {
     selectedDate = DateTime.now();
-    oneMonthLater = selectedDate.add(const Duration(days: 30));
+    //  oneMonthLater = selectedDate.add(const Duration(days: days));
   }
 
   final FirebaseServices _firebaseServices = FirebaseServices();
@@ -21,17 +21,21 @@ final class SubDetailNotifier extends ChangeNotifier {
   late DateTime oneMonthLater;
 
   /// selectDate
-  Future<void> selectDate(BuildContext context) async {
+  Future<DateTime?> selectDate(BuildContext context) async {
+    const firstDate = 2000;
+    const lastDate = 2101;
     final picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
+      firstDate: DateTime(firstDate),
+      lastDate: DateTime(lastDate),
     );
     if (picked != null && picked != selectedDate) {
       selectedDate = picked;
-      oneMonthLater = selectedDate.add(const Duration(days: 30));
       notifyListeners();
+      return picked; // Return the picked date
+    } else {
+      return null; // Return null if the user cancels
     }
   }
 
