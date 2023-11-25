@@ -1,1 +1,1 @@
-enum SubViewEnum { date, price }
+enum SubViewEnum { date, monthLength, subPrice }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:subsparrow/feature/sub_detail/view/sub_detail_view.dart';
+import 'package:subsparrow/feature/sub_detail/view_model/sub_detail_notifier.dart';
 import 'package:subsparrow/product/enum/sub_view_enum.dart';
 
 /// SubViewMixin
@@ -10,6 +11,11 @@ mixin SubDetailMixin on State<SubDetailView> implements TickerProvider {
 
   /// pageController
   PageController get pageController => _pageController;
+
+  final SubDetailNotifier _subDetailNotifier = SubDetailNotifier();
+
+  /// subDetailNotifier
+  SubDetailNotifier get subDetailNotifier => _subDetailNotifier;
 
   @override
   void initState() {

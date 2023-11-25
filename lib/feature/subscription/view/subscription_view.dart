@@ -8,16 +8,13 @@ import 'package:subsparrow/feature/sub_detail/view/sub_detail_view.dart';
 import 'package:subsparrow/feature/subscription/view/mixin/subscription_mixin.dart';
 import 'package:subsparrow/product/model/subscription/subscription.dart';
 import 'package:subsparrow/product/model/subscription_collection/subscription_collection.dart';
-import 'package:subsparrow/product/model/user/users.dart';
 
 part 'widget/new_sub_app_bar.dart';
 part 'widget/new_sub_card.dart';
 
 /// NewSub
 final class SubscriptionView extends StatefulWidget {
-  const SubscriptionView({required this.user, super.key});
-
-  final Users? user;
+  const SubscriptionView({super.key});
 
   @override
   State<SubscriptionView> createState() => _NewSubViewState();
@@ -60,7 +57,9 @@ final class _NewSubViewState extends State<SubscriptionView> with SubscriptionMi
                     )
                     .toList();
 
-                return _subCardList(subscriptions, widget.user);
+                return _subCardList(
+                  subscriptions,
+                );
               } else {
                 return const Center(
                   child: Text('Veri Bulunamadı'),
@@ -74,7 +73,6 @@ final class _NewSubViewState extends State<SubscriptionView> with SubscriptionMi
 
   ListView _subCardList(
     List<SubscriptionCollection?> subscriptions,
-    Users? user,
   ) {
     return ListView.builder(
       itemCount: subscriptions.first?.subscriptions?.length ?? 0,
@@ -86,7 +84,6 @@ final class _NewSubViewState extends State<SubscriptionView> with SubscriptionMi
             context.route.navigateToPage(
               SubDetailView(
                 subDetail: sub,
-                user: user,
               ),
             );
             //  addSub(user.toString(), sub);

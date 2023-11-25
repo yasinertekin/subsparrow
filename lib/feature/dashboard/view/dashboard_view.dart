@@ -36,9 +36,7 @@ final class _DashboardViewState extends State<DashboardView> with DashBoardMixin
               ),
             );*/
             context.route.navigateToPage(
-              const SubscriptionView(
-                user: null,
-              ),
+              const SubscriptionView(),
             );
           },
           child: const Icon(Icons.add),

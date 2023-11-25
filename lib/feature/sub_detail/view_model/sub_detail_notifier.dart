@@ -8,7 +8,7 @@ final class SubDetailNotifier extends ChangeNotifier {
   /// SubDetailNotifier constructor
   SubDetailNotifier() {
     selectedDate = DateTime.now();
-    //  oneMonthLater = selectedDate.add(const Duration(days: days));
+    monthCount = selectedDate.add(const Duration(days: 30));
   }
 
   final FirebaseServices _firebaseServices = FirebaseServices();
@@ -18,7 +18,7 @@ final class SubDetailNotifier extends ChangeNotifier {
   late DateTime selectedDate;
 
   /// oneMonthLater
-  late DateTime oneMonthLater;
+  late DateTime monthCount;
 
   /// selectDate
   Future<DateTime?> selectDate(BuildContext context) async {
