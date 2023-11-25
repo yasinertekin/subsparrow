@@ -6,8 +6,13 @@ import 'package:subsparrow/product/model/user/users.dart';
 
 ///
 mixin HomeViewMixin on State<HomeView> {
+  /// Bu mixin, HomeView sınıfı için kullanılacak
   late final String auth;
+
+  /// Bu mixin, HomeView sınıfı için kullanılacak
   late final DocumentReference<Users> userDocument;
+
+  /// Bu mixin, HomeView sınıfı için kullanılacak
   bool stopListening = false;
 
   @override
