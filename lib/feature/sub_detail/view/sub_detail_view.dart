@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/scheduler/ticker.dart';
 import 'package:gap/gap.dart';
@@ -9,21 +10,31 @@ import 'package:subsparrow/product/enum/sub_length.dart';
 import 'package:subsparrow/product/enum/sub_view_enum.dart';
 import 'package:subsparrow/product/model/subscription/subscription.dart';
 
+part './widget/sub_month_list.dart';
+part 'widget/price_view.dart';
 part 'widget/sub_detail_app_bar.dart';
+part 'widget/subscription_date_time_picker.dart';
 
 /// SubDetail
 final class SubDetailView extends StatefulWidget {
   /// SubDetail constructor
-  const SubDetailView({required this.subDetail, super.key});
+  const SubDetailView({
+    required this.subDetail,
+    required this.subDetailsList,
+    super.key,
+  });
 
   /// SubDetail key
   final Subscription? subDetail;
+
+  /// SubDetail key
+  final List<Subscription>? subDetailsList;
 
   @override
   State<SubDetailView> createState() => _SubDetailViewState();
 }
 
-class _SubDetailViewState extends State<SubDetailView> with SubDetailMixin {
+final class _SubDetailViewState extends State<SubDetailView> with SubDetailMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,18 +59,18 @@ class _SubDetailViewState extends State<SubDetailView> with SubDetailMixin {
                 pageController: pageController,
               );
             case SubViewEnum.subPrice:
-              // Handle subPrice case
-              // You can return a different widget or perform specific actions for subPrice
-              return Column(
-                children: [
-                  ListView.builder(
-                    itemCount: 1,
-                    itemBuilder: (BuildContext context, int index) {
-                      return;
-                    },
-                  ),
-                ],
+              return _PriceView(
+                subPrices: subPrices,
+                subDetailNotifier: subDetailNotifier,
+                pageController: pageController,
               );
+            case SubViewEnum.verifications:
+              return _VerificationView(
+                subDetail: widget.subDetail!,
+                subDetailNotifier: subDetailNotifier,
+              );
+            default:
+              throw ArgumentError('Unhandled case: ${SubViewEnum.values[index]}');
           }
         },
       ),
@@ -72,115 +83,51 @@ class _SubDetailViewState extends State<SubDetailView> with SubDetailMixin {
   }
 }
 
-final class _SubMonthList extends StatelessWidget {
-  const _SubMonthList({
+final class _VerificationView extends StatelessWidget {
+  const _VerificationView({
     required this.subDetailNotifier,
-    required this.pageController,
-  });
-
-  final SubDetailNotifier subDetailNotifier;
-  final PageController pageController;
-
-  String _formatEnumName(SubLength enumValue) {
-    final enumName = enumValue.toString().split('.').last;
-    final words = enumName.split(RegExp('(?=[A-Z])'));
-
-    for (var i = 0; i < words.length; i++) {
-      words[i] = words[i][0].toUpperCase() + words[i].substring(1);
-    }
-
-    return words.join(' ');
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: SubLength.values.length,
-      itemBuilder: (BuildContext context, int index) {
-        final currentSubLength = SubLength.values[index];
-
-        return ListTile(
-          title: Text(
-            _formatEnumName(currentSubLength),
-          ),
-          onTap: () async {
-            subDetailNotifier.monthCount = subDetailNotifier.selectedDate.add(
-              Duration(
-                days: getSubscriptionDays(currentSubLength),
-              ),
-            );
-            await pageController.nextPage(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-            );
-          },
-        );
-      },
-    );
-  }
-}
-
-final class _SubscriptionDateTimePicker extends StatelessWidget {
-  const _SubscriptionDateTimePicker({
-    required this.subView,
-    required this.subDetailNotifier,
-    required this.checkPickedDate,
     required this.subDetail,
-    required this.pageController,
   });
-  final SubViewEnum subView;
   final SubDetailNotifier subDetailNotifier;
-  final void Function(DateTime pickedDate) checkPickedDate;
-  final Subscription? subDetail;
-  final PageController pageController;
+  final Subscription subDetail;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Abonelik Başlangıç Tarihiniz',
-              style: context.general.textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+        const Gap(15),
+        Text(
+          subDetailNotifier.selectedDate.toString(),
         ),
-        Assets.icons.icDatePicker.svg(
-          package: 'gen',
-          height: context.sized.dynamicHeight(0.35),
+        const Gap(15),
+        Text(
+          subDetailNotifier.monthCount.toString(),
         ),
-        Padding(
-          padding: context.padding.low,
-          child: Column(
-            children: [
-              const Gap(15),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    final pickedDate = await subDetailNotifier.selectDate(
-                      context,
-                    );
-                    if (pickedDate != null) {
-                      await pageController.nextPage(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                      );
-                    }
-                  },
-                  child: const Text(
-                    'Tarih Seç',
-                  ),
-                ),
+        const Gap(15),
+        Text(
+          subDetailNotifier.subPrice.toString(),
+        ),
+        const Gap(15),
+        Text(
+          subDetailNotifier.character,
+        ),
+        const Gap(15),
+        Text(
+          subDetailNotifier.subPrice.toString(),
+        ),
+        ElevatedButton(
+          onPressed: () async {
+            await subDetailNotifier.addSub(
+              FirebaseAuth.instance.currentUser!.uid,
+              subDetail.copyWith(
+                subBasePrice: subDetailNotifier.subPrice.toString(),
+                startDate: subDetailNotifier.selectedDate,
+                endDate: subDetailNotifier.monthCount,
+                subBaseMonth: subDetailNotifier.monthCount.toString(),
               ),
-            ],
-          ),
+            );
+          },
+          child: const Text('Save'),
         ),
       ],
     );

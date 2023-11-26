@@ -5,6 +5,10 @@ import 'package:subsparrow/product/enum/sub_view_enum.dart';
 
 /// SubViewMixin
 mixin SubDetailMixin on State<SubDetailView> implements TickerProvider {
+  late final _subPrices = widget.subDetail?.subPrices?.toJson();
+
+  Map<String, dynamic> get subPrices => _subPrices!;
+
   late final PageController _pageController;
 
   final int _milliseconds = 500;
