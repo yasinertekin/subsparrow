@@ -37,6 +37,9 @@ final class _SubMonthList extends StatelessWidget {
                 days: getSubscriptionDays(currentSubLength),
               ),
             );
+            subDetailNotifier.setSubViewEnum(
+              pageController.page!.toInt() + 1,
+            );
             await pageController.nextPage(
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut,

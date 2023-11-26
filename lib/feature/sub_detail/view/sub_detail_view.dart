@@ -38,13 +38,15 @@ final class _SubDetailViewState extends State<SubDetailView> with SubDetailMixin
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const _SubDetailAppBar(),
+      appBar: _SubDetailAppBar(
+        subDetailNotifier: subDetailNotifier,
+      ),
       body: PageView.builder(
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
         itemCount: SubViewEnum.values.length,
         itemBuilder: (context, index) {
-          switch (SubViewEnum.values[index]) {
+          switch (subDetailNotifier.subViewEnum) {
             case SubViewEnum.date:
               return _SubscriptionDateTimePicker(
                 subView: SubViewEnum.date,

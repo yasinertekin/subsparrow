@@ -19,7 +19,6 @@ final class _SubscriptionDateTimePicker extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const _DateTimeTitle(),
         Assets.icons.icDatePicker.svg(
           package: 'gen',
           height: context.sized.dynamicHeight(0.35),
@@ -58,6 +57,9 @@ final class _DateTimeButton extends StatelessWidget {
                   context,
                 );
                 if (pickedDate != null) {
+                  subDetailNotifier.setSubViewEnum(
+                    pageController.page!.toInt() + 1,
+                  );
                   await pageController.nextPage(
                     duration: const Duration(
                       milliseconds: milliseconds,

@@ -29,6 +29,9 @@ final class _PriceView extends StatelessWidget {
                         ..selectPrice(
                           subPrices?.values.elementAt(index).toString(),
                         );
+                      subDetailNotifier.setSubViewEnum(
+                        pageController.page!.toInt() + 1,
+                      );
                       pageController.nextPage(
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.easeIn,

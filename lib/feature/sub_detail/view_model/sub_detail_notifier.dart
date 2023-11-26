@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:subsparrow/product/enum/sub_view_enum.dart';
 import 'package:subsparrow/product/model/subscription/subscription.dart';
 import 'package:subsparrow/product/service/firebase_service.dart';
 
@@ -62,6 +63,13 @@ final class SubDetailNotifier extends ChangeNotifier {
 
   void setSelectedRadio(String? value) {
     character = value!;
+    notifyListeners();
+  }
+
+  SubViewEnum subViewEnum = SubViewEnum.date;
+
+  void setSubViewEnum(int value) {
+    subViewEnum = SubViewEnum.values[value];
     notifyListeners();
   }
 }
