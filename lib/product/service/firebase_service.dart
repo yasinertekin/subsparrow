@@ -64,39 +64,37 @@ class FirebaseServices extends FirebaseService {
     CollectionReference users,
   ) async {
     try {
-      var documentSnapshot = await users.doc(userId).get();
+      // Convert SubPrices to a Map
+      final subPricesMap = {
+        'basic': newSubDetail!.subPrices!.basic,
+        'standard': newSubDetail.subPrices!.standard,
+        'premium': newSubDetail.subPrices!.premium,
+      };
 
-      if (!documentSnapshot.exists) {
-        await users.doc(userId).set({'subscriptionDetails'});
-        documentSnapshot = await users.doc(userId).get();
-      }
+      // Explicitly convert subPricesMap to JSON
+      final subPricesJson = Map<String, dynamic>.from(subPricesMap);
 
-      final data = documentSnapshot.data() as Map<String, dynamic>?;
+      // Convert the entire Subscription object to a JSON-like structure
+      final subscriptionJson = {
+        'subId': newSubDetail.subId,
+        'subName': newSubDetail.subName,
+        'subType': newSubDetail.subType,
+        'subBasePrice': newSubDetail.subBasePrice,
+        'subPrices': subPricesJson,
+        'status': newSubDetail.status,
+        'subIcon': newSubDetail.subIcon,
+        'subOnePrice': newSubDetail.subOnePrice,
+        'subBaseMonth': newSubDetail.subBaseMonth,
+      };
 
-      if (data != null) {
-        final existingSubDetails = data['subscriptionDetails'] as List<dynamic>;
+      final docRef = await users.doc(userId).update({
+        'subscriptionDetails': FieldValue.arrayUnion([subscriptionJson]),
+      });
 
-        final newSubDetailMap = newSubDetail?.toJson();
-
-        if (newSubDetailMap != null) {
-          final newSubDetailId = newSubDetailMap['subId'] as String;
-
-          // Check if a SubscriptionDetail with the same ID already exists
-          final alreadyExists = existingSubDetails.any((existingSub) {
-            return existingSub['subId'] == newSubDetailId;
-          });
-
-          if (!alreadyExists) {
-            existingSubDetails.add(newSubDetailMap);
-
-            await users.doc(userId).update({
-              'subscriptionDetails': existingSubDetails,
-            });
-          }
-        }
-      }
+      return docRef;
     } catch (e) {
-      // Handle the exception appropriately
+      // Handle the error
+      print('Error: $e');
     }
   }
 }
