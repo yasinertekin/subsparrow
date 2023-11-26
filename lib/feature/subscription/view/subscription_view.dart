@@ -84,6 +84,7 @@ final class _NewSubViewState extends State<SubscriptionView> with SubscriptionMi
             context.route.navigateToPage(
               SubDetailView(
                 subDetail: sub,
+                subDetailsList: subscriptions.first?.subscriptions,
               ),
             );
             //  addSub(user.toString(), sub);
