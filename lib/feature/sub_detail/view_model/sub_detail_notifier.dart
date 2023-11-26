@@ -14,6 +14,13 @@ final class SubDetailNotifier extends ChangeNotifier {
   final FirebaseServices _firebaseServices = FirebaseServices();
   final CollectionReference<Map<String, dynamic>> users = FirebaseFirestore.instance.collection('users');
 
+  double subPrice = 0;
+
+  void selectPrice(String? value) {
+    subPrice = double.parse(value!);
+    notifyListeners();
+  }
+
   /// selectedDate
   late DateTime selectedDate;
 
@@ -49,5 +56,12 @@ final class SubDetailNotifier extends ChangeNotifier {
       newSubDetail,
       users,
     );
+  }
+
+  String character = '';
+
+  void setSelectedRadio(String? value) {
+    character = value!;
+    notifyListeners();
   }
 }

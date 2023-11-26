@@ -14,7 +14,7 @@ final class Subscription with EquatableMixin {
     this.subName,
     this.subType,
     this.subBasePrice,
-    // this.subPrices,
+    this.subPrices,
     this.startDate,
     this.endDate,
     this.status,
@@ -42,10 +42,10 @@ final class Subscription with EquatableMixin {
 
   /// This property is responsible for holding subscription base price
   final String? subBasePrice;
-  // @JsonKey(name: 'subPrices')
+  @JsonKey(name: 'subPrices')
 
   /// This property is responsible for holding subscription prices
-  // final List<SubPrices>? subPrices;
+  final SubPrices? subPrices;
   @JsonKey(name: 'subStartDate')
 
   /// This property is responsible for holding subscription start date
@@ -81,7 +81,7 @@ final class Subscription with EquatableMixin {
         subName,
         subType,
         subBasePrice,
-        //      subPrices,
+        subPrices,
         startDate,
         endDate,
         status,
@@ -95,7 +95,7 @@ final class Subscription with EquatableMixin {
     String? subName,
     String? subType,
     String? subBasePrice,
-    List<SubPrices>? subPrices,
+    SubPrices? subPrices, // Correct type here
     DateTime? startDate,
     DateTime? endDate,
     bool? status,
@@ -108,13 +108,13 @@ final class Subscription with EquatableMixin {
       subName: subName ?? this.subName,
       subType: subType ?? this.subType,
       subBasePrice: subBasePrice ?? this.subBasePrice,
-      //   subPrices: subPrices ?? this.subPrices,
+      subPrices: subPrices ?? this.subPrices, // Correct assignment here
       startDate: startDate ?? this.startDate,
       endDate: endDate ?? this.endDate,
       status: status ?? this.status,
       subIcon: subIcon ?? this.subIcon,
       subOnePrice: subOneMonth ?? subOnePrice,
-      subBaseMonth: subBaseMonth ?? subBaseMonth,
+      subBaseMonth: subBaseMonth ?? this.subBaseMonth,
     );
   }
 }
