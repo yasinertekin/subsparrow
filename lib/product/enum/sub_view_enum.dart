@@ -1,1 +1,14 @@
-enum SubViewEnum { date, monthLength, subPrice, verifications }
+/// SubViewEnum
+enum SubViewEnum {
+  /// SubViewEnum
+  date,
+
+  /// SubViewEnum
+  monthLength,
+
+  /// SubViewEnum
+  subPrice,
+
+  /// SubViewEnum
+  verifications,
+}

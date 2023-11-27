@@ -1,1 +1,14 @@
-enum TabViews { subscriptions, payments, notifications, profile }
+/// Tab views
+enum TabViews {
+  /// Subscription
+  subscriptions,
+
+  /// Payments
+  payments,
+
+  /// Notifications
+  notifications,
+
+  /// Profile
+  profile,
+}
