@@ -62,6 +62,7 @@ final class _SubDetailViewState extends State<SubDetailView> with SubDetailMixin
               );
             case SubViewEnum.subPrice:
               return _PriceView(
+                subscription: widget.subDetail!,
                 subPrices: subPrices,
                 subDetailNotifier: subDetailNotifier,
                 pageController: pageController,

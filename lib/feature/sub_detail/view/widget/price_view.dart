@@ -5,25 +5,39 @@ final class _PriceView extends StatelessWidget {
     required this.subPrices,
     required this.subDetailNotifier,
     required this.pageController,
+    required this.subscription,
   });
 
   final Map<String, dynamic>? subPrices;
   final SubDetailNotifier subDetailNotifier;
   final PageController pageController;
-
+  final Subscription subscription;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Expanded(
-          child: _PriceList(
-            subPrices: subPrices,
-            subDetailNotifier: subDetailNotifier,
-            pageController: pageController,
+    if (subscription.subOnePrice == true) {
+      /// ToDo: Add your logic here
+
+      // Perform page transition
+      pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeIn,
+      );
+      // Return an empty container or any other widget if needed
+      return const SizedBox.shrink();
+    } else {
+      // Display your normal content with _PriceList
+      return Column(
+        children: <Widget>[
+          Expanded(
+            child: _PriceList(
+              subPrices: subPrices,
+              subDetailNotifier: subDetailNotifier,
+              pageController: pageController,
+            ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
+    }
   }
 }
 
@@ -95,6 +109,7 @@ final class _PriceSelectCard extends StatelessWidget {
           index: index,
           subDetailNotifier: subDetailNotifier,
         ),
+        trailing: Text('${subPrices?.values.elementAt(index)} ₺'),
       ),
     );
   }
