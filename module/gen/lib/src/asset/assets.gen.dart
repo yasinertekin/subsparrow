@@ -32,12 +32,15 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_love.svg
   SvgGenImage get icLove => const SvgGenImage('assets/icons/ic_love.svg');
 
+  /// File path: assets/icons/ic_price.svg
+  SvgGenImage get icPrice => const SvgGenImage('assets/icons/ic_price.svg');
+
   /// File path: assets/icons/ic_robin_bird.svg
   SvgGenImage get icRobinBird =>
       const SvgGenImage('assets/icons/ic_robin_bird.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [icDatePicker, icLove, icRobinBird];
+  List<SvgGenImage> get values => [icDatePicker, icLove, icPrice, icRobinBird];
 }
 
 class $AssetsImagesGen {
