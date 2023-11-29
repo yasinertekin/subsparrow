@@ -8,6 +8,9 @@ enum SubLength {
 
   /// Six month subscription
   sixMonth,
+
+  /// Twelve month subscription
+  year,
 }
 
 /// This method is responsible for getting subscription days
@@ -19,5 +22,7 @@ int getSubscriptionDays(SubLength subLength) {
       return 90;
     case SubLength.sixMonth:
       return 180;
+    case SubLength.year:
+      return 365;
   }
 }

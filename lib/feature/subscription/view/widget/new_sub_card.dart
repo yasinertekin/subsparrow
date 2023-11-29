@@ -12,12 +12,16 @@ final class _SubCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        onTap: onTap,
-        leading: _SubCardImage(sub: sub),
-        title: _SubCardTitle(sub: sub),
-        trailing: const _SubCardIcon(),
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Card(
+        child: Center(
+          child: ListTile(
+            onTap: onTap,
+            // subtitle: _SubCardTitle(sub: sub),
+            title: _SubCardImage(sub: sub),
+          ),
+        ),
       ),
     );
   }

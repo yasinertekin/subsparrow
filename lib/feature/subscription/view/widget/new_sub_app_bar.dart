@@ -7,8 +7,11 @@ final class _NewSubAppBar extends StatelessWidget implements PreferredSizeWidget
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      title: const Text(
+      title: Text(
         'Abonelikler',
+        style: context.general.textTheme.displaySmall?.copyWith(
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
