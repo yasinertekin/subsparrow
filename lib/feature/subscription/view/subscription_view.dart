@@ -24,10 +24,6 @@ final class _NewSubViewState extends State<SubscriptionView> with SubscriptionMi
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
-      ),
       appBar: const _NewSubAppBar(),
       body: FutureBuilder(
         future: getSubData(),
@@ -57,8 +53,13 @@ final class _NewSubViewState extends State<SubscriptionView> with SubscriptionMi
                     )
                     .toList();
 
-                return _subCardList(
-                  subscriptions,
+                return Column(
+                  children: [
+                    const _SearchSubscription(),
+                    _subCardList(
+                      subscriptions,
+                    ),
+                  ],
                 );
               } else {
                 return const Center(
@@ -71,27 +72,54 @@ final class _NewSubViewState extends State<SubscriptionView> with SubscriptionMi
     );
   }
 
-  ListView _subCardList(
+  Expanded _subCardList(
     List<SubscriptionCollection?> subscriptions,
   ) {
-    return ListView.builder(
-      itemCount: subscriptions.first?.subscriptions?.length ?? 0,
-      itemBuilder: (context, index) {
-        final sub = subscriptions.first?.subscriptions?[index];
+    return Expanded(
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.8,
+        ),
+        itemCount: subscriptions.first?.subscriptions?.length ?? 0,
+        itemBuilder: (context, index) {
+          final sub = subscriptions.first?.subscriptions?[index];
 
-        return _SubCard(
-          onTap: () {
-            context.route.navigateToPage(
-              SubDetailView(
-                subDetail: sub,
-                subDetailsList: subscriptions.first?.subscriptions,
-              ),
-            );
-            //  addSub(user.toString(), sub);
-          },
-          sub: sub,
-        );
-      },
+          return _SubCard(
+            onTap: () {
+              context.route.navigateToPage(
+                SubDetailView(
+                  subDetail: sub,
+                  subDetailsList: subscriptions.first?.subscriptions,
+                ),
+              );
+              //  addSub(user.toString(), sub);
+            },
+            sub: sub,
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _SearchSubscription extends StatelessWidget {
+  const _SearchSubscription({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: context.padding.low,
+      child: const Card(
+        child: TextField(
+          decoration: InputDecoration(
+            hintText: 'Abonelik Ara',
+            prefixIcon: Icon(Icons.search),
+          ),
+        ),
+      ),
     );
   }
 }

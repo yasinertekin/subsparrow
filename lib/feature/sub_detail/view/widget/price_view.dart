@@ -14,30 +14,28 @@ final class _PriceView extends StatelessWidget {
   final Subscription subscription;
   @override
   Widget build(BuildContext context) {
-    if (subscription.subOnePrice == true) {
-      /// ToDo: Add your logic here
-
-      // Perform page transition
-      pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeIn,
-      );
-      // Return an empty container or any other widget if needed
-      return const SizedBox.shrink();
-    } else {
-      // Display your normal content with _PriceList
-      return Column(
+    return Padding(
+      padding: context.padding.low,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Expanded(
+          Assets.icons.icPrice.svg(
+            package: 'gen',
+            height: context.sized.dynamicHeight(0.25),
+          ),
+          SizedBox(
+            height: context.sized.dynamicHeight(0.5),
             child: _PriceList(
               subPrices: subPrices,
               subDetailNotifier: subDetailNotifier,
               pageController: pageController,
+              subscription: subscription,
             ),
           ),
         ],
-      );
-    }
+      ),
+    );
   }
 }
 
@@ -46,30 +44,86 @@ final class _PriceList extends StatelessWidget {
     required this.subPrices,
     required this.subDetailNotifier,
     required this.pageController,
+    required this.subscription,
   });
 
   final Map<String, dynamic>? subPrices;
   final SubDetailNotifier subDetailNotifier;
   final PageController pageController;
-
+  final Subscription subscription;
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: subPrices!.length,
-      itemBuilder: (BuildContext context, int index) {
-        return ListenableBuilder(
-          listenable: subDetailNotifier,
-          builder: (BuildContext context, Widget? child) {
-            return _PriceSelectCard(
-              subPrices: subPrices,
-              subDetailNotifier: subDetailNotifier,
-              index: index,
-              pageController: pageController,
-            );
-          },
-        );
-      },
-    );
+    // Filter out items with empty values
+    final filteredSubPrices = Map.fromEntries(subPrices!.entries.where((entry) => entry.value != ''));
+
+    return filteredSubPrices.isEmpty
+        ? Column(
+            children: [
+              Center(
+                child: Text(
+                  "Aylık Tek Fiyat ${subscription.subBasePrice} ₺",
+                  style: context.general.textTheme.headlineLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    subDetailNotifier.setSelectedRadio(subscription.subBasePrice.toString());
+                    subDetailNotifier.selectPrice(subscription.subBasePrice.toString());
+                    subDetailNotifier.setSubViewEnum(
+                      pageController.page!.toInt() + 1,
+                    );
+                    pageController.nextPage(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeIn,
+                    );
+                  },
+                  child: Text('Devam et'),
+                ),
+              ),
+            ],
+          )
+        : Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: filteredSubPrices.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListenableBuilder(
+                      listenable: subDetailNotifier,
+                      builder: (BuildContext context, Widget? child) {
+                        return _PriceSelectCard(
+                          subscription: subscription,
+                          subPrices: filteredSubPrices,
+                          subDetailNotifier: subDetailNotifier,
+                          index: index,
+                          pageController: pageController,
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    subDetailNotifier.setSubViewEnum(
+                      pageController.page!.toInt() + 1,
+                    );
+                    pageController.nextPage(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeIn,
+                    );
+                  },
+                  child: Text('Devam et'),
+                ),
+              ),
+            ],
+          );
   }
 }
 
@@ -79,12 +133,14 @@ final class _PriceSelectCard extends StatelessWidget {
     required this.subDetailNotifier,
     required this.index,
     required this.pageController,
+    required this.subscription,
   });
 
   final Map<String, dynamic>? subPrices;
   final SubDetailNotifier subDetailNotifier;
   final int index;
   final PageController pageController;
+  final Subscription subscription;
 
   @override
   Widget build(BuildContext context) {
@@ -95,13 +151,7 @@ final class _PriceSelectCard extends StatelessWidget {
             ..setSelectedRadio(subPrices?.keys.elementAt(index))
             ..selectPrice(
               subPrices?.values.elementAt(index).toString(),
-            )
-            ..setSubViewEnum(pageController.page!.toInt() + 1);
-
-          pageController.nextPage(
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeIn,
-          );
+            );
         },
         title: Text('${subPrices?.keys.elementAt(index)} ₺'),
         leading: _RadioButton(
@@ -129,6 +179,7 @@ final class _RadioButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Radio<String>(
+      toggleable: true,
       value: subPrices?.keys.elementAt(index) ?? '',
       groupValue: subDetailNotifier.character,
       onChanged: subDetailNotifier.setSelectedRadio,
