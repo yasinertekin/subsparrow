@@ -69,6 +69,13 @@ class FirebaseServices extends FirebaseService {
         'basic': newSubDetail!.subPrices!.basic,
         'standard': newSubDetail.subPrices!.standard,
         'premium': newSubDetail.subPrices!.premium,
+        'family': newSubDetail.subPrices!.family,
+        'student': newSubDetail.subPrices!.student,
+        'individual': newSubDetail.subPrices!.individual,
+        'deluxe': newSubDetail.subPrices!.deluxe,
+        'essential': newSubDetail.subPrices!.essential,
+        'extra': newSubDetail.subPrices!.extra,
+        'yearly': newSubDetail.subPrices!.yearly,
       };
 
       // Explicitly convert subPricesMap to JSON
