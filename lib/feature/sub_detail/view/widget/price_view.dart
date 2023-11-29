@@ -18,7 +18,6 @@ final class _PriceView extends StatelessWidget {
       padding: context.padding.low,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Assets.icons.icPrice.svg(
             package: 'gen',
@@ -54,14 +53,16 @@ final class _PriceList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Filter out items with empty values
-    final filteredSubPrices = Map.fromEntries(subPrices!.entries.where((entry) => entry.value != ''));
+    final filteredSubPrices = Map.fromEntries(
+      subPrices!.entries.where((entry) => entry.value != ''),
+    );
 
     return filteredSubPrices.isEmpty
         ? Column(
             children: [
               Center(
                 child: Text(
-                  "Aylık Tek Fiyat ${subscription.subBasePrice} ₺",
+                  'Aylık Tek Fiyat ${subscription.subBasePrice} ₺',
                   style: context.general.textTheme.headlineLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -71,17 +72,17 @@ final class _PriceList extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    subDetailNotifier.setSelectedRadio(subscription.subBasePrice.toString());
-                    subDetailNotifier.selectPrice(subscription.subBasePrice.toString());
-                    subDetailNotifier.setSubViewEnum(
-                      pageController.page!.toInt() + 1,
-                    );
+                    subDetailNotifier
+                      ..setSelectedRadio(subscription.subBasePrice.toString())
+                      ..selectPrice(subscription.subBasePrice.toString())
+                      ..setSubViewEnum(pageController.page!.toInt() + 1);
+
                     pageController.nextPage(
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeIn,
                     );
                   },
-                  child: Text('Devam et'),
+                  child: const Text('Devam et'),
                 ),
               ),
             ],
@@ -119,7 +120,7 @@ final class _PriceList extends StatelessWidget {
                       curve: Curves.easeIn,
                     );
                   },
-                  child: Text('Devam et'),
+                  child: const Text('Devam et'),
                 ),
               ),
             ],

@@ -7,6 +7,15 @@ import 'package:subsparrow/product/enum/sub_view_enum.dart';
 mixin SubDetailMixin on State<SubDetailView> implements TickerProvider {
   late final _subPrices = widget.subDetail?.subPrices?.toJson();
 
+  /// Represents the subPrices for a widget.
+  /// This member holds the serialized JSON representation of subPrices
+  /// obtained from the widget's subDetail.
+  /// It is expected to be in the form of a Map<String, dynamic>.
+  /// Example usage:
+  /// ```
+  /// late final _subPrices = widget.subDetail?.subPrices?.toJson();
+  /// Map<String, dynamic> get subPrices => _subPrices!;
+  /// ```
   Map<String, dynamic> get subPrices => _subPrices!;
 
   late final PageController _pageController;

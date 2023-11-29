@@ -11,6 +11,8 @@ mixin SubscriptionMixin on State<SubscriptionView> {
   final CollectionReference<Map<String, dynamic>> _subscriptions =
       FirebaseFirestore.instance.collection('subscriptions');
   final FirebaseServices _firebaseServices = FirebaseServices();
+
+  /// users
   final CollectionReference<Map<String, dynamic>> users = FirebaseFirestore.instance.collection('users');
 
   /// customShowBottomSheet
@@ -36,9 +38,7 @@ mixin SubscriptionMixin on State<SubscriptionView> {
               ),
             ),
             ElevatedButton(
-              onPressed: () {
-                print('${sub?.subName} eklendi');
-              },
+              onPressed: () {},
               child: const Text('data'),
             ),
           ],

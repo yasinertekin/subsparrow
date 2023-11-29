@@ -3,7 +3,9 @@ import 'package:common/src/package/custom_image/custom_mem_cache.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+/// CustomNetworkImage
 final class CustomNetworkImage extends StatelessWidget {
+  /// Creates a [CustomNetworkImage] instance.
   const CustomNetworkImage({
     super.key,
     this.imageUrl,
@@ -13,17 +15,23 @@ final class CustomNetworkImage extends StatelessWidget {
     this.loadingWidget,
     this.size,
   });
+
+  /// The image url.
   final String? imageUrl;
 
   /// When image is not available then it will show empty widget
   final Widget? emptyWidget;
 
+  /// The mem cache of the image.
   final CustomMemCache memCache;
 
+  /// The box fit of the image.
   final BoxFit? boxFit;
 
+  /// The loading widget of the image.
   final Widget? loadingWidget;
 
+  /// The size of the image.
   final Size? size;
 
   @override

@@ -103,6 +103,7 @@ class _AuthInit extends StatelessWidget {
             },
           ),
           const _RegisterTextButton(),
+          const _ForgotPasswordTextButton(),
         ],
       ),
     );
@@ -123,7 +124,7 @@ class _AuthInit extends StatelessWidget {
               content: const Text(
                 'Email veya şifre boş olamaz',
               ),
-              duration: const Duration(seconds: 2), // Snackbar'ın ekranda kalma süresi
+              duration: const Duration(seconds: 2),
               action: SnackBarAction(
                 label: 'Kapat',
                 onPressed: () {},

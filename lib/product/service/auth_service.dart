@@ -31,5 +31,6 @@ final class AuthServices extends AuthService {
     }
   }
 
+  /// Returns the current user.
   Future<void> tokenSaveToCache(String token) async {}
 }

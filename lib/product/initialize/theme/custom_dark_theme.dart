@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:subsparrow/product/initialize/theme/color_schemes.g.dart';
 import 'package:subsparrow/product/initialize/theme/custom_theme.dart';
 
+/// CustomDarkTheme
 final class CustomDarkTheme implements CustomTheme {
   @override
   ThemeData get themeData => ThemeData(

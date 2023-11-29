@@ -4,14 +4,19 @@ import 'package:subsparrow/product/model/subscription_collection/subscription_co
 
 /// FirebaseService
 abstract class FirebaseService {
+  /// Get all subscriptions
   Future<QuerySnapshot<SubscriptionCollection?>> getSubscriptions(
     CollectionReference<Map<String, dynamic>> subscriptions,
   );
+
+  /// Add a new user
   Future<void> addUser(
     String documentId,
     List<Subscription> subDetails,
     CollectionReference<Object?> users,
   );
+
+  /// Add a new subscription detail
   Future<void> addSubscriptionDetail(
     String userId,
     Subscription newSubDetail,
@@ -19,7 +24,8 @@ abstract class FirebaseService {
   );
 }
 
-class FirebaseServices extends FirebaseService {
+/// FirebaseServices
+final class FirebaseServices extends FirebaseService {
   @override
   Future<QuerySnapshot<SubscriptionCollection?>> getSubscriptions(
     CollectionReference<Map<String, dynamic>> subscriptions,
@@ -37,8 +43,7 @@ class FirebaseServices extends FirebaseService {
 
       return response;
     } catch (e, stackTrace) {
-      ///
-      print(stackTrace);
+      print('Exception occurred: $e stackTrace: $stackTrace');
       rethrow;
     }
   }
@@ -50,11 +55,14 @@ class FirebaseServices extends FirebaseService {
     CollectionReference<Object?> users,
   ) async {
     try {
-      final subDetailMaps = subDetails.map((subDetail) => subDetail.toJson()).toList();
       final docRef = await users.doc(documentId).set({
-        'subscriptionDetails': subDetailMaps,
+        'subscriptionDetails': subDetails,
       });
-    } catch (e) {}
+
+      return docRef;
+    } catch (e) {
+      // Handle the error
+    }
   }
 
   @override
@@ -101,7 +109,6 @@ class FirebaseServices extends FirebaseService {
       return docRef;
     } catch (e) {
       // Handle the error
-      print('Error: $e');
     }
   }
 }

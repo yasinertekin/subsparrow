@@ -79,6 +79,7 @@ final class _DateTimeButton extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 final class _DateTimeTitle extends StatelessWidget {
   const _DateTimeTitle();
 

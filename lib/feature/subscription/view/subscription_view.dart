@@ -103,10 +103,8 @@ final class _NewSubViewState extends State<SubscriptionView> with SubscriptionMi
   }
 }
 
-class _SearchSubscription extends StatelessWidget {
-  const _SearchSubscription({
-    super.key,
-  });
+final class _SearchSubscription extends StatelessWidget {
+  const _SearchSubscription();
 
   @override
   Widget build(BuildContext context) {

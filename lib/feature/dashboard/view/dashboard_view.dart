@@ -8,6 +8,7 @@ import 'package:subsparrow/feature/subscription/view/subscription_view.dart';
 import 'package:subsparrow/product/enum/tab_view.dart';
 import 'package:subsparrow/product/extensions/tab_icons.dart';
 
+/// DashboardView
 final class DashboardView extends StatefulWidget {
   /// DashboardView
   const DashboardView({super.key});

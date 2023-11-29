@@ -13,10 +13,14 @@ final class SubDetailNotifier extends ChangeNotifier {
   }
 
   final FirebaseServices _firebaseServices = FirebaseServices();
+
+  /// users
   final CollectionReference<Map<String, dynamic>> users = FirebaseFirestore.instance.collection('users');
 
+  /// subDetail
   double subPrice = 0;
 
+  /// Price selection
   void selectPrice(String? value) {
     subPrice = double.parse(value!);
     notifyListeners();
@@ -59,15 +63,19 @@ final class SubDetailNotifier extends ChangeNotifier {
     );
   }
 
+  /// character
   String character = '';
 
+  /// setSelectedRadio
   void setSelectedRadio(String? value) {
     character = value!;
     notifyListeners();
   }
 
+  /// Enum for subView
   SubViewEnum subViewEnum = SubViewEnum.date;
 
+  /// setSubViewEnum
   void setSubViewEnum(int value) {
     subViewEnum = SubViewEnum.values[value];
     notifyListeners();

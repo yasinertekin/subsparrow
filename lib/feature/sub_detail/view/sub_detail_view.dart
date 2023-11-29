@@ -72,8 +72,6 @@ final class _SubDetailViewState extends State<SubDetailView> with SubDetailMixin
                 subDetail: widget.subDetail!,
                 subDetailNotifier: subDetailNotifier,
               );
-            default:
-              throw ArgumentError('Unhandled case: ${SubViewEnum.values[index]}');
           }
         },
       ),

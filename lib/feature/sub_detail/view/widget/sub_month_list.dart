@@ -32,14 +32,14 @@ final class _SubMonthList extends StatelessWidget {
             _formatEnumName(currentSubLength),
           ),
           onTap: () async {
-            subDetailNotifier.monthCount = subDetailNotifier.selectedDate.add(
-              Duration(
-                days: getSubscriptionDays(currentSubLength),
-              ),
-            );
-            subDetailNotifier.setSubViewEnum(
-              pageController.page!.toInt() + 1,
-            );
+            subDetailNotifier
+              ..monthCount = subDetailNotifier.selectedDate.add(
+                Duration(
+                  days: getSubscriptionDays(currentSubLength),
+                ),
+              )
+              ..setSubViewEnum(pageController.page!.toInt() + 1);
+
             await pageController.nextPage(
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut,

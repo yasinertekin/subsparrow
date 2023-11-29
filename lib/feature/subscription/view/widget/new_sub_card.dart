@@ -27,6 +27,7 @@ final class _SubCard extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 final class _SubCardIcon extends StatelessWidget {
   const _SubCardIcon();
 

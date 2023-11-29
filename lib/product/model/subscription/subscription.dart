@@ -23,6 +23,7 @@ final class Subscription with EquatableMixin {
     this.subBaseMonth,
   });
 
+  /// This function is responsible for converting json to subscription object
   factory Subscription.fromJson(Map<String, dynamic> json) => _$SubscriptionFromJson(
         json,
       );
@@ -89,7 +90,8 @@ final class Subscription with EquatableMixin {
         subBaseMonth,
       ];
 
-  ///This function is responsible for copying subscription object with new values
+  ///This function is responsible for copying subscription
+  /// object with new values
   Subscription copyWith({
     String? subId,
     String? subName,

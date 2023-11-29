@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 
+/// AdaptMobileView
 final class AdaptMobileView extends StatelessWidget {
+  /// Creates a [AdaptMobileView] instance.
   const AdaptMobileView({
     required this.phone,
     required this.tablet,
@@ -10,6 +12,8 @@ final class AdaptMobileView extends StatelessWidget {
 
   /// Define your custom widget for mobile
   final Widget phone;
+
+  /// Define your custom widget for tablet
   final Widget tablet;
 
   @override

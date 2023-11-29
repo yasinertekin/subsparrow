@@ -5,18 +5,28 @@ import 'package:subsparrow/product/utility/base/base_firebase_model.dart';
 
 part 'subscription_collection.g.dart';
 
+/// Represents a collection of subscriptions.
 @JsonSerializable()
 class SubscriptionCollection extends Equatable with BaseFireBaseModel<SubscriptionCollection>, IdModel {
+  /// Creates a [SubscriptionCollection] instance.
+
   const SubscriptionCollection({
     this.subscriptions,
   });
 
-  factory SubscriptionCollection.fromJson(Map<String, dynamic> json) => _$SubscriptionCollectionFromJson(json);
+  /// Creates a [SubscriptionCollection] instance from a JSON representation.
+  factory SubscriptionCollection.fromJson(Map<String, dynamic> json) => _$SubscriptionCollectionFromJson(
+        json,
+      );
+
+  /// A list of subscriptions in the collection.
 
   final List<Subscription>? subscriptions;
 
   @override
   List<Object?> get props => [subscriptions];
+
+  /// Creates a copy of the [SubscriptionCollection] with some fields replaced.
 
   SubscriptionCollection copyWith({
     List<Subscription>? subscriptions,
@@ -34,6 +44,7 @@ class SubscriptionCollection extends Equatable with BaseFireBaseModel<Subscripti
   @override
   String? get id => null;
 
-  // Add the toJson method
+  /// Converts the [SubscriptionCollection] instance to a JSON representation.
+
   Map<String, dynamic> toJson() => _$SubscriptionCollectionToJson(this);
 }
