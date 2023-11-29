@@ -7,21 +7,18 @@ final class _TotalPriceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: context.padding.onlyBottomMedium,
-      child: Card(
-        child: ListTile(
-          title: Text(
-            'Toplam',
-            style: context.general.textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+    return Card(
+      child: ListTile(
+        title: Text(
+          'Toplam',
+          style: context.general.textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.bold,
           ),
-          trailing: Text(
-            '$totalSubPrice TL',
-            style: context.general.textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+        ),
+        trailing: Text(
+          '$totalSubPrice TL',
+          style: context.general.textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

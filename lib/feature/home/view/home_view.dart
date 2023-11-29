@@ -46,6 +46,7 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  _TotalPriceCard(totalSubPrice: totalSubPrice ?? 0.0),
                   Padding(
                     padding: context.padding.low,
                     child: Text(
@@ -59,7 +60,6 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
                     _SubscriptionList(
                       users: users,
                     ),
-                  _TotalPriceCard(totalSubPrice: totalSubPrice ?? 0.0),
                 ],
               );
             } else if (snapshot.hasError) {
