@@ -14,6 +14,7 @@ part './widget/sub_month_list.dart';
 part 'widget/price_view.dart';
 part 'widget/sub_detail_app_bar.dart';
 part 'widget/subscription_date_time_picker.dart';
+part 'widget/verification_view.dart';
 
 /// SubDetail
 final class SubDetailView extends StatefulWidget {
@@ -34,7 +35,7 @@ final class SubDetailView extends StatefulWidget {
   State<SubDetailView> createState() => _SubDetailViewState();
 }
 
-final class _SubDetailViewState extends State<SubDetailView> with SubDetailMixin {
+class _SubDetailViewState extends State<SubDetailView> with SubDetailMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,57 +83,5 @@ final class _SubDetailViewState extends State<SubDetailView> with SubDetailMixin
   @override
   Ticker createTicker(TickerCallback onTick) {
     return Ticker(onTick);
-  }
-}
-
-final class _VerificationView extends StatelessWidget {
-  const _VerificationView({
-    required this.subDetailNotifier,
-    required this.subDetail,
-  });
-  final SubDetailNotifier subDetailNotifier;
-  final Subscription subDetail;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Gap(15),
-        Text(
-          subDetailNotifier.selectedDate.toString(),
-        ),
-        const Gap(15),
-        Text(
-          subDetailNotifier.monthCount.toString(),
-        ),
-        const Gap(15),
-        Text(
-          subDetailNotifier.subPrice.toString(),
-        ),
-        const Gap(15),
-        Text(
-          subDetailNotifier.character,
-        ),
-        const Gap(15),
-        Text(
-          subDetailNotifier.subPrice.toString(),
-        ),
-        ElevatedButton(
-          onPressed: () async {
-            await subDetailNotifier.addSub(
-              FirebaseAuth.instance.currentUser!.uid,
-              subDetail.copyWith(
-                subBasePrice: subDetailNotifier.subPrice.toString(),
-                startDate: subDetailNotifier.selectedDate,
-                endDate: subDetailNotifier.monthCount,
-                subBaseMonth: subDetailNotifier.monthCount.toString(),
-                subType: subDetailNotifier.subPlan.isEmpty ? 'Basic' : subDetailNotifier.subPlan,
-              ),
-            );
-          },
-          child: const Text('Save'),
-        ),
-      ],
-    );
   }
 }

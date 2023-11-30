@@ -20,7 +20,7 @@ final class SubscriptionView extends StatefulWidget {
   State<SubscriptionView> createState() => _NewSubViewState();
 }
 
-final class _NewSubViewState extends State<SubscriptionView> with SubscriptionMixin {
+class _NewSubViewState extends State<SubscriptionView> with SubscriptionMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
