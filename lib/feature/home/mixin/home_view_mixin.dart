@@ -29,7 +29,7 @@ mixin HomeViewMixin on State<HomeView> {
 
   @override
   void dispose() {
-    userDocument.snapshots().listen((event) {}).cancel(); // Bu satır, Stream'i kapatır
+    userDocument.snapshots().listen((event) {}).cancel();
     super.dispose();
   }
 }

@@ -13,8 +13,11 @@ final class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           package: 'gen',
         ),
       ),
-      title: const Text(
-        'Hoş Geldiniz',
+      title: Text(
+        StringConstants.welcome,
+        style: context.general.textTheme.displayMedium?.copyWith(
+          fontWeight: FontWeight.bold,
+        ),
       ),
       actions: const [],
     );

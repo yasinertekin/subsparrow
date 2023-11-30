@@ -7,6 +7,7 @@ final class _SubListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const height = 50.0;
     return Dismissible(
       key: ValueKey(sub?.subName),
       onDismissed: (direction) {
@@ -14,7 +15,7 @@ final class _SubListCard extends StatelessWidget {
           SnackBar(
             content: Text('${sub?.subName} silindi'),
             action: SnackBarAction(
-              label: 'Geri Al',
+              label: StringConstants.getBack,
               onPressed: () {
                 // Some code to undo the change.
               },
@@ -26,7 +27,7 @@ final class _SubListCard extends StatelessWidget {
         child: ListTile(
           leading: SvgPicture.network(
             sub!.subIcon.toString(),
-            height: 50,
+            height: height,
           ),
           title: Text(
             sub?.subName?.toString() ?? '',
@@ -34,6 +35,10 @@ final class _SubListCard extends StatelessWidget {
           ),
           trailing: Text(
             '${sub?.subBasePrice} TL',
+            style: context.general.textTheme.bodyMedium?.copyWith(),
+          ),
+          subtitle: Text(
+            '${sub?.subType} ay',
             style: context.general.textTheme.bodyMedium?.copyWith(),
           ),
         ),

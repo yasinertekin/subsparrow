@@ -7,6 +7,7 @@ import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/home/mixin/home_view_mixin.dart';
 import 'package:subsparrow/product/model/subscription/subscription.dart';
 import 'package:subsparrow/product/model/user/users.dart';
+import 'package:subsparrow/product/constants/string_constants.dart';
 
 part './widget/home_app_bar.dart';
 part 'widget/home_sub_list_card.dart';
@@ -50,7 +51,7 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
                   Padding(
                     padding: context.padding.low,
                     child: Text(
-                      'Aboneliklerim',
+                      StringConstants.mySubscriptions,
                       style: context.general.textTheme.displaySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

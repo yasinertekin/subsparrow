@@ -10,7 +10,7 @@ final class _TotalPriceCard extends StatelessWidget {
     return Card(
       child: ListTile(
         title: Text(
-          'Toplam',
+          StringConstants.total,
           style: context.general.textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.bold,
           ),
