@@ -5,6 +5,7 @@ import 'package:subsparrow/feature/auth/view/mixin/auth_mixin.dart';
 import 'package:subsparrow/feature/auth/view_model/cubit/auth_cubit.dart';
 import 'package:subsparrow/feature/auth/view_model/state/auth_state.dart';
 import 'package:subsparrow/feature/dashboard/view/dashboard_view.dart';
+import 'package:subsparrow/product/constants/string_constants.dart';
 import 'package:subsparrow/product/model/auth/auth.dart';
 
 part 'widget/email_text_field.dart';
@@ -29,7 +30,9 @@ class _AuthViewState extends State<AuthView> with AuthMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User Authentication'),
+        title: const Text(
+          StringConstants.authAppBar,
+        ),
       ),
       body: BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
@@ -60,7 +63,7 @@ class _AuthViewState extends State<AuthView> with AuthMixin {
                     passwordController: passwordController,
                   ),
                   Text(
-                    'Something went wrong: ${(state as AuthFailure).error}',
+                    '${StringConstants.wrongMessage}${(state as AuthFailure).error}',
                   ),
                 ],
               );
@@ -73,7 +76,7 @@ class _AuthViewState extends State<AuthView> with AuthMixin {
   }
 }
 
-class _AuthInit extends StatelessWidget {
+final class _AuthInit extends StatelessWidget {
   const _AuthInit({
     required this.emailController,
     required this.passwordController,
@@ -89,7 +92,7 @@ class _AuthInit extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            'Welcome to Subsparrow',
+            StringConstants.welcomeSubSparrow,
           ),
           _EmailTextField(
             emailController: emailController,
@@ -122,11 +125,11 @@ class _AuthInit extends StatelessWidget {
         : ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: const Text(
-                'Email veya şifre boş olamaz',
+                StringConstants.snackbarMessage,
               ),
               duration: const Duration(seconds: 2),
               action: SnackBarAction(
-                label: 'Kapat',
+                label: StringConstants.snackbarLabel,
                 onPressed: () {},
               ),
             ),
