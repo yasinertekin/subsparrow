@@ -16,7 +16,7 @@ final class _EmailTextField extends StatelessWidget {
         textInputAction: TextInputAction.next,
         keyboardType: TextInputType.emailAddress,
         decoration: const InputDecoration(
-          labelText: 'Email',
+          labelText: StringConstants.email,
         ),
       ),
     );
