@@ -6,7 +6,9 @@ import 'package:subsparrow/feature/dashboard/view/mixin/dashboard_mixin.dart';
 import 'package:subsparrow/feature/home/view/home_view.dart';
 import 'package:subsparrow/feature/subscription/view/subscription_view.dart';
 import 'package:subsparrow/product/enum/tab_view.dart';
-import 'package:subsparrow/product/extensions/tab_icons.dart';
+
+part 'widget/bottom_app_bar.dart';
+part 'widget/dashboard_floating.dart';
 
 /// DashboardView
 final class DashboardView extends StatefulWidget {
@@ -17,53 +19,20 @@ final class DashboardView extends StatefulWidget {
   State<DashboardView> createState() => _DashboardViewState();
 }
 
-final class _DashboardViewState extends State<DashboardView> with DashBoardMixin {
+class _DashboardViewState extends State<DashboardView> with DashBoardMixin {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: TabViews.values.length,
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            /*      addUser(
-              FirebaseAuth.instance.currentUser!.uid,
-              List<SubscriptionDetail>.empty(growable: true),
-            );
-            //  context.route.navigateToPage(const NewSubView());*/
-            /*addSubscriptionDetail(
-              FirebaseAuth.instance.currentUser!.uid,
-              SubscriptionDetail(
-                subIcon: '',
-              ),
-            );*/
-            context.route.navigateToPage(
-              const SubscriptionView(),
-            );
-          },
-          child: const Icon(Icons.add),
-        ),
+        floatingActionButton: const _DashboardFloating(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: BottomAppBar(
-          child: _myDashboardView(),
+        bottomNavigationBar: _BottomAppBar(
+          tabController: tabController,
+          tabViewsList: tabViews,
         ),
         body: _DashboardView(tabController: tabController),
       ),
-    );
-  }
-
-  TabBar _myDashboardView() {
-    final tabViewsList = TabViews.values
-        .map(
-          (e) => Tab(
-            text: formatEnumName(e.name),
-            icon: Icon(e.icon),
-          ),
-        )
-        .toList();
-    return TabBar(
-      onTap: (value) {},
-      controller: tabController,
-      tabs: tabViewsList,
     );
   }
 

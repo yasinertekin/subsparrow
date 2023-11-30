@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:subsparrow/feature/dashboard/view/dashboard_view.dart';
 import 'package:subsparrow/product/enum/tab_view.dart';
+import 'package:subsparrow/product/extensions/tab_icons.dart';
 
 /// DashBoardMixin
 mixin DashBoardMixin on State<DashboardView> implements TickerProvider {
@@ -8,6 +9,19 @@ mixin DashBoardMixin on State<DashboardView> implements TickerProvider {
 
   /// tabController
   TabController get tabController => _tabController;
+
+  /// tabViewsList
+  late final List<Tab> _tabViewsList = TabViews.values
+      .map(
+        (e) => Tab(
+          text: formatEnumName(e.name),
+          icon: Icon(e.icon),
+        ),
+      )
+      .toList();
+
+  /// tabViewsList
+  List<Tab> get tabViews => _tabViewsList;
 
   @override
   void initState() {
