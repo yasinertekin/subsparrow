@@ -19,7 +19,7 @@ final class Subscription with EquatableMixin {
     this.endDate,
     this.status,
     this.subIcon,
-    this.subOnePrice,
+    this.subMonth,
     this.subBaseMonth,
   });
 
@@ -65,8 +65,8 @@ final class Subscription with EquatableMixin {
   final String? subIcon;
 
   /// This property is responsible for holding subscription one month
-  @JsonKey(name: 'subOnePrice')
-  final bool? subOnePrice;
+  @JsonKey(name: 'subMonth')
+  final bool? subMonth;
 
   @JsonKey(name: 'subBaseMonth')
 
@@ -88,6 +88,7 @@ final class Subscription with EquatableMixin {
         status,
         subIcon,
         subBaseMonth,
+        subMonth,
       ];
 
   ///This function is responsible for copying subscription
@@ -102,8 +103,8 @@ final class Subscription with EquatableMixin {
     DateTime? endDate,
     bool? status,
     String? subIcon,
-    bool? subOneMonth,
     String? subBaseMonth,
+    bool? subMonth,
   }) {
     return Subscription(
       subId: subId ?? this.subId,
@@ -115,7 +116,7 @@ final class Subscription with EquatableMixin {
       endDate: endDate ?? this.endDate,
       status: status ?? this.status,
       subIcon: subIcon ?? this.subIcon,
-      subOnePrice: subOneMonth ?? subOnePrice,
+      subMonth: subMonth ?? this.subMonth,
       subBaseMonth: subBaseMonth ?? this.subBaseMonth,
     );
   }
