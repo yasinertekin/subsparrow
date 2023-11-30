@@ -18,6 +18,9 @@ class SubPrices with EquatableMixin {
     this.essential,
     this.extra,
     this.yearly,
+    this.duo,
+    this.computer,
+    this.ultimate,
   });
 
   /// Creates a [SubPrices] instance from a JSON representation.
@@ -76,6 +79,21 @@ class SubPrices with EquatableMixin {
 
   final String? yearly;
 
+  @JsonKey(name: 'Duo')
+
+  /// Duo subscription price.
+  final String? duo;
+
+  @JsonKey(name: 'Bilgisayar')
+
+  /// Computer subscription price.
+  final String? computer;
+
+  @JsonKey(name: 'Ultimate')
+
+  /// Ultimate subscription price.
+  final String? ultimate;
+
   /// Converts the [SubPrices] instance to a JSON representation.
 
   Map<String, dynamic> toJson() => _$SubPricesToJson(this);
@@ -92,6 +110,9 @@ class SubPrices with EquatableMixin {
         essential,
         extra,
         yearly,
+        duo,
+        computer,
+        ultimate,
       ];
 
   /// Creates a new [SubPrices] instance by copying the existing one and
@@ -107,6 +128,9 @@ class SubPrices with EquatableMixin {
     String? essential,
     String? extra,
     String? yearly,
+    String? duo,
+    String? computer,
+    String? ultimate,
   }) {
     return SubPrices(
       basic: basic ?? this.basic,
@@ -119,6 +143,9 @@ class SubPrices with EquatableMixin {
       essential: essential ?? this.essential,
       extra: extra ?? this.extra,
       yearly: yearly ?? this.yearly,
+      duo: duo ?? this.duo,
+      computer: computer ?? this.computer,
+      ultimate: ultimate ?? this.ultimate,
     );
   }
 }
