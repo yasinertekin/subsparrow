@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gen/gen.dart';
 import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/auth/view/mixin/auth_mixin.dart';
+import 'package:subsparrow/feature/auth/view_model/auth_init_notifier.dart';
 import 'package:subsparrow/feature/auth/view_model/cubit/auth_cubit.dart';
 import 'package:subsparrow/feature/auth/view_model/state/auth_state.dart';
 import 'package:subsparrow/feature/dashboard/view/dashboard_view.dart';
@@ -31,7 +33,7 @@ class _AuthViewState extends State<AuthView> with AuthMixin {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          StringConstants.authAppBar,
+          StringConstants.welcomeSubSparrow,
         ),
       ),
       body: BlocBuilder<AuthCubit, AuthState>(
@@ -55,8 +57,7 @@ class _AuthViewState extends State<AuthView> with AuthMixin {
               return const SizedBox.shrink();
 
             case AuthFailure:
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              return ListView(
                 children: [
                   _AuthInit(
                     emailController: emailController,
@@ -87,27 +88,43 @@ final class _AuthInit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            StringConstants.welcomeSubSparrow,
+    final authInitNotifier = AuthInitNotifier();
+    return ListenableBuilder(
+      listenable: authInitNotifier,
+      builder: (BuildContext context, Widget? child) => Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: authInitNotifier.keyboardOpen ? MainAxisAlignment.spaceEvenly : MainAxisAlignment.center,
+            children: [
+              Assets.icons.icAuth.svg(
+                package: 'gen',
+                height:
+                    authInitNotifier.keyboardOpen ? context.sized.dynamicHeight(0.2) : context.sized.dynamicHeight(0.4),
+              ),
+              _EmailTextField(
+                authInitNotifier: authInitNotifier,
+                emailController: emailController,
+              ),
+              _PasswordTextField(
+                passwordController: passwordController,
+              ),
+              if (context.general.isKeyBoardOpen)
+                const SizedBox.shrink()
+              else
+                Column(
+                  children: [
+                    const _ForgotPasswordTextButton(),
+                    _LoginButton(
+                      onPressed: () {
+                        _signInControl(context);
+                      },
+                    ),
+                    const _RegisterTextButton(),
+                  ],
+                ),
+            ],
           ),
-          _EmailTextField(
-            emailController: emailController,
-          ),
-          _PasswordTextField(
-            passwordController: passwordController,
-          ),
-          _LoginButton(
-            onPressed: () {
-              _signInControl(context);
-            },
-          ),
-          const _RegisterTextButton(),
-          const _ForgotPasswordTextButton(),
-        ],
+        ),
       ),
     );
   }

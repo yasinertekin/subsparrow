@@ -9,7 +9,7 @@ final class _PasswordTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _PasswordTextFieldNotifier notifier = _PasswordTextFieldNotifier();
+    final notifier = _PasswordTextFieldNotifier();
 
     return Padding(
       padding: context.padding.low,

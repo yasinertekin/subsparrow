@@ -25,6 +25,9 @@ class $AssetsColorGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/ic_auth.svg
+  SvgGenImage get icAuth => const SvgGenImage('assets/icons/ic_auth.svg');
+
   /// File path: assets/icons/ic_credit_card.svg
   SvgGenImage get icCreditCard =>
       const SvgGenImage('assets/icons/ic_credit_card.svg');
@@ -45,7 +48,7 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<SvgGenImage> get values =>
-      [icCreditCard, icDatePicker, icLove, icPrice, icRobinBird];
+      [icAuth, icCreditCard, icDatePicker, icLove, icPrice, icRobinBird];
 }
 
 class $AssetsImagesGen {
