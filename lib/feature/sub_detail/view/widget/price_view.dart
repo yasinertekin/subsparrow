@@ -152,7 +152,8 @@ final class _PriceSelectCard extends StatelessWidget {
             ..setSelectedRadio(subPrices?.keys.elementAt(index))
             ..selectPrice(
               subPrices?.values.elementAt(index).toString(),
-            );
+            )
+            ..setSubPlan(subPrices?.keys.elementAt(index) ?? '');
         },
         title: Text('${subPrices?.keys.elementAt(index)} ₺'),
         leading: _RadioButton(
