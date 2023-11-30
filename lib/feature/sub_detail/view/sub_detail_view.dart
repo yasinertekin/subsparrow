@@ -57,6 +57,7 @@ final class _SubDetailViewState extends State<SubDetailView> with SubDetailMixin
               );
             case SubViewEnum.monthLength:
               return _SubMonthList(
+                subscription: widget.subDetail!,
                 subDetailNotifier: subDetailNotifier,
                 pageController: pageController,
               );
@@ -125,6 +126,7 @@ final class _VerificationView extends StatelessWidget {
                 startDate: subDetailNotifier.selectedDate,
                 endDate: subDetailNotifier.monthCount,
                 subBaseMonth: subDetailNotifier.monthCount.toString(),
+                subType: subDetailNotifier.subPlan.isEmpty ? 'Basic' : subDetailNotifier.subPlan,
               ),
             );
           },

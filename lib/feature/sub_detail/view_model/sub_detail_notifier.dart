@@ -20,6 +20,13 @@ final class SubDetailNotifier extends ChangeNotifier {
   /// subDetail
   double subPrice = 0;
 
+  String subPlan = '';
+
+  void setSubPlan(String value) {
+    subPlan = value;
+    notifyListeners();
+  }
+
   /// Price selection
   void selectPrice(String? value) {
     subPrice = double.parse(value!);
