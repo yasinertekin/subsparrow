@@ -14,7 +14,7 @@ final class _LoginButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         child: Text(
-          'Giriş Yap',
+          StringConstants.login,
           style: context.general.textTheme.titleLarge?.copyWith(
             fontSize: fontSize,
             fontWeight: FontWeight.bold,
