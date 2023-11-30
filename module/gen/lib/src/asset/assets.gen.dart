@@ -25,6 +25,10 @@ class $AssetsColorGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/ic_credit_card.svg
+  SvgGenImage get icCreditCard =>
+      const SvgGenImage('assets/icons/ic_credit_card.svg');
+
   /// File path: assets/icons/ic_date_picker.svg
   SvgGenImage get icDatePicker =>
       const SvgGenImage('assets/icons/ic_date_picker.svg');
@@ -40,7 +44,8 @@ class $AssetsIconsGen {
       const SvgGenImage('assets/icons/ic_robin_bird.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [icDatePicker, icLove, icPrice, icRobinBird];
+  List<SvgGenImage> get values =>
+      [icCreditCard, icDatePicker, icLove, icPrice, icRobinBird];
 }
 
 class $AssetsImagesGen {
