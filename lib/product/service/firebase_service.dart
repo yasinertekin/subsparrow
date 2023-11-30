@@ -84,6 +84,9 @@ final class FirebaseServices extends FirebaseService {
         'essential': newSubDetail.subPrices!.essential,
         'extra': newSubDetail.subPrices!.extra,
         'yearly': newSubDetail.subPrices!.yearly,
+        'duo': newSubDetail.subPrices!.duo,
+        'computer': newSubDetail.subPrices!.computer,
+        'ultimate': newSubDetail.subPrices!.ultimate,
       };
 
       // Explicitly convert subPricesMap to JSON
@@ -98,8 +101,10 @@ final class FirebaseServices extends FirebaseService {
         'subPrices': subPricesJson,
         'status': newSubDetail.status,
         'subIcon': newSubDetail.subIcon,
-        'subOnePrice': newSubDetail.subOnePrice,
         'subBaseMonth': newSubDetail.subBaseMonth,
+        'subMonth': newSubDetail.subMonth,
+        'startDate': newSubDetail.startDate,
+        'endDate': newSubDetail.endDate,
       };
 
       final docRef = await users.doc(userId).update({
