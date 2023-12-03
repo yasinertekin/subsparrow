@@ -20,7 +20,6 @@ final class _EmailTextField extends StatelessWidget {
             authInitNotifier.setKeyboardOpen(
               context.general.isKeyBoardOpen,
             );
-            print(context.general.isKeyBoardOpen);
           },
           controller: emailController,
           textInputAction: TextInputAction.next,
