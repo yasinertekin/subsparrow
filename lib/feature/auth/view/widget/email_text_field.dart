@@ -18,7 +18,7 @@ final class _EmailTextField extends StatelessWidget {
         child: TextField(
           onTap: () {
             authInitNotifier.setKeyboardOpen(
-              context.general.isKeyBoardOpen,
+              value: context.general.isKeyBoardOpen,
             );
           },
           controller: emailController,
