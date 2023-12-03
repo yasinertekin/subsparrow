@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:gen/src/model/subscriptions/subscriptions.dart';
 import 'package:subsparrow/feature/dashboard/view/dashboard_view.dart';
 import 'package:subsparrow/product/enum/tab_view.dart';
 import 'package:subsparrow/product/extensions/tab_icons.dart';
@@ -6,6 +8,8 @@ import 'package:subsparrow/product/extensions/tab_icons.dart';
 /// DashBoardMixin
 mixin DashBoardMixin on State<DashboardView> implements TickerProvider {
   late final TabController _tabController;
+
+  final CollectionReference<Map<String, dynamic>> users = FirebaseFirestore.instance.collection('users');
 
   /// tabController
   TabController get tabController => _tabController;
@@ -62,5 +66,22 @@ mixin DashBoardMixin on State<DashboardView> implements TickerProvider {
     }
 
     return formattedName;
+  }
+
+  /// FirebaseServices
+  Future<void> addUser(
+    String documentId,
+    List<Subscriptions> subDetails,
+    CollectionReference<Object?> users,
+  ) async {
+    try {
+      final docRef = await users.doc(documentId).set({
+        'subscriptionDetails': subDetails,
+      });
+
+      return docRef;
+    } catch (e) {
+      // Handle the error
+    }
   }
 }
