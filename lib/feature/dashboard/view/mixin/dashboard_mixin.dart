@@ -9,6 +9,7 @@ import 'package:subsparrow/product/extensions/tab_icons.dart';
 mixin DashBoardMixin on State<DashboardView> implements TickerProvider {
   late final TabController _tabController;
 
+  /// users
   final CollectionReference<Map<String, dynamic>> users = FirebaseFirestore.instance.collection('users');
 
   /// tabController
