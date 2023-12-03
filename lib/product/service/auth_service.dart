@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:subsparrow/product/model/auth/auth.dart';
+import 'package:gen/src/model/auth/auth.dart';
 import 'package:subsparrow/product/service/auth_interface.dart';
 
 /// This class is responsible for creating auth service object

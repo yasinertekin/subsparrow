@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:subsparrow/product/model/auth/auth.dart';
+import 'package:gen/src/model/auth/auth.dart';
 
 /// AuthService
 abstract class AuthService {
