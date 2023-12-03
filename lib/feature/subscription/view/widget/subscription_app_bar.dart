@@ -1,7 +1,7 @@
 part of '../subscription_view.dart';
 
-final class _NewSubAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const _NewSubAppBar();
+final class _SubsriptionAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const _SubsriptionAppBar();
 
   @override
   Widget build(BuildContext context) {
