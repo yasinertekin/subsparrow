@@ -1,4 +1,4 @@
-part of '../view/subscription_detail_view.dart';
+part of '../subscription_detail_view.dart';
 
 final class _SubscriptionDetailCard extends StatelessWidget {
   const _SubscriptionDetailCard({

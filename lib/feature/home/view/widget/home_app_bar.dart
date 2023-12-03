@@ -6,20 +6,20 @@ final class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      centerTitle: true,
       automaticallyImplyLeading: false,
-      leading: ClipRRect(
+      /*  leading: ClipRRect(
         borderRadius: context.border.lowBorderRadius,
-        child: Assets.images.imgSubLogoTwo.image(
+        child: Assets.icons.icAuth.svg(
           package: 'gen',
         ),
-      ),
+      ),*/
       title: Text(
-        StringConstants.welcome,
-        style: context.general.textTheme.displayMedium?.copyWith(
+        'Aboneliklerim',
+        style: context.general.textTheme.displaySmall?.copyWith(
           fontWeight: FontWeight.bold,
         ),
       ),
-      actions: const [],
     );
   }
 

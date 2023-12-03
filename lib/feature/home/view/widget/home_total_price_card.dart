@@ -7,21 +7,26 @@ final class _TotalPriceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        title: Text(
-          StringConstants.total,
+    return Column(
+      children: [
+        Text(
+          'Toplam Harcama',
           style: context.general.textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),
-        trailing: Text(
-          '$totalSubPrice TL',
-          style: context.general.textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
+        CircleAvatar(
+          radius: 50,
+          child: Center(
+            child: Text(
+              totalSubPrice.toString(),
+              style: context.general.textTheme.bodyLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 }

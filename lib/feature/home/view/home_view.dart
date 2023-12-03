@@ -6,8 +6,8 @@ import 'package:gap/gap.dart';
 import 'package:gen/gen.dart';
 import 'package:gen/src/model/users/users.dart';
 import 'package:kartal/kartal.dart';
-import 'package:subsparrow/feature/home/mixin/home_view_mixin.dart';
 import 'package:subsparrow/product/constants/string_constants.dart';
+import 'package:subsparrow/feature/home/view/mixin/home_view_mixin.dart';
 
 part 'widget/home_app_bar.dart';
 part 'widget/home_total_price_card.dart';
@@ -40,25 +40,8 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _TotalPriceCard(totalSubPrice: totalPrice ?? 0.0),
-                  Padding(
-                    padding: context.padding.low,
-                    child: Text(
-                      StringConstants.mySubscriptions,
-                      style: context.general.textTheme.displaySmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: users?.subscriptions.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return _SubscriptionCard(
-                          index: index,
-                          users: users,
-                        );
-                      },
-                    ),
+                  SubscriptionCardList(
+                    users: users,
                   ),
                 ],
               );
@@ -68,6 +51,42 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
           }
           return const CircularProgressIndicator();
         },
+      ),
+    );
+  }
+}
+
+final class SubscriptionCardList extends StatelessWidget {
+  const SubscriptionCardList({required this.users, super.key});
+  final Users? users;
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: users?.subscriptions.length,
+        itemBuilder: (BuildContext context, int index) {
+          return _SubscriptionCard(
+            index: index,
+            users: users,
+          );
+        },
+      ),
+    );
+  }
+}
+
+final class _HomeTitle extends StatelessWidget {
+  const _HomeTitle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: context.padding.low,
+      child: Text(
+        StringConstants.mySubscriptions,
+        style: context.general.textTheme.displaySmall?.copyWith(
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }

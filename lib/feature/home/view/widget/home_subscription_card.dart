@@ -4,7 +4,6 @@ final class _SubscriptionCard extends StatelessWidget {
   const _SubscriptionCard({
     required this.index,
     required this.users,
-    super.key,
   });
   final int index;
   final Users? users;
@@ -14,6 +13,7 @@ final class _SubscriptionCard extends StatelessWidget {
     return Padding(
       padding: context.padding.low,
       child: Card(
+        elevation: 5,
         child: ListTile(
           leading: CustomNetworkImage(
             boxFit: BoxFit.fill,

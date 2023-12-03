@@ -6,8 +6,8 @@ import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/subscription/view_model/subscription_view_model.dart';
 import 'package:subsparrow/product/service/firebase_service.dart';
 
-part '../widget/subscription_detail_app_bar.dart';
-part '../widget/subscription_detail_card.dart';
+part 'widget/subscription_detail_app_bar.dart';
+part 'widget/subscription_detail_card.dart';
 
 /// [SubscriptionDetailView] is the view that displays the
 final class SubscriptionDetailView extends StatelessWidget {
