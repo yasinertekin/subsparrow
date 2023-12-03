@@ -71,6 +71,10 @@ dependencies:
 
   gen:
     path: module/gen
+  freezed_annotation: ^2.4.1
+
+  common:
+    path: module/common
 
 dev_dependencies:
   flutter_test:
@@ -89,7 +93,8 @@ dev_dependencies:
   envied_generator: ^0.5.1
   auto_route_generator: ^7.3.2
   device_preview: ^1.1.0
-  build_runner: ^2.4.6
+  build_runner: ^2.4.7
+  freezed: ^2.4.5
 
 flutter_launcher_icons:
   android: "launcher_icon"
