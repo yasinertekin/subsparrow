@@ -12,13 +12,11 @@ final class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         borderRadius: context.border.lowBorderRadius,
         child: Assets.icons.icAuth.svg(
           package: 'gen',
-        ),
+        ), 
       ),*/
       title: Text(
         'Aboneliklerim',
-        style: context.general.textTheme.displaySmall?.copyWith(
-          fontWeight: FontWeight.bold,
-        ),
+        style: context.general.textTheme.displaySmall?.copyWith(),
       ),
     );
   }
