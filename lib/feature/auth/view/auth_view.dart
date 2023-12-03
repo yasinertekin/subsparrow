@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gen/gen.dart';
+import 'package:gen/src/model/auth/auth.dart';
 import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/auth/view/mixin/auth_mixin.dart';
 import 'package:subsparrow/feature/auth/view_model/auth_init_notifier.dart';
@@ -8,7 +9,6 @@ import 'package:subsparrow/feature/auth/view_model/cubit/auth_cubit.dart';
 import 'package:subsparrow/feature/auth/view_model/state/auth_state.dart';
 import 'package:subsparrow/feature/dashboard/view/dashboard_view.dart';
 import 'package:subsparrow/product/constants/string_constants.dart';
-import 'package:subsparrow/product/model/auth/auth.dart';
 
 part 'widget/email_text_field.dart';
 part 'widget/forgot_password_text_button.dart';
