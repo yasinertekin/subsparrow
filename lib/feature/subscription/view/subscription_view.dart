@@ -1,122 +1,59 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:gap/gap.dart';
 import 'package:gen/gen.dart';
+import 'package:gen/src/model/subscription_data/subscription_data.dart';
+import 'package:gen/src/model/subscriptions/subscriptions.dart';
 import 'package:kartal/kartal.dart';
-import 'package:subsparrow/feature/sub_detail/view/sub_detail_view.dart';
+import 'package:subsparrow/feature/subscription%20detail/subscription_detail_view.dart';
 import 'package:subsparrow/feature/subscription/view/mixin/subscription_mixin.dart';
-import 'package:subsparrow/product/model/subscription/subscription.dart';
-import 'package:subsparrow/product/model/subscription_collection/subscription_collection.dart';
+import 'package:subsparrow/feature/subscription/view_model/subscription_view_model.dart';
 
-part 'widget/new_sub_app_bar.dart';
-part 'widget/new_sub_card.dart';
+part 'widget/subscription_app_bar.dart';
+part 'widget/subscription_view_card.dart';
 
-/// NewSub
+/// [SubscriptionView] is the view that displays the list of subscriptions
 final class SubscriptionView extends StatefulWidget {
+  /// [SubscriptionView] is the view that displays the list of subscriptions
   const SubscriptionView({super.key});
 
   @override
-  State<SubscriptionView> createState() => _NewSubViewState();
+  _SubscriptionViewState createState() => _SubscriptionViewState();
 }
 
-class _NewSubViewState extends State<SubscriptionView> with SubscriptionMixin {
+class _SubscriptionViewState extends State<SubscriptionView> with SubscriptionMixin {
+  /// [SubscriptionView] is the view that displays the list of subscriptions
+  final SubscriptionViewModel _subscriptionViewModel = SubscriptionViewModel();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const _NewSubAppBar(),
+      appBar: const _SubsriptionAppBar(),
       body: FutureBuilder(
-        future: getSubData(),
-        builder: (
-          BuildContext context,
-          AsyncSnapshot<QuerySnapshot<SubscriptionCollection?>> snapshot,
-        ) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-              return Center(
-                child: Assets.images.imgSubSparrowLogo.image(
-                  package: 'gen',
-                ),
-              );
-
-            case ConnectionState.active:
-            case ConnectionState.waiting:
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-
-            case ConnectionState.done:
-              if (snapshot.hasData) {
-                final subscriptions = snapshot.data!.docs
-                    .map(
-                      (e) => e.data(),
-                    )
-                    .toList();
-
-                return Column(
-                  children: [
-                    const _SearchSubscription(),
-                    _subCardList(
-                      subscriptions,
-                    ),
-                  ],
+        future: getSubscriptionData(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final subscriptionData = snapshot.data!;
+            return ListView.builder(
+              itemCount: subscriptionData.length,
+              itemBuilder: (context, index) {
+                return _SubscriptionViewCard(
+                  subscriptionData: subscriptionData,
+                  subscriptionViewModel: _subscriptionViewModel,
+                  index: index,
                 );
-              } else {
-                return const Center(
-                  child: Text('Veri Bulunamadı'),
-                );
-              }
+              },
+            );
+          } else if (snapshot.hasError) {
+            return const Center(
+              child: Text('Error'),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
         },
-      ),
-    );
-  }
-
-  Expanded _subCardList(
-    List<SubscriptionCollection?> subscriptions,
-  ) {
-    return Expanded(
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.8,
-        ),
-        itemCount: subscriptions.first?.subscriptions?.length ?? 0,
-        itemBuilder: (context, index) {
-          final sub = subscriptions.first?.subscriptions?[index];
-
-          return _SubCard(
-            onTap: () {
-              context.route.navigateToPage(
-                SubDetailView(
-                  subDetail: sub,
-                  subDetailsList: subscriptions.first?.subscriptions,
-                ),
-              );
-              //  addSub(user.toString(), sub);
-            },
-            sub: sub,
-          );
-        },
-      ),
-    );
-  }
-}
-
-final class _SearchSubscription extends StatelessWidget {
-  const _SearchSubscription();
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: context.padding.low,
-      child: const Card(
-        child: TextField(
-          decoration: InputDecoration(
-            hintText: 'Abonelik Ara',
-            prefixIcon: Icon(Icons.search),
-          ),
-        ),
       ),
     );
   }
