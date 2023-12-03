@@ -5,7 +5,7 @@ import 'package:gen/gen.dart';
 import 'package:gen/src/model/subscription_data/subscription_data.dart';
 import 'package:gen/src/model/subscriptions/subscriptions.dart';
 import 'package:kartal/kartal.dart';
-import 'package:subsparrow/feature/subscription%20detail/subscription_detail_view.dart';
+import 'package:subsparrow/feature/subscription%20detail/view/subscription_detail_view.dart';
 import 'package:subsparrow/feature/subscription/view/mixin/subscription_mixin.dart';
 import 'package:subsparrow/feature/subscription/view_model/subscription_view_model.dart';
 
@@ -34,15 +34,9 @@ class _SubscriptionViewState extends State<SubscriptionView> with SubscriptionMi
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final subscriptionData = snapshot.data!;
-            return ListView.builder(
-              itemCount: subscriptionData.length,
-              itemBuilder: (context, index) {
-                return _SubscriptionViewCard(
-                  subscriptionData: subscriptionData,
-                  subscriptionViewModel: _subscriptionViewModel,
-                  index: index,
-                );
-              },
+            return _SubscriptionList(
+              subscriptionData: subscriptionData,
+              subscriptionViewModel: _subscriptionViewModel,
             );
           } else if (snapshot.hasError) {
             return const Center(
@@ -55,6 +49,30 @@ class _SubscriptionViewState extends State<SubscriptionView> with SubscriptionMi
           }
         },
       ),
+    );
+  }
+}
+
+final class _SubscriptionList extends StatelessWidget {
+  const _SubscriptionList({
+    required this.subscriptionData,
+    required SubscriptionViewModel subscriptionViewModel,
+  }) : _subscriptionViewModel = subscriptionViewModel;
+
+  final List<SubscriptionData> subscriptionData;
+  final SubscriptionViewModel _subscriptionViewModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: subscriptionData.length,
+      itemBuilder: (context, index) {
+        return _SubscriptionViewCard(
+          subscriptionData: subscriptionData,
+          subscriptionViewModel: _subscriptionViewModel,
+          index: index,
+        );
+      },
     );
   }
 }

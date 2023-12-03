@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 part of '../subscription_view.dart';
 
 final class _SubscriptionViewCard extends StatelessWidget {
@@ -35,7 +37,7 @@ final class _SubscriptionViewCard extends StatelessWidget {
           imageUrl: subscriptionData[index].data.subscriptions?[index].icon,
         ),
         subtitle: Text(
-          subscriptionData[index].id.toString(),
+          subscriptionData[index].id,
           style: context.general.textTheme.bodyLarge?.copyWith(),
         ),
       ),
@@ -91,15 +93,20 @@ final class _DateTimeButton extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () async {
+                final currentContext = context;
+                // Store the context outside async block
                 final pickedDate = await subViewModel.selectDate(
-                  context,
+                  currentContext,
                 );
+
                 if (pickedDate != null) {
-                  subViewModel.selectedDate = pickedDate;
-                  subViewModel.monthCount = pickedDate.add(
-                    const Duration(days: 30),
-                  );
-                  await context.route.navigateToPage(
+                  subViewModel
+                    ..selectedDate = pickedDate
+                    ..monthCount = pickedDate.add(
+                      const Duration(days: 30),
+                    );
+
+                  await currentContext.route.navigateToPage(
                     SubscriptionDetailView(
                       subscriptionData: subscriptionData,
                       subscriptionViewModel: subViewModel,
