@@ -1,32 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:subsparrow/feature/auth/view/auth_view.dart';
-import 'package:subsparrow/feature/auth/view_model/auth_view_model.dart';
 import 'package:subsparrow/feature/register/view/register_view.dart';
-import 'package:subsparrow/feature/register/view_model/register_view_model.dart';
 import 'package:subsparrow/product/initialize/app_initialize.dart';
+import 'package:subsparrow/product/initialize/state_initialize.dart';
 import 'package:subsparrow/product/initialize/theme/custom_dark_theme.dart';
-import 'package:subsparrow/product/service/auth_service.dart';
 
 Future<void> main() async {
   await AppInitialize().make();
 
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => AuthViewModel(
-            AuthServices(),
-          ),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => PasswordNotifier(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => RegisterViewModel(),
-        ),
-      ],
-      child: const _MyApp(),
+    const StateInitialize(
+      child: _MyApp(),
     ),
   );
 }
