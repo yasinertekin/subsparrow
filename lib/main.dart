@@ -23,7 +23,7 @@ Future<void> main() async {
           create: (_) => PasswordNotifier(),
         ),
         ChangeNotifierProvider(
-          create: (_) => UserRegisterViewModel(),
+          create: (_) => RegisterViewModel(),
         ),
       ],
       child: const _MyApp(),

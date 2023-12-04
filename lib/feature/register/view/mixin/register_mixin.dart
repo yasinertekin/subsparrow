@@ -28,7 +28,7 @@ mixin RegisterMixin on State<RegisterView> {
 
   /// [registerUserAndNavigate] Function
   Future<void> registerUserAndNavigate(
-    UserRegisterViewModel userRegisterViewModel,
+    RegisterViewModel userRegisterViewModel,
     BuildContext context,
   ) async {
     try {

@@ -5,8 +5,8 @@ import 'package:gen/src/model/subscriptions/subscriptions.dart';
 import 'package:subsparrow/product/service/auth_service.dart';
 import 'package:subsparrow/product/service/firebase_service.dart';
 
-/// [UserRegisterViewModel] view model
-final class UserRegisterViewModel extends ChangeNotifier {
+/// [RegisterViewModel] view model
+final class RegisterViewModel extends ChangeNotifier {
   final AuthServices _authServices = AuthServices();
   final FirebaseServices _firebaseServices = FirebaseServices();
 

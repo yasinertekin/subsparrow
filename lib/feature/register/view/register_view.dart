@@ -24,7 +24,7 @@ final class RegisterView extends StatefulWidget {
 class _RegisterViewState extends State<RegisterView> with RegisterMixin {
   @override
   Widget build(BuildContext context) {
-    final userRegisterViewModel = Provider.of<UserRegisterViewModel>(context);
+    final userRegisterViewModel = Provider.of<RegisterViewModel>(context);
     return Scaffold(
       appBar: const _RegisterAppBar(),
       body: SafeArea(
