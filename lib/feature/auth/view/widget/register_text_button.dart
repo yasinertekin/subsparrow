@@ -12,7 +12,9 @@ final class _RegisterTextButton extends StatelessWidget {
           StringConstants.registerQuestion,
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            context.route.navigateToPage(const RegisterView());
+          },
           child: Text(
             StringConstants.register,
             style: context.general.textTheme.labelLarge?.copyWith(
