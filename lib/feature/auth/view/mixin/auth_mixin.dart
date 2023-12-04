@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/auth/view/auth_view.dart';
-import 'package:subsparrow/feature/auth/view_model/custom_auth_provider.dart';
+import 'package:subsparrow/feature/auth/view_model/auth_view_model.dart';
 import 'package:subsparrow/feature/dashboard/view/dashboard_view.dart';
 
 /// A mixin for [AuthView] providing common authentication functionality.
@@ -24,7 +24,7 @@ mixin AuthMixin on State<AuthView> {
 
   /// [signInUserAndNavigate] Function
   Future<void> signInUserAndNavigate(
-    CustomAuthProvider userRegisterViewModel,
+    AuthViewModel userRegisterViewModel,
     BuildContext context,
   ) async {
     try {

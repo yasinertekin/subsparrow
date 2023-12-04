@@ -4,7 +4,7 @@ import 'package:gen/gen.dart';
 import 'package:kartal/kartal.dart';
 import 'package:provider/provider.dart';
 import 'package:subsparrow/feature/auth/view/mixin/auth_mixin.dart';
-import 'package:subsparrow/feature/auth/view_model/custom_auth_provider.dart';
+import 'package:subsparrow/feature/auth/view_model/auth_view_model.dart';
 import 'package:subsparrow/feature/register/view/register_view.dart';
 import 'package:subsparrow/product/constants/string_constants.dart';
 
@@ -50,7 +50,7 @@ final class _AuthViewState extends State<AuthView> with AuthMixin {
               _LoginButton(
                 onPressed: () async {
                   await signInUserAndNavigate(
-                    context.read<CustomAuthProvider>(),
+                    context.read<AuthViewModel>(),
                     context,
                   );
                 },

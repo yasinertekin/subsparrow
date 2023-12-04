@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subsparrow/feature/auth/view/auth_view.dart';
-import 'package:subsparrow/feature/auth/view_model/custom_auth_provider.dart';
+import 'package:subsparrow/feature/auth/view_model/auth_view_model.dart';
 import 'package:subsparrow/feature/register/view/register_view.dart';
 import 'package:subsparrow/feature/register/view_model/register_view_model.dart';
 import 'package:subsparrow/product/initialize/app_initialize.dart';
@@ -15,7 +15,7 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => CustomAuthProvider(
+          create: (context) => AuthViewModel(
             AuthServices(),
           ),
         ),

@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:subsparrow/product/service/auth_interface.dart';
 
-/// [CustomAuthProvider] view model
-final class CustomAuthProvider extends ChangeNotifier {
+/// [AuthViewModel] view model
+final class AuthViewModel extends ChangeNotifier {
   /// Defauult constructor
-  CustomAuthProvider(this._authService);
+  AuthViewModel(this._authService);
   final AuthService _authService;
 
   /// [signIn] Function
