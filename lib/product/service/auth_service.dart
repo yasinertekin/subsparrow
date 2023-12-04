@@ -1,36 +1,37 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:gen/src/model/auth/auth.dart';
 import 'package:subsparrow/product/service/auth_interface.dart';
 
 /// This class is responsible for creating auth service object
 final class AuthServices extends AuthService {
-  @override
-  Future<bool> signIn(
-    UserModel auth,
-    TextEditingController emailController,
-    TextEditingController passwordController,
-  ) async {
-    auth
-      ..email = emailController.text.trim()
-      ..password = passwordController.text.trim();
-    if (auth.email!.isNotEmpty && auth.password!.isNotEmpty) {
-      try {
-        final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: auth.email ?? '',
-          password: auth.password ?? '',
-        );
-        final user = userCredential.user;
+  /// Returns the current user.
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-        return user != null;
-      } catch (e) {
-        return false;
-      }
-    } else {
-      return false;
-    }
+  @override
+  Future<UserCredential> signInEmailAndPassword(String email, String password) async {
+    return _auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
   }
 
-  /// Returns the current user.
-  Future<void> tokenSaveToCache(String token) async {}
+  @override
+  Future<UserCredential> createUserWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
+    return _auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
+
+  @override
+  User? getCurrentUser() {
+    return _auth.currentUser;
+  }
+
+  @override
+  Future<void> signOut() {
+    return _auth.signOut();
+  }
 }

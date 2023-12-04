@@ -43,7 +43,11 @@ final class FirebaseServices extends FirebaseService {
   }
 
   @override
-  Future<void> addSubscription(String userId, Subscriptions newSubDetail, CollectionReference<Object?> users) async {
+  Future<void> addSubscription(
+    String userId,
+    Subscriptions newSubDetail,
+    CollectionReference<Object?> users,
+  ) async {
     try {
       final docRef = await users.doc(userId).update({
         'subscriptionDetails': FieldValue.arrayUnion([newSubDetail.toJson()]),
