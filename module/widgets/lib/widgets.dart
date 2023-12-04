@@ -1,4 +1,3 @@
-library widgets;
 
 /// A Calculator.
 class Calculator {
