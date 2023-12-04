@@ -42,13 +42,24 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_price.svg
   SvgGenImage get icPrice => const SvgGenImage('assets/icons/ic_price.svg');
 
+  /// File path: assets/icons/ic_register_bird.svg
+  SvgGenImage get icRegisterBird =>
+      const SvgGenImage('assets/icons/ic_register_bird.svg');
+
   /// File path: assets/icons/ic_robin_bird.svg
   SvgGenImage get icRobinBird =>
       const SvgGenImage('assets/icons/ic_robin_bird.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [icAuth, icCreditCard, icDatePicker, icLove, icPrice, icRobinBird];
+  List<SvgGenImage> get values => [
+        icAuth,
+        icCreditCard,
+        icDatePicker,
+        icLove,
+        icPrice,
+        icRegisterBird,
+        icRobinBird
+      ];
 }
 
 class $AssetsImagesGen {
