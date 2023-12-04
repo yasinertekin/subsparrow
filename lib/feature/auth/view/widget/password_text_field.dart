@@ -9,53 +9,43 @@ final class _PasswordTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final notifier = _PasswordTextFieldNotifier();
-
-    return Padding(
-      padding: context.padding.low,
-      child: ListenableBuilder(
-        listenable: notifier,
-        builder: (BuildContext context, Widget? child) => TextField(
-          textInputAction: TextInputAction.done,
-          controller: passwordController,
-          decoration: InputDecoration(
-            labelText: StringConstants.password,
-            suffixIcon: IconButton(
-              icon: Icon(
-                notifier.obscureText ? Icons.visibility_off : Icons.visibility,
-              ),
-              onPressed: notifier.changeObscureText,
-            ),
-          ),
-          obscureText: notifier.obscureText,
-          keyboardType: TextInputType.visiblePassword,
+    final passwordNotifier = Provider.of<PasswordNotifier>(context);
+    return TextFormField(
+      controller: passwordController,
+      keyboardType: TextInputType.visiblePassword,
+      textInputAction: TextInputAction.done,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Lütfen bir şifre giriniz';
+        }
+        return null;
+      },
+      obscureText: passwordNotifier.isObscure,
+      decoration: InputDecoration(
+        labelText: 'Şifre',
+        suffixIcon: IconButton(
+          onPressed: passwordNotifier.toggleObscure,
+          icon: passwordNotifier.isObscure
+              ? const Icon(Icons.visibility)
+              : const Icon(
+                  Icons.visibility_off,
+                ),
         ),
       ),
     );
   }
 }
 
-final class _PasswordTextFieldNotifier extends ChangeNotifier {
-  /// PasswordTextFieldNotifier constructor
-  _PasswordTextFieldNotifier() {
-    passwordController = TextEditingController();
-  }
+/// A [ChangeNotifier] class for managing password visibility.
+final class PasswordNotifier extends ChangeNotifier {
+  bool _isObscure = true;
 
-  /// passwordController
-  late TextEditingController passwordController;
+  /// Getter for [_isObscure].
+  bool get isObscure => _isObscure;
 
-  bool obscureText = false;
-
-  /// dispose
-  @override
-  void dispose() {
-    passwordController.dispose();
-    super.dispose();
-  }
-
-  /// changeObscureText
-  void changeObscureText() {
-    obscureText = !obscureText;
+  /// Toggle [_isObscure] value.
+  void toggleObscure() {
+    _isObscure = !_isObscure;
     notifyListeners();
   }
 }
