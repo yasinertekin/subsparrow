@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:gen/gen.dart';
 import 'package:kartal/kartal.dart';
 import 'package:provider/provider.dart';
+import 'package:subsparrow/feature/dashboard/view/dashboard_view.dart';
 import 'package:subsparrow/feature/register/view/mixin/register_mixin.dart';
 import 'package:subsparrow/feature/register/view_model/register_view_model.dart';
 
@@ -25,37 +27,41 @@ class _RegisterViewState extends State<RegisterView> with RegisterMixin {
   @override
   Widget build(BuildContext context) {
     final userRegisterViewModel = Provider.of<RegisterViewModel>(context);
-    return Scaffold(
-      appBar: const _RegisterAppBar(),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Assets.icons.icRegisterBird.svg(
-              package: 'gen',
-              height: context.sized.dynamicHeight(
-                context.general.isKeyBoardOpen == true ? 0.10 : 0.45,
+    final user = FirebaseAuth.instance.currentUser;
+    return user == null
+        ? Scaffold(
+            appBar: const _RegisterAppBar(),
+            body: SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Assets.icons.icRegisterBird.svg(
+                    package: 'gen',
+                    height: context.sized.dynamicHeight(
+                      context.general.isKeyBoardOpen == true ? 0.10 : 0.45,
+                    ),
+                  ),
+                  _CustomForm(
+                    formKey: formKey,
+                    emailController: emailController,
+                    passwordController: passwordController,
+                  ),
+                  _SignInTextButton(
+                    onPressed: () => navigateToAuthScreen(context),
+                  ),
+                  _RegisterButton(
+                    onPressed: () async {
+                      await registerUserAndNavigate(
+                        userRegisterViewModel,
+                        context,
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
-            _CustomForm(
-              formKey: formKey,
-              emailController: emailController,
-              passwordController: passwordController,
-            ),
-            _SignInTextButton(
-              onPressed: () => navigateToAuthScreen(context),
-            ),
-            _RegisterButton(
-              onPressed: () async {
-                await registerUserAndNavigate(
-                  userRegisterViewModel,
-                  context,
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-    );
+          )
+        : const DashboardView();
   }
 }
 

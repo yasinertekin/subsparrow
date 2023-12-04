@@ -10,7 +10,7 @@ final class _RegisterAppBar extends StatelessWidget implements PreferredSizeWidg
     return AppBar(
       automaticallyImplyLeading: false,
       title: Text(
-        "SubSparrow'a Hoşgeldiniz!",
+        "SubSparrow'a Hoşgeldin!",
         style: context.general.textTheme.headlineMedium?.copyWith(
           fontWeight: FontWeight.bold,
         ),

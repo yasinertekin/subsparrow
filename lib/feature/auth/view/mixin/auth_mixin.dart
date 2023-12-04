@@ -28,13 +28,13 @@ mixin AuthMixin on State<AuthView> {
     BuildContext context,
   ) async {
     try {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          duration: Duration(seconds: 1),
-          content: Text('Giriş yapılıyor...'),
-        ),
-      );
       if (formKey.currentState!.validate()) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            duration: Duration(seconds: 1),
+            content: Text('Giriş yapılıyor...'),
+          ),
+        );
         await userRegisterViewModel.signIn(
           emailController.text,
           passwordController.text,
