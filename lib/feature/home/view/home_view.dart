@@ -24,7 +24,6 @@ final class HomeView extends StatefulWidget {
 final class _HomeViewState extends State<HomeView> with HomeViewMixin {
   @override
   Widget build(BuildContext context) {
-    final HomeViewModel viewModel = HomeViewModel();
     return Scaffold(
       appBar: const _HomeAppBar(),
       body: StreamBuilder<DocumentSnapshot<Users>>(
@@ -34,12 +33,14 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
             if (snapshot.hasData) {
               final users = snapshot.data!.data();
 
-              viewModel.subTotalPrice(users);
+              homeViewModel.subTotalPrice(users);
 
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _TotalPriceCard(totalSubPrice: viewModel.totalPrice ?? 0.0),
+                  _TotalPriceCard(
+                    totalSubPrice: homeViewModel.totalPrice ?? 0.0,
+                  ),
                   SubscriptionCardList(
                     users: users,
                   ),
