@@ -11,18 +11,30 @@ final class RegisterViewModel extends ChangeNotifier {
   final AuthServices _authServices = AuthServices();
   final FirebaseServices _firebaseServices = FirebaseServices();
 
+  /// [userName] String
+  String userName = '';
+
+  /// [setUserName] Function
+  void setUserName(String value) {
+    userName = value;
+    notifyListeners();
+  }
+
   /// [users] CollectionReference
   final users = FirebaseFirestore.instance.collection('users');
 
   /// [userRegister] Function
-  Future<void> userRegister(String email, String password) async {
+  Future<void> userRegister(String email, String password, String value) async {
     try {
       final userCredential = await _authServices.createUserWithEmailAndPassword(
         email,
         password,
       );
-
+      setUserName(value);
       final uid = userCredential.user!.uid;
+      final user = FirebaseAuth.instance.currentUser;
+
+      await user!.updateDisplayName(value);
 
       await addUser(uid);
       notifyListeners();

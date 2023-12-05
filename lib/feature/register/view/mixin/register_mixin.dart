@@ -20,6 +20,10 @@ mixin RegisterMixin on State<RegisterView> {
   TextEditingController get passwordController => _passwordController;
   final _passwordController = TextEditingController();
 
+  /// [nameController] getter
+  TextEditingController get nameController => _nameController;
+  final _nameController = TextEditingController();
+
   /// [navigateToAuthScreen] Function
   void navigateToAuthScreen(BuildContext context) {
     context.route.navigateToPage(
@@ -37,6 +41,7 @@ mixin RegisterMixin on State<RegisterView> {
         await userRegisterViewModel.userRegister(
           emailController.text,
           passwordController.text,
+          nameController.text,
         );
 
         navigateToAuthScreen(context);

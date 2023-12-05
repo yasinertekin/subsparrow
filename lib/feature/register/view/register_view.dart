@@ -38,13 +38,14 @@ class _RegisterViewState extends State<RegisterView> with RegisterMixin {
                   Assets.icons.icRegisterBird.svg(
                     package: 'gen',
                     height: context.sized.dynamicHeight(
-                      context.general.isKeyBoardOpen == true ? 0.10 : 0.45,
+                      context.general.isKeyBoardOpen == true ? 0.10 : 0.35,
                     ),
                   ),
                   _CustomForm(
                     formKey: formKey,
                     emailController: emailController,
                     passwordController: passwordController,
+                    nameController: nameController,
                   ),
                   _SignInTextButton(
                     onPressed: () => navigateToAuthScreen(context),
@@ -70,11 +71,13 @@ final class _CustomForm extends StatelessWidget {
     required this.formKey,
     required this.emailController,
     required this.passwordController,
+    required this.nameController,
   });
 
   final GlobalKey<FormState> formKey;
   final TextEditingController emailController;
   final TextEditingController passwordController;
+  final TextEditingController nameController;
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +88,21 @@ final class _CustomForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'İsim',
+              ),
+              keyboardType: TextInputType.name,
+              textInputAction: TextInputAction.next,
+              controller: nameController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Lütfen bir email giriniz';
+                }
+                return null;
+              },
+            ),
+            const Gap(15),
             _EmailTextField(
               emailController: emailController,
             ),
