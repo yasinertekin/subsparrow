@@ -23,8 +23,14 @@ final class StringConstants {
   /// AuthView  EmailTextField
   static const String email = 'Email';
 
+  /// AuthView EmailTextField Hint
+  static const String emailHint = 'Lütfen Email giriniz';
+
   /// AuthView PasswordTextField
   static const String password = 'Şifre';
+
+  /// AuthView PasswordTextField Hint
+  static const String passwordHint = 'Lütfen Şifre giriniz';
 
   /// AuthView ForgotPasswordTextButton
   static const String forgotPassword = 'Şifremi Unuttum';
@@ -42,6 +48,12 @@ final class StringConstants {
   /// HomeView
   static const String mySubscriptions = 'Aboneliklerim';
 
+  /// HomeView Search
+  static const String search = 'Aboneliklerimde Ara';
+
+  /// HomeView Card
+  static const String currentSubscriptions = 'Mevcut Aboneliklerim';
+
   /// HomeSubListCard
   static const String getBack = 'Geri Al';
 
@@ -49,5 +61,5 @@ final class StringConstants {
   static const String welcome = 'Hoş Geldiniz';
 
   /// HomeTotalPriceCard
-  static const String total = 'Toplam';
+  static const String total = 'Toplam Harcama';
 }

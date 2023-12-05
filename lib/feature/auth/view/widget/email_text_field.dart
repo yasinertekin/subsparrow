@@ -15,11 +15,13 @@ final class _EmailTextField extends StatelessWidget {
       textInputAction: TextInputAction.next,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Lütfen Email Giriniz';
+          return StringConstants.emailHint;
         }
         return null;
       },
-      decoration: const InputDecoration(labelText: 'Email'),
+      decoration: const InputDecoration(
+        labelText: StringConstants.email,
+      ),
     );
   }
 }

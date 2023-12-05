@@ -13,12 +13,16 @@ final class _RegisterTextButton extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            context.route.navigateToPage(const RegisterView());
+            context.route.navigateToPage(
+              const RegisterView(),
+            );
           },
           child: Text(
             StringConstants.register,
             style: context.general.textTheme.labelLarge?.copyWith(
               fontWeight: FontWeight.bold,
+
+              // TODO: Change color
               color: Colors.amber,
             ),
           ),

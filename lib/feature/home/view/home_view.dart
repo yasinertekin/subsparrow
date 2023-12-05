@@ -45,11 +45,11 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
                     children: [
                       _TotalPriceCard(
                         totalSubPrice: homeViewModel.totalPrice ?? 0.0,
-                        total: 'Mevcut Aboneliklerim',
+                        total: StringConstants.currentSubscriptions,
                       ),
                       _TotalPriceCard(
                         totalSubPrice: homeViewModel.totalPrice ?? 0.0,
-                        total: 'Toplam Harcama',
+                        total: StringConstants.total,
                       ),
                     ],
                   ),

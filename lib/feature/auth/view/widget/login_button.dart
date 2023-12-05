@@ -16,7 +16,9 @@ final class _LoginButton extends StatelessWidget {
           elevation: 6,
         ),
         onPressed: onPressed,
-        child: const Text('Giriş yap'),
+        child: const Text(
+          StringConstants.login,
+        ),
       ),
     );
   }

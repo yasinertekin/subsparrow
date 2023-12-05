@@ -14,7 +14,7 @@ final class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         ), 
       ),*/
       title: Text(
-        'Aboneliklerim',
+        StringConstants.mySubscriptions,
         style: context.general.textTheme.displaySmall?.copyWith(
           fontWeight: FontWeight.bold,
         ),

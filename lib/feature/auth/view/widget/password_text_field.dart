@@ -16,13 +16,13 @@ final class _PasswordTextField extends StatelessWidget {
       textInputAction: TextInputAction.done,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Lütfen bir şifre giriniz';
+          return StringConstants.passwordHint;
         }
         return null;
       },
       obscureText: passwordNotifier.isObscure,
       decoration: InputDecoration(
-        labelText: 'Şifre',
+        labelText: StringConstants.password,
         suffixIcon: IconButton(
           onPressed: passwordNotifier.toggleObscure,
           icon: passwordNotifier.isObscure

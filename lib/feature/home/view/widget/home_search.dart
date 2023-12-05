@@ -11,7 +11,7 @@ final class _HomeSearch extends StatelessWidget {
         elevation: 3,
         child: TextField(
           decoration: InputDecoration(
-            hintText: 'Abanoliklerimde Ara',
+            hintText: StringConstants.search,
             prefixIcon: const Icon(
               Icons.search,
             ),
