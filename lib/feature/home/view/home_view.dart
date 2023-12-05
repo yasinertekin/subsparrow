@@ -8,6 +8,7 @@ import 'package:gen/src/model/users/users.dart';
 import 'package:kartal/kartal.dart';
 import 'package:subsparrow/product/constants/string_constants.dart';
 import 'package:subsparrow/feature/home/view/mixin/home_view_mixin.dart';
+import 'package:subsparrow/feature/home/view_model/home_view_model.dart';
 
 part 'widget/home_app_bar.dart';
 part 'widget/home_total_price_card.dart';
@@ -23,6 +24,7 @@ final class HomeView extends StatefulWidget {
 final class _HomeViewState extends State<HomeView> with HomeViewMixin {
   @override
   Widget build(BuildContext context) {
+    final HomeViewModel viewModel = HomeViewModel();
     return Scaffold(
       appBar: const _HomeAppBar(),
       body: StreamBuilder<DocumentSnapshot<Users>>(
@@ -32,14 +34,12 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
             if (snapshot.hasData) {
               final users = snapshot.data!.data();
 
-              final totalPrice = users?.subscriptions.map((e) => e.price).reduce(
-                    (value, element) => value! + element!,
-                  );
+              viewModel.subTotalPrice(users);
 
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _TotalPriceCard(totalSubPrice: totalPrice ?? 0.0),
+                  _TotalPriceCard(totalSubPrice: viewModel.totalPrice ?? 0.0),
                   SubscriptionCardList(
                     users: users,
                   ),
@@ -63,7 +63,7 @@ final class SubscriptionCardList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        itemCount: users?.subscriptions.length,
+        itemCount: users?.subscriptions.length ?? 0,
         itemBuilder: (BuildContext context, int index) {
           return _SubscriptionCard(
             index: index,

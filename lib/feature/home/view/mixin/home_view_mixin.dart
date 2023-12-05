@@ -10,6 +10,8 @@ mixin HomeViewMixin on State<HomeView> {
   late DocumentReference<Users> userDocument;
   bool stopListening = false;
 
+  final totalPrice = 0.0;
+
   @override
   void initState() {
     super.initState();
