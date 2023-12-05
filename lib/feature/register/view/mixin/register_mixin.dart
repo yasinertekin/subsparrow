@@ -3,6 +3,7 @@ import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/auth/view/auth_view.dart';
 import 'package:subsparrow/feature/register/view/register_view.dart';
 import 'package:subsparrow/feature/register/view_model/register_view_model.dart';
+import 'package:subsparrow/product/utility/auth_exception.dart';
 
 /// [RegisterMixin] mixin
 mixin RegisterMixin on State<RegisterView> {
@@ -38,10 +39,9 @@ mixin RegisterMixin on State<RegisterView> {
           passwordController.text,
         );
 
-        // Registration successful, you can navigate to the next screen or take any other action.
         navigateToAuthScreen(context);
       }
-    } catch (error) {
+    } on AuthException catch (error) {
       // Handle and display the error
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

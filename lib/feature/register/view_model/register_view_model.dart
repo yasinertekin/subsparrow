@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gen/src/model/subscriptions/subscriptions.dart';
 import 'package:subsparrow/product/service/auth_service.dart';
 import 'package:subsparrow/product/service/firebase_service.dart';
+import 'package:subsparrow/product/utility/auth_exception.dart';
 
 /// [RegisterViewModel] view model
 final class RegisterViewModel extends ChangeNotifier {
@@ -27,15 +28,16 @@ final class RegisterViewModel extends ChangeNotifier {
       notifyListeners();
       // Giriş başarılıysa, burada gerekli bildirimleri yapabilirsiniz.
     } on FirebaseAuthException catch (e) {
+      String errorMessage;
       if (e.code == 'weak-password') {
-        throw 'The password provided is too weak.';
+        errorMessage = 'The password provided is too weak.';
       } else if (e.code == 'email-already-in-use') {
-        throw 'The account already exists for that email.';
+        errorMessage = 'The account already exists for that email.';
       } else {
-        throw 'Error during registration: $e';
+        errorMessage = 'Error during registration: $e';
       }
-    } catch (e) {
-      throw 'Error during registration: $e';
+
+      throw AuthException(errorMessage);
     }
   }
 
