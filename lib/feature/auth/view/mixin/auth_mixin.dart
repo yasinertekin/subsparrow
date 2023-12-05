@@ -3,6 +3,7 @@ import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/auth/view/auth_view.dart';
 import 'package:subsparrow/feature/auth/view_model/auth_view_model.dart';
 import 'package:subsparrow/feature/dashboard/view/dashboard_view.dart';
+import 'package:subsparrow/product/utility/auth_exception.dart';
 
 /// A mixin for [AuthView] providing common authentication functionality.
 ///
@@ -40,14 +41,11 @@ mixin AuthMixin on State<AuthView> {
           passwordController.text,
         );
 
-        // Registration successful, you can navigate
-        //to the next screen or take any other action.
-
         navigateToDashboardView(
           context,
         );
       }
-    } catch (error) {
+    } on AuthException catch (error) {
       // Handle and display the error
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
