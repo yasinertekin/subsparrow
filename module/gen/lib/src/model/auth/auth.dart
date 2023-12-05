@@ -17,10 +17,10 @@ final class UserModel with EquatableMixin {
   }
 
   /// This property is responsible for holding user email
-  String? email;
+  final String? email;
 
   /// This property is responsible for holding user password
-  String? password;
+  final String? password;
 
   @override
   List<Object?> get props => [email, password];
