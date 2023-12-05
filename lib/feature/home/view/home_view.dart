@@ -38,8 +38,18 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _TotalPriceCard(
-                    totalSubPrice: homeViewModel.totalPrice ?? 0.0,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _TotalPriceCard(
+                        totalSubPrice: homeViewModel.totalPrice ?? 0.0,
+                        total: 'Mevcut Aboneliklerim',
+                      ),
+                      _TotalPriceCard(
+                        totalSubPrice: homeViewModel.totalPrice ?? 0.0,
+                        total: 'Toplam Harcama',
+                      ),
+                    ],
                   ),
                   SubscriptionCardList(
                     users: users,
