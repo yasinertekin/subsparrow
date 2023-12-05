@@ -4,6 +4,7 @@ import 'package:gen/gen.dart';
 import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/dashboard/view/mixin/dashboard_mixin.dart';
 import 'package:subsparrow/feature/home/view/home_view.dart';
+import 'package:subsparrow/feature/profile/view/profile_view.dart';
 import 'package:subsparrow/feature/subscription/view/subscription_view.dart';
 import 'package:subsparrow/product/enum/tab_view.dart';
 
@@ -62,9 +63,7 @@ final class _DashboardView extends StatelessWidget {
         Container(
           color: Colors.red,
         ),
-        Container(
-          color: Colors.red,
-        ),
+        const ProfileView(),
       ],
     );
   }

@@ -13,6 +13,7 @@ import 'package:subsparrow/feature/home/view_model/home_view_model.dart';
 part 'widget/home_app_bar.dart';
 part 'widget/home_total_price_card.dart';
 part 'widget/home_subscription_card.dart';
+part 'widget/home_search.dart';
 
 final class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -38,6 +39,7 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  _HomeSearch(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [

@@ -6,7 +6,6 @@ final class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      centerTitle: true,
       automaticallyImplyLeading: false,
       /*  leading: ClipRRect(
         borderRadius: context.border.lowBorderRadius,
