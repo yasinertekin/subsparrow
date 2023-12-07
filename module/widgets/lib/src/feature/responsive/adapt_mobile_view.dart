@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 
-/// AdaptMobileView
+/// Adapt your view only tablet and phone
 final class AdaptMobileView extends StatelessWidget {
-  /// Creates a [AdaptMobileView] instance.
+  /// Define your custom widget for every platform
+  /// mobile, tablet, desktop
   const AdaptMobileView({
     required this.phone,
     required this.tablet,
@@ -19,7 +20,7 @@ final class AdaptMobileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (ResponsiveBreakpoints.of(context).isMobile) return phone;
-    if (ResponsiveBreakpoints.of(context).isMobile) return tablet;
+    if (ResponsiveBreakpoints.of(context).isTablet) return tablet;
 
     return tablet;
   }

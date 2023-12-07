@@ -2,8 +2,14 @@ import 'package:flutter/widgets.dart';
 import 'package:responsive_framework/breakpoint.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 
+/// Custom responsive for project
+/// [MOBILE] 0 - 450
+/// [TABLET] 451 - 800
+/// [DESKTOP] 801 - 1920
+/// [4K] 1921 - double.infinity
+/// [CustomResponsive.build(context, child)]
 final class CustomResponsive {
-  // ignore: public_member_api_docs
+  /// Make to ui responsive
   static Widget build(BuildContext context, Widget? child) {
     return ResponsiveBreakpoints.builder(
       child: child!,
