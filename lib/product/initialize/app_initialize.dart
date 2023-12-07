@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kartal/kartal.dart';
 import 'package:logger/logger.dart';
-import 'package:subsparrow/firebase_options.dart';
+import 'package:subsparrow/product/initialize/app_environment.dart';
 
 @immutable
 
@@ -33,9 +33,11 @@ final class AppInitialize {
     );
     await DeviceUtility.instance.initPackageInfo();
 
+    AppEnvironment.general();
+
     ///Firebase
     await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
+      options: AppEnvironment.firebaseOptions,
     );
     FirebaseUIAuth.configureProviders([
       EmailAuthProvider(),
