@@ -10,6 +10,8 @@ final class _HomeSearch extends StatelessWidget {
       child: Card(
         elevation: 3,
         child: TextField(
+          keyboardType: TextInputType.text,
+          textInputAction: TextInputAction.search,
           decoration: InputDecoration(
             hintText: StringConstants.search,
             prefixIcon: const Icon(
