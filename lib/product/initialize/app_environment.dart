@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:gen/src/environment/androidEnv/android_env.dart';
+import 'package:gen/src/environment/android%20env/android_env.dart';
 import 'package:gen/src/environment/app_configuration.dart';
 import 'package:gen/src/environment/ios%20env/ios_env.dart';
 
@@ -29,6 +29,7 @@ final class AppEnvironment {
     }
   }
 
+  /// Firebase options
   static FirebaseOptions get firebaseOptions {
     return FirebaseOptions(
       apiKey: _config.apiKey,
