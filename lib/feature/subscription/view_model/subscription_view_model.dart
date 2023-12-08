@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:gen/src/model/subscription_data/subscription_data.dart';
 
 /// SubscriptionViewModel
 final class SubscriptionViewModel extends ChangeNotifier {
@@ -32,6 +34,44 @@ final class SubscriptionViewModel extends ChangeNotifier {
       return picked; // Return the picked date
     } else {
       return null; // Return null if the user cancels
+    }
+  }
+
+  bool _isRequestSent = false;
+
+  /// isRequestSent
+  bool get isRequestSent => _isRequestSent;
+
+  /// getSubscriptionData
+  Future<List<SubscriptionData>> getSubscriptionData() async {
+    if (!_isRequestSent) {
+      try {
+        _isRequestSent = true;
+
+        notifyListeners(); // Değişiklik olduğunda dinleyenleri bilgilendir
+
+        final subscriptions = FirebaseFirestore.instance.collection(
+          'subscription_platforms',
+        );
+        final subscriptionDocs = await subscriptions.get();
+
+        _isRequestSent = false;
+        notifyListeners(); // Değişiklik olduğunda dinleyenleri bilgilendir
+
+        return subscriptionDocs.docs
+            .map(
+              SubscriptionData.fromFirestore,
+            )
+            .toList();
+      } catch (error) {
+        _isRequestSent = false;
+
+        notifyListeners(); // Değişiklik olduğunda dinleyenleri bilgilendir
+
+        return <SubscriptionData>[];
+      }
+    } else {
+      return <SubscriptionData>[];
     }
   }
 }

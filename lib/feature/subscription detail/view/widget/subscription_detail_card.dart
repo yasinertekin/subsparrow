@@ -20,7 +20,7 @@ final class _SubscriptionDetailCard extends StatelessWidget {
     return Card(
       child: ListTile(
         onTap: () {
-          firebaseServices.addSubscription(
+          firebaseServices.upgradeSubscriptions(
             FirebaseAuth.instance.currentUser!.uid,
             subscriptionData!.data.subscriptions![index].copyWith(
               startDate: subscriptionViewModel.selectedDate,
