@@ -6,13 +6,13 @@ import 'package:gen/src/model/users/users.dart';
 /// FirebaseService
 abstract class FirebaseService {
   /// Add a new user
-  Future<void> addUser(
+  Future<void> addUserSubscriptions(
     String documentId,
     List<Subscriptions> subDetails,
     CollectionReference<Object?> users,
   );
 
-  Future<void> addSubscription(
+  Future<void> upgradeSubscriptions(
     String userId,
     Subscriptions newSubDetail,
     CollectionReference<Object?> users,
@@ -21,12 +21,18 @@ abstract class FirebaseService {
   Future<DocumentSnapshot<Users>> fetchUserData(
     String authId,
   );
+
+  Future<void> setSubscriptions(
+    String userId,
+    Subscriptions subDetails,
+    CollectionReference<Object?> users,
+  );
 }
 
 /// FirebaseServices
 final class FirebaseServices extends FirebaseService {
   @override
-  Future<void> addUser(
+  Future<void> addUserSubscriptions(
     String documentId,
     List<Subscriptions> subDetails,
     CollectionReference<Object?> users,
@@ -43,7 +49,7 @@ final class FirebaseServices extends FirebaseService {
   }
 
   @override
-  Future<void> addSubscription(
+  Future<void> upgradeSubscriptions(
     String userId,
     Subscriptions newSubDetail,
     CollectionReference<Object?> users,
@@ -73,6 +79,23 @@ final class FirebaseServices extends FirebaseService {
     } catch (error) {
       print('Error fetching data: $error');
       rethrow;
+    }
+  }
+
+  @override
+  Future<void> setSubscriptions(
+    String userId,
+    Subscriptions subDetails,
+    CollectionReference<Object?> users,
+  ) async {
+    try {
+      final docRef = await users.doc(userId).set({
+        'subscriptionDetails': FieldValue.arrayUnion([subDetails.toJson()]),
+      });
+
+      return docRef;
+    } catch (e) {
+      // Handle the error
     }
   }
 }
