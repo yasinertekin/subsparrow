@@ -39,6 +39,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_love.svg
   SvgGenImage get icLove => const SvgGenImage('assets/icons/ic_love.svg');
 
+  /// File path: assets/icons/ic_photo_upload.svg
+  SvgGenImage get icPhotoUpload =>
+      const SvgGenImage('assets/icons/ic_photo_upload.svg');
+
   /// File path: assets/icons/ic_price.svg
   SvgGenImage get icPrice => const SvgGenImage('assets/icons/ic_price.svg');
 
@@ -56,6 +60,7 @@ class $AssetsIconsGen {
         icCreditCard,
         icDatePicker,
         icLove,
+        icPhotoUpload,
         icPrice,
         icRegisterBird,
         icRobinBird
