@@ -23,7 +23,6 @@ final class SubscriptionView extends StatefulWidget {
 
 class _SubscriptionViewState extends State<SubscriptionView> with SubscriptionMixin {
   /// [SubscriptionView] is the view that displays the list of subscriptions
-  final SubscriptionViewModel _subscriptionViewModel = SubscriptionViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,7 @@ class _SubscriptionViewState extends State<SubscriptionView> with SubscriptionMi
             final subscriptionData = snapshot.data!;
             return _SubscriptionList(
               subscriptionData: subscriptionData,
-              subscriptionViewModel: _subscriptionViewModel,
+              subscriptionViewModel: subscriptionViewModel,
             );
           } else if (snapshot.hasError) {
             return const Center(
