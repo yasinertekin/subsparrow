@@ -1,14 +1,11 @@
 /// Tab views
 enum TabViews {
   /// Subscription
-  subscriptions,
-
-  /// Payments
-  payments,
+  aboneliklerim,
 
   /// Notifications
-  notifications,
+  abonelikEkle,
 
   /// Profile
-  profile,
+  profil,
 }

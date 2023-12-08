@@ -4,16 +4,18 @@ import 'package:subsparrow/product/enum/tab_view.dart';
 /// TabViews
 extension TabIcons on TabViews {
   /// Icon
-  IconData get icon {
+  Widget get icon {
     switch (this) {
-      case TabViews.subscriptions:
-        return Icons.subscriptions_outlined;
-      case TabViews.payments:
-        return Icons.payment;
-      case TabViews.notifications:
-        return Icons.notifications;
-      case TabViews.profile:
-        return Icons.person;
+      case TabViews.aboneliklerim:
+        return const Icon(Icons.subscriptions_outlined);
+
+      case TabViews.abonelikEkle:
+        return const Icon(
+          Icons.add,
+        );
+
+      case TabViews.profil:
+        return const Icon(Icons.person);
     }
   }
 }

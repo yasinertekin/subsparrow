@@ -16,8 +16,10 @@ mixin DashBoardMixin on State<DashboardView> implements TickerProvider {
   late final List<Tab> _tabViewsList = TabViews.values
       .map(
         (e) => Tab(
-          text: formatEnumName(e.name),
-          icon: Icon(e.icon),
+          text: formatEnumName(
+            e.name,
+          ),
+          icon: e.icon,
         ),
       )
       .toList();
