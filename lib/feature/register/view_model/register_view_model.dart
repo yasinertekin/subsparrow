@@ -57,7 +57,7 @@ final class RegisterViewModel extends ChangeNotifier {
   Future<void> addUser(
     String uid,
   ) async {
-    await _firebaseServices.addUser(
+    await _firebaseServices.addUserSubscriptions(
       uid,
       List<Subscriptions>.empty(growable: true),
       users,
