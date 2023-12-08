@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 /// The main profile view widget.
 final class ProfileViewModel extends ChangeNotifier {
@@ -35,6 +38,59 @@ final class ProfileViewModel extends ChangeNotifier {
     firebaseUser?.updateEmail(emailController.text).toString();
     email = emailController.text;
 
+    notifyListeners();
+  }
+
+  File? _image;
+
+  File? get image => _image;
+
+  /// Picks an image from the gallery.
+  Future<void> pickImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+    _image = File(image.path);
+    notifyListeners();
+  }
+
+  /// Phone number of the current user.
+  late String? phoneNumber = firebaseUser?.phoneNumber.toString();
+
+  /// The controller for the phone number text field.
+  final phoneNumberController = TextEditingController(
+    text: FirebaseAuth.instance.currentUser?.phoneNumber,
+  );
+
+  /// Updates the phone number of the current user.
+  Future<void> updatePhoneNumber({
+    required String verificationId,
+    required String smsCode,
+  }) async {
+    try {
+      // Assuming you have the verificationId and smsCode from the user input
+      final phoneAuthCredential = PhoneAuthProvider.credential(
+        verificationId: verificationId,
+        smsCode: smsCode,
+      );
+
+      await firebaseUser?.updatePhoneNumber(phoneAuthCredential);
+
+      // Update the phoneNumber variable
+      phoneNumber = phoneNumberController.text;
+
+      // Notify listeners about the change
+      notifyListeners();
+    } catch (e) {
+      print('Error updating phone number: $e');
+      // Handle the error accordingly
+    }
+  }
+
+  bool readOnly = true;
+
+  ///ChangeReadOnly
+  void changeReadOnly() {
+    readOnly = !readOnly;
     notifyListeners();
   }
 }

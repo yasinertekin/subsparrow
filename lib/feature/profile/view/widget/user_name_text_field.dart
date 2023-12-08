@@ -57,37 +57,8 @@ final class _TextFieldBody extends StatelessWidget {
         _TextFieldCard(
           textEditingController: textEditingController,
           viewModel: viewModel,
-          icon: icon,
-        ),
-        _CustomIconButton(
-          viewModel: viewModel,
-          onPressed: onPressed,
         ),
       ],
-    );
-  }
-}
-
-final class _CustomIconButton extends StatelessWidget {
-  const _CustomIconButton({
-    required this.viewModel,
-    required this.onPressed,
-  });
-
-  final ProfileViewModel viewModel;
-  final void Function()? onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: CircleAvatar(
-        child: IconButton(
-          icon: const Icon(
-            Icons.edit,
-          ),
-          onPressed: onPressed,
-        ),
-      ),
     );
   }
 }
@@ -96,27 +67,49 @@ final class _TextFieldCard extends StatelessWidget {
   const _TextFieldCard({
     required this.viewModel,
     required this.textEditingController,
-    required this.icon,
   });
 
   final ProfileViewModel viewModel;
   final TextEditingController textEditingController;
-  final Widget icon;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       flex: 9,
       child: Card(
-        child: TextField(
-          controller: textEditingController,
-          decoration: InputDecoration(
-            prefixIcon: icon,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+        elevation: 5,
+        child: ListenableBuilder(
+          listenable: viewModel,
+          builder: (context, child) => TextField(
+            keyboardType: TextInputType.name,
+            readOnly: viewModel.readOnly,
+            controller: textEditingController,
+            decoration: InputDecoration(
+              suffixIcon: _CustomIconButton(viewModel: viewModel),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+final class _CustomIconButton extends StatelessWidget {
+  const _CustomIconButton({
+    required this.viewModel,
+  });
+
+  final ProfileViewModel viewModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: viewModel.changeReadOnly,
+      icon: const Icon(
+        Icons.edit,
       ),
     );
   }
