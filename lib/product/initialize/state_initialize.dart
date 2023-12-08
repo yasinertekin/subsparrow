@@ -5,6 +5,7 @@ import 'package:subsparrow/feature/auth/view_model/auth_view_model.dart';
 import 'package:subsparrow/feature/home/view_model/home_view_model.dart';
 import 'package:subsparrow/feature/profile/view_model/profile_view_model.dart';
 import 'package:subsparrow/feature/register/view_model/register_view_model.dart';
+import 'package:subsparrow/feature/subscription/view_model/subscription_view_model.dart';
 import 'package:subsparrow/product/service/auth_service.dart';
 
 /// This class is used to initialize the state of the application.
@@ -36,6 +37,9 @@ final class StateInitialize extends StatelessWidget {
           create: (_) => HomeViewModel(),
         ),
         ChangeNotifierProvider(create: (_) => ProfileViewModel()),
+        ChangeNotifierProvider(
+          create: (_) => SubscriptionViewModel(),
+        ),
       ],
       child: child,
     );
