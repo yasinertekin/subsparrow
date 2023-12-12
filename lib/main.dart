@@ -24,6 +24,7 @@ final class _MyApp extends StatelessWidget {
     return MaterialApp(
       builder: CustomResponsive.build,
       title: 'Flutter Demo',
+
       theme: CustomDarkTheme().themeData,
       // ignore: unnecessary_null_comparison
       home: const RegisterView(),
