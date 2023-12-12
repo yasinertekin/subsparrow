@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/auth/sign/view/auth_view.dart';
-import 'package:subsparrow/feature/auth/view_model/auth_view_model.dart';
+import 'package:subsparrow/feature/auth/sign/view_model/auth_view_model.dart';
 import 'package:subsparrow/feature/dashboard/view/dashboard_view.dart';
 import 'package:subsparrow/product/utility/auth_exception.dart';
 import 'package:widgets/src/widgets/custom_scaffold_messenger.dart';

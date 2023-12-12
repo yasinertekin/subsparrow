@@ -3,9 +3,9 @@ import 'package:gap/gap.dart';
 import 'package:gen/gen.dart';
 import 'package:kartal/kartal.dart';
 import 'package:provider/provider.dart';
+import 'package:subsparrow/feature/auth/register/view/register_view.dart';
 import 'package:subsparrow/feature/auth/sign/view/mixin/auth_mixin.dart';
-import 'package:subsparrow/feature/auth/view_model/auth_view_model.dart';
-import 'package:subsparrow/feature/register/view/register_view.dart';
+import 'package:subsparrow/feature/auth/sign/view_model/auth_view_model.dart';
 import 'package:subsparrow/product/utility/constants/string_constants.dart';
 
 part './widget/email_text_field.dart';

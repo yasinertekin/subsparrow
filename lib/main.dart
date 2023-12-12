@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:subsparrow/feature/register/view/register_view.dart';
+import 'package:subsparrow/feature/auth/register/view/register_view.dart';
 import 'package:subsparrow/product/initialize/app_initialize.dart';
 import 'package:subsparrow/product/initialize/state_initialize.dart';
 import 'package:subsparrow/product/initialize/theme/custom_dark_theme.dart';

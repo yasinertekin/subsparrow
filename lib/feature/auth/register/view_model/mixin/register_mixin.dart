@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
+import 'package:subsparrow/feature/auth/register/view/register_view.dart';
+import 'package:subsparrow/feature/auth/register/view_model/register_view_model.dart';
 import 'package:subsparrow/feature/auth/sign/view/auth_view.dart';
-import 'package:subsparrow/feature/register/view/register_view.dart';
-import 'package:subsparrow/feature/register/view_model/register_view_model.dart';
 import 'package:subsparrow/product/utility/auth_exception.dart';
 import 'package:widgets/src/widgets/custom_scaffold_messenger.dart';
 

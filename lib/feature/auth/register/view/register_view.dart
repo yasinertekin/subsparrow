@@ -4,9 +4,9 @@ import 'package:gap/gap.dart';
 import 'package:gen/gen.dart';
 import 'package:kartal/kartal.dart';
 import 'package:provider/provider.dart';
+import 'package:subsparrow/feature/auth/register/view_model/mixin/register_mixin.dart';
+import 'package:subsparrow/feature/auth/register/view_model/register_view_model.dart';
 import 'package:subsparrow/feature/dashboard/view/dashboard_view.dart';
-import 'package:subsparrow/feature/register/view/mixin/register_mixin.dart';
-import 'package:subsparrow/feature/register/view_model/register_view_model.dart';
 
 part 'widget/email_text_field.dart';
 part 'widget/password_text_field.dart';
