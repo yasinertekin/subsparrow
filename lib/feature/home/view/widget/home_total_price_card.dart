@@ -31,7 +31,7 @@ final class _TotalPriceCard extends StatelessWidget {
                 listenable: homeViewModel,
                 builder: (context, child) => Text(
                   maxLines: 1,
-                  '${homeViewModel.totalPrice.toString()}₺',
+                  '${homeViewModel.totalPrice}₺',
                   style: context.general.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),

@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gen/src/model/users/users.dart';
+import 'package:get_it/get_it.dart';
+import 'package:subsparrow/product/service/notification_service.dart';
 
 /// [HomeViewModel] HomeView için view model
 final class HomeViewModel extends ChangeNotifier {
@@ -53,5 +55,23 @@ final class HomeViewModel extends ChangeNotifier {
           fromFirestore: (snapshot, _) => Users.fromJson(snapshot.data() ?? {}),
           toFirestore: (users, _) => users.toJson(),
         );
+  }
+
+  final INotificationService _notificationService = GetIt.instance<INotificationService>();
+
+  INotificationService get notificationService => _notificationService;
+
+  /// Schedule notification
+  Future<void> scheduledNotification(
+    DateTime dateTime,
+    String title,
+    String body,
+  ) async {
+    await _notificationService.scheduledNotification(
+      dateTime,
+      title,
+      body,
+    );
+    notifyListeners();
   }
 }
