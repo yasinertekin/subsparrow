@@ -35,7 +35,11 @@ final class AppInitialize {
         AwesomeNotifications(),
       )
         ..initializeNotifications()
-        ..requestUserPermissions();
+        ..awesomeNotifications.isNotificationAllowed().then((isAllowed) {
+          if (!isAllowed) {
+            AwesomeNotifications().requestPermissionToSendNotifications();
+          }
+        });
     });
     WidgetsFlutterBinding.ensureInitialized();
     await EasyLocalization.ensureInitialized();

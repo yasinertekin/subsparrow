@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:subsparrow/feature/dashboard/view/dashboard_view.dart';
-import 'package:subsparrow/feature/dashboard/view_model/dashboard_view_model.dart';
 import 'package:subsparrow/product/utility/enum/tab_view.dart';
 import 'package:subsparrow/product/utility/extensions/tab_icons.dart';
 
 /// DashBoardMixin
 mixin DashBoardMixin on State<DashboardView> implements TickerProvider {
-  /// DashboardViewModel
-  final DashboardViewModel _viewModel = DashboardViewModel();
-
-  /// viewModel
-  DashboardViewModel get viewModel => _viewModel;
-
   late final TabController _tabController;
 
   /// tabController

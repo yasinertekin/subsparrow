@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:subsparrow/feature/dashboard/view/mixin/dashboard_mixin.dart';
-import 'package:subsparrow/feature/dashboard/view_model/dashboard_view_model.dart';
 import 'package:subsparrow/feature/home/view/home_view.dart';
 import 'package:subsparrow/feature/profile/view/profile_view.dart';
 import 'package:subsparrow/feature/subscription/view/subscription_view.dart';
@@ -30,7 +29,6 @@ class _DashboardViewState extends State<DashboardView> with DashBoardMixin {
         ),
         body: _DashboardView(
           tabController: tabController,
-          viewModel: viewModel,
         ),
       ),
     );
@@ -45,11 +43,9 @@ class _DashboardViewState extends State<DashboardView> with DashBoardMixin {
 final class _DashboardView extends StatelessWidget {
   const _DashboardView({
     required TabController tabController,
-    required this.viewModel,
   }) : _tabController = tabController;
 
   final TabController _tabController;
-  final DashboardViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
