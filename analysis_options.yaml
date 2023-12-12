@@ -18,7 +18,6 @@ analyzer:
     - "bin/cache/**"
     - "lib/generated_plugin_registrant.dart"
     - "lib/firebase_options.dart"
-    - "lib/feature/home/view/home_view.dart"
 
 linter:
   # The lint rules applied to this project can be customized in the
