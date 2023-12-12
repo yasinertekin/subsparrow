@@ -33,6 +33,22 @@ final class _SubscriptionDetailCard extends StatelessWidget {
             ),
             users,
           );
+          CustomSnackBar.show(
+            context: context,
+            content: const Row(
+              children: [
+                Text('Aboneliğiniz başarıyla Eklendi'),
+                Icon(
+                  Icons.check,
+                  color: Colors.black,
+                ),
+              ],
+            ),
+          );
+
+          context.route.navigateToPage(
+            const DashboardView(),
+          );
         },
         title: Text(subscriptionData!.data.subscriptions![index].name!),
         subtitle: Text(

@@ -9,7 +9,7 @@ final class _PasswordTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final passwordTextFieldNotifier = PasswordNotifier();
+    final passwordTextFieldNotifier = PasswordNotifierTwo();
 
     return ListenableBuilder(
       listenable: passwordTextFieldNotifier,
@@ -39,7 +39,7 @@ final class _PasswordTextField extends StatelessWidget {
 }
 
 /// Şifre alanı için notifier
-final class PasswordNotifier extends ChangeNotifier {
+final class PasswordNotifierTwo extends ChangeNotifier {
   bool _obscureText = true;
 
   /// Şifre alanının görünürlüğünü değiştirir

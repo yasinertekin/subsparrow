@@ -3,8 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gen/src/model/subscription_data/subscription_data.dart';
 import 'package:kartal/kartal.dart';
+import 'package:subsparrow/feature/dashboard/view/dashboard_view.dart';
 import 'package:subsparrow/feature/subscription/view_model/subscription_view_model.dart';
 import 'package:subsparrow/product/service/firebase_service.dart';
+import 'package:widgets/src/widgets/custom_scaffold_messenger.dart';
 
 part 'widget/subscription_detail_app_bar.dart';
 part 'widget/subscription_detail_card.dart';

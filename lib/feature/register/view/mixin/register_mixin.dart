@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
-import 'package:subsparrow/feature/auth/view/auth_view.dart';
+import 'package:subsparrow/feature/auth/sign/view/auth_view.dart';
 import 'package:subsparrow/feature/register/view/register_view.dart';
 import 'package:subsparrow/feature/register/view_model/register_view_model.dart';
 import 'package:subsparrow/product/utility/auth_exception.dart';
+import 'package:widgets/src/widgets/custom_scaffold_messenger.dart';
 
 /// [RegisterMixin] mixin
 mixin RegisterMixin on State<RegisterView> {
@@ -47,11 +48,9 @@ mixin RegisterMixin on State<RegisterView> {
         navigateToAuthScreen(context);
       }
     } on AuthException catch (error) {
-      // Handle and display the error
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('$error'),
-        ),
+      CustomSnackBar.show(
+        context: context,
+        content: Text(error.message),
       );
     }
   }
