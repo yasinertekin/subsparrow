@@ -4,6 +4,7 @@ import 'package:kartal/kartal.dart';
 import 'package:logger/logger.dart';
 import 'package:subsparrow/feature/profile/view/mixin/profile_mixin.dart';
 import 'package:subsparrow/feature/profile/view_model/profile_view_model.dart';
+import 'package:widgets/src/widgets/custom_scaffold_messenger.dart';
 
 part 'widget/user_name_text_field.dart';
 
@@ -55,12 +56,9 @@ final class _ProfileViewState extends State<ProfileView> with ProfileMixin {
   }
 
   void _mailMessenger(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text(
-          'Email Değiştirme Yakında Eklenecek',
-        ),
-      ),
+    CustomSnackBar.show(
+      context: context,
+      content: const Text('Mail değiştirme işlemi henüz aktif değil.'),
     );
   }
 }
