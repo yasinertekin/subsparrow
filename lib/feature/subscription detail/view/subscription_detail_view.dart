@@ -8,6 +8,7 @@ import 'package:subsparrow/feature/subscription/view_model/subscription_view_mod
 import 'package:subsparrow/product/service/firebase_service.dart';
 import 'package:widgets/src/widgets/custom_scaffold_messenger.dart';
 
+part 'widget/subscription_date_time_title.dart';
 part 'widget/subscription_detail_app_bar.dart';
 part 'widget/subscription_detail_card.dart';
 
