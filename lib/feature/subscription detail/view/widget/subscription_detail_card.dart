@@ -20,34 +20,8 @@ final class _SubscriptionDetailCard extends StatelessWidget {
     return Card(
       child: ListTile(
         onTap: () {
-          firebaseServices.upgradeSubscriptions(
-            FirebaseAuth.instance.currentUser!.uid,
-            subscriptionData!.data.subscriptions![index].copyWith(
-              startDate: subscriptionViewModel.selectedDate,
-              endDate: subscriptionViewModel.monthCount,
-              status: true,
-              icon: subscriptionData!.data.subscriptions![index].icon,
-              name: subscriptionData!.data.subscriptions![index].name,
-              price: subscriptionData!.data.subscriptions![index].price,
-              platformName: subscriptionData!.data.subscriptions![index].platformName,
-            ),
-            users,
-          );
-          CustomSnackBar.show(
-            context: context,
-            content: const Row(
-              children: [
-                Text('Aboneliğiniz başarıyla Eklendi'),
-                Icon(
-                  Icons.check,
-                  color: Colors.black,
-                ),
-              ],
-            ),
-          );
-
-          context.route.navigateToPage(
-            const DashboardView(),
+          _upgradeSubscriptionsAndNavigate(
+            context,
           );
         },
         title: Text(subscriptionData!.data.subscriptions![index].name!),
@@ -55,6 +29,38 @@ final class _SubscriptionDetailCard extends StatelessWidget {
           '${subscriptionData!.data.subscriptions![index].price!} ₺',
         ),
       ),
+    );
+  }
+
+  void _upgradeSubscriptionsAndNavigate(BuildContext context) {
+    firebaseServices.upgradeSubscriptions(
+      FirebaseAuth.instance.currentUser!.uid,
+      subscriptionData!.data.subscriptions![index].copyWith(
+        startDate: subscriptionViewModel.selectedDate,
+        endDate: subscriptionViewModel.monthCount,
+        status: true,
+        icon: subscriptionData!.data.subscriptions![index].icon,
+        name: subscriptionData!.data.subscriptions![index].name,
+        price: subscriptionData!.data.subscriptions![index].price,
+        platformName: subscriptionData!.data.subscriptions![index].platformName,
+      ),
+      users,
+    );
+    CustomSnackBar.show(
+      context: context,
+      content: const Row(
+        children: [
+          Text('Aboneliğiniz başarıyla Eklendi'),
+          Icon(
+            Icons.check,
+            color: Colors.black,
+          ),
+        ],
+      ),
+    );
+
+    context.route.navigateToPage(
+      const DashboardView(),
     );
   }
 }

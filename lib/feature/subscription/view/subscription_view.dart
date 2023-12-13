@@ -10,6 +10,8 @@ import 'package:subsparrow/feature/subscription/view/mixin/subscription_mixin.da
 import 'package:subsparrow/feature/subscription/view_model/subscription_view_model.dart';
 
 part 'widget/subscription_app_bar.dart';
+part 'widget/subscription_date_time_button.dart';
+part 'widget/subscription_date_time_picker.dart';
 part 'widget/subscription_view_card.dart';
 
 /// [SubscriptionView] is the view that displays the list of subscriptions
