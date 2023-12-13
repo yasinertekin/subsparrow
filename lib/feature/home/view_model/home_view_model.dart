@@ -12,6 +12,15 @@ final class HomeViewModel extends ChangeNotifier {
   /// Kullanıcıya ait verileri tutar
   late DocumentReference<Users> userDocument;
 
+  /// [subCount] abonelik sayısı
+  int subCount = 0;
+
+  /// [changeSubCount] abonelik sayısını değiştirir
+  void changeSubCount(int value) {
+    subCount = value;
+    notifyListeners();
+  }
+
   /// [totalPrice] toplam fiyat
   double totalPrice = 0;
   double monthlyPrice = 0;
@@ -46,6 +55,7 @@ final class HomeViewModel extends ChangeNotifier {
     notifyListeners();
 
     initializeFirebase();
+    changeSubCount(users?.subscriptions.length ?? 0);
     notifyListeners();
   }
 

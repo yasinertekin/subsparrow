@@ -10,8 +10,10 @@ import 'package:subsparrow/product/service/firebase_service.dart';
 import 'package:subsparrow/product/utility/constants/string_constants.dart';
 import 'package:subsparrow/product/utility/enum/home_grid.dart';
 
+part 'widget/custom_circle_avatar.dart';
 part 'widget/home subscription cards/home_subscription_cards.dart';
 part 'widget/home_app_bar.dart';
+part 'widget/home_header.dart';
 part 'widget/home_search.dart';
 part 'widget/home_total_price_card.dart';
 
@@ -40,26 +42,7 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const _HomeSearch(),
-                  GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: HomeGridViewBuilder.values.length,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: 1.5,
-                    ),
-                    itemBuilder: (BuildContext context, int index) {
-                      final item = HomeGridViewBuilder.values[index];
-
-                      return Text(
-                        maxLines: 1,
-                        item.name,
-                        style: context.general.textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      );
-                    },
-                  ),
+                  _HomeHeader(homeViewModel: homeViewModel),
                   SubscriptionCardList(
                     users: users,
                     firebaseServices: firebaseServices,
@@ -74,43 +57,6 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
           return const CircularProgressIndicator();
         },
       ),
-    );
-  }
-}
-
-final class _TotalPriceHeader extends StatelessWidget {
-  const _TotalPriceHeader({
-    required this.homeViewModel,
-  });
-
-  final HomeViewModel homeViewModel;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        _TotalPriceCard(
-          homeViewModel: homeViewModel,
-          totalSubPrice: homeViewModel.totalPrice,
-          total: StringConstants.currentSubscriptions,
-        ),
-        const Column(
-          children: [
-            Text('Toplam Abonelik Sayısı'),
-            CircleAvatar(
-              radius: 20,
-              child: Text(
-                'tatal',
-              ),
-            ),
-          ],
-        ),
-        _TotalPriceCard(
-          homeViewModel: homeViewModel,
-          totalSubPrice: homeViewModel.monthlyPrice,
-          total: StringConstants.total,
-        ),
-      ],
     );
   }
 }
@@ -149,7 +95,7 @@ final class SubscriptionCardList extends StatelessWidget {
           itemCount: subList?.length,
           itemBuilder: (BuildContext context, int index) {
             final subscription = subList?.elementAt(index); // Get the subscription for the current index
-
+            homeViewModel.changeSubCount(subList?.length ?? 0);
             return SubscriptionCards(
               item: subscription,
             );
