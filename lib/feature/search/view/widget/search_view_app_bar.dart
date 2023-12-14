@@ -1,5 +1,6 @@
 part of '../search_view.dart';
 
+// ignore: lines_longer_than_80_chars
 final class _SearchViewAppBar extends StatelessWidget implements PreferredSizeWidget {
   const _SearchViewAppBar();
 
