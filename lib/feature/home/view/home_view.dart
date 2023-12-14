@@ -83,7 +83,7 @@ final class _HomeBody extends StatelessWidget {
           ),
         ),
         _HomeHeader(homeViewModel: homeViewModel),
-        SubscriptionCardList(
+        _SubscriptionCardList(
           users: users,
           firebaseServices: firebaseServices,
           homeViewModel: homeViewModel,
@@ -107,14 +107,13 @@ final class _HomeFloating extends StatelessWidget {
   }
 }
 
-/// [SubscriptionCardList] is the list of subscriptions.
-final class SubscriptionCardList extends StatelessWidget {
-  /// [SubscriptionCardList] is the list of subscriptions.
-  const SubscriptionCardList({
+/// [_SubscriptionCardList] is the list of subscriptions.
+final class _SubscriptionCardList extends StatelessWidget {
+  /// [_SubscriptionCardList] is the list of subscriptions.
+  const _SubscriptionCardList({
     required this.users,
     required this.firebaseServices,
     required this.homeViewModel,
-    super.key,
   });
 
   /// [users] is the user data.
