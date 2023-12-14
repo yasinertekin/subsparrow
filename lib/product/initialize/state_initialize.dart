@@ -6,6 +6,7 @@ import 'package:subsparrow/feature/auth/sign/view/auth_view.dart';
 import 'package:subsparrow/feature/auth/sign/view_model/auth_view_model.dart';
 import 'package:subsparrow/feature/home/view_model/home_view_model.dart';
 import 'package:subsparrow/feature/profile/view_model/profile_view_model.dart';
+import 'package:subsparrow/feature/search/view_model/search_view_model.dart';
 import 'package:subsparrow/feature/subscription/view_model/subscription_view_model.dart';
 import 'package:subsparrow/product/service/auth_service.dart';
 
@@ -45,6 +46,11 @@ final class StateInitialize extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => PasswordNotifier(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => SearchViewModel(
+            subscriptions: [],
+          ),
         ),
       ],
       child: child,

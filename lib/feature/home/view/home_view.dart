@@ -1,17 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:gen/src/model/subscriptions/subscriptions.dart';
 import 'package:gen/src/model/users/users.dart';
 import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/home/view/mixin/home_view_mixin.dart';
-import 'package:subsparrow/feature/home/view/widget/home%20subscription%20cards/home_subscription_cards_mixin.dart';
+import 'package:subsparrow/feature/home/view/widget/home%20subscription%20cards/home_subscription_cards.dart';
 import 'package:subsparrow/feature/home/view_model/home_view_model.dart';
+import 'package:subsparrow/feature/search/view/search_view.dart';
 import 'package:subsparrow/product/service/firebase_service.dart';
 import 'package:subsparrow/product/utility/constants/string_constants.dart';
 import 'package:subsparrow/product/utility/enum/home_grid.dart';
 
 part 'widget/custom_circle_avatar.dart';
-part 'widget/home subscription cards/home_subscription_cards.dart';
 part 'widget/home_app_bar.dart';
 part 'widget/home_header.dart';
 part 'widget/home_search.dart';
@@ -30,6 +29,7 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: const _HomeFloating(),
       appBar: const _HomeAppBar(),
       body: StreamBuilder<DocumentSnapshot<Users>>(
         stream: homeViewModel.userDocument.snapshots(),
@@ -37,18 +37,12 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
           if (snapshot.connectionState == ConnectionState.active) {
             if (snapshot.hasData) {
               final users = snapshot.data!.data();
+
               homeViewUsersInit(users, firebaseServices);
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const _HomeSearch(),
-                  _HomeHeader(homeViewModel: homeViewModel),
-                  SubscriptionCardList(
-                    users: users,
-                    firebaseServices: firebaseServices,
-                    homeViewModel: homeViewModel,
-                  ),
-                ],
+              return _HomeBody(
+                users: users,
+                firebaseServices: firebaseServices,
+                homeViewModel: homeViewModel,
               );
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
@@ -56,6 +50,58 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
           }
           return const CircularProgressIndicator();
         },
+      ),
+    );
+  }
+}
+
+final class _HomeBody extends StatelessWidget {
+  const _HomeBody({
+    required this.users,
+    required this.firebaseServices,
+    required this.homeViewModel,
+  });
+
+  final Users? users;
+  final FirebaseServices firebaseServices;
+  final HomeViewModel homeViewModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: context.padding.low,
+          child: Card(
+            elevation: 5,
+            child: _HomeSearch(
+              users: users,
+              firebaseServices: firebaseServices,
+              homeViewModel: homeViewModel,
+            ),
+          ),
+        ),
+        _HomeHeader(homeViewModel: homeViewModel),
+        SubscriptionCardList(
+          users: users,
+          firebaseServices: firebaseServices,
+          homeViewModel: homeViewModel,
+        ),
+      ],
+    );
+  }
+}
+
+final class _HomeFloating extends StatelessWidget {
+  const _HomeFloating();
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {},
+      child: const Icon(
+        Icons.history,
       ),
     );
   }
@@ -81,23 +127,26 @@ final class SubscriptionCardList extends StatelessWidget {
   final HomeViewModel homeViewModel;
   @override
   Widget build(BuildContext context) {
-    final subList = users?.subscriptions.where(
-      (
-        element,
-      ) =>
-          element.status == true,
-    );
+    final subList = users?.subscriptions
+            .where(
+              (element) => element.status == true,
+            )
+            .toList() ??
+        [];
 
     return Expanded(
       child: Padding(
         padding: context.padding.low,
         child: ListView.builder(
-          itemCount: subList?.length,
+          itemCount: subList.length,
           itemBuilder: (BuildContext context, int index) {
-            final subscription = subList?.elementAt(index); // Get the subscription for the current index
-            homeViewModel.changeSubCount(subList?.length ?? 0);
+            final subscription = subList.elementAt(index); // Get the subscription for the current index
+            homeViewModel.changeSubCount(subList.length);
+
             return SubscriptionCards(
               item: subscription,
+              firebaseService: firebaseServices,
+              homeViewModel: homeViewModel,
             );
           },
         ),

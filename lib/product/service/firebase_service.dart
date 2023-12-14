@@ -31,6 +31,13 @@ abstract class FirebaseService {
     Subscriptions subDetails,
     CollectionReference<Object?> users,
   );
+
+  /// [deleteSubscriptions] deletes the subscription details for the user
+  Future<void> deleteSubscriptions(
+    String userId,
+    Subscriptions subDetails,
+    CollectionReference<Object?> users,
+  );
 }
 
 /// FirebaseServices
@@ -101,6 +108,23 @@ final class FirebaseServices extends FirebaseService {
     try {
       final docRef = await users.doc(userId).set({
         'subscriptionDetails': FieldValue.arrayUnion([subDetails.toJson()]),
+      });
+
+      return docRef;
+    } catch (e) {
+      // Handle the error
+    }
+  }
+
+  @override
+  Future<void> deleteSubscriptions(
+    String userId,
+    Subscriptions subDetails,
+    CollectionReference<Object?> users,
+  ) async {
+    try {
+      final docRef = await users.doc(userId).update({
+        'subscriptionDetails': FieldValue.arrayRemove([subDetails.toJson()]),
       });
 
       return docRef;

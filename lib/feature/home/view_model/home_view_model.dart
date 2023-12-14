@@ -7,6 +7,8 @@ import 'package:subsparrow/product/service/notification_service.dart';
 
 /// [HomeViewModel] HomeView için view model
 final class HomeViewModel extends ChangeNotifier {
+  final Users? users = null;
+
   late String auth;
 
   /// Kullanıcıya ait verileri tutar
@@ -23,6 +25,8 @@ final class HomeViewModel extends ChangeNotifier {
 
   /// [totalPrice] toplam fiyat
   double totalPrice = 0;
+
+  /// [monthlyPrice] aylık fiyat
   double monthlyPrice = 0;
 
   /// [subTotalPrice] toplam fiyatı hesaplar

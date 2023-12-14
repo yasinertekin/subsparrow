@@ -1,15 +1,27 @@
-part of '../../home_view.dart';
+import 'package:flutter/material.dart';
+import 'package:gen/src/model/subscriptions/subscriptions.dart';
+import 'package:kartal/kartal.dart';
+import 'package:subsparrow/feature/home/view/widget/home%20subscription%20cards/home_subscription_cards_mixin.dart';
+import 'package:subsparrow/feature/home/view_model/home_view_model.dart';
+import 'package:subsparrow/product/service/firebase_service.dart';
 
 /// SubscriptionCards is the main view of the application.
 final class SubscriptionCards extends StatefulWidget {
   /// SubscriptionCards is the main view of the application.
   const SubscriptionCards({
     required this.item,
+    required this.firebaseService,
+    this.homeViewModel,
     super.key,
   });
 
   /// [Subscriptions] item
   final Subscriptions? item;
+
+  /// [FirebaseService] instance
+  final FirebaseService? firebaseService;
+
+  final HomeViewModel? homeViewModel;
 
   @override
   SubscriptionCardsState createState() => SubscriptionCardsState();
@@ -29,7 +41,11 @@ class SubscriptionCardsState extends State<SubscriptionCards> with HomeSubscript
       onDismissed: (_) {},
       background: const _CustomDismissibleBackground(),
       confirmDismiss: (_) async {
-        return customAlertDialog(context);
+        return showCustomDialog(
+          context,
+          widget.firebaseService!,
+          widget.item!,
+        );
       },
       resizeDuration: const Duration(milliseconds: 200),
       direction: DismissDirection.endToStart,
