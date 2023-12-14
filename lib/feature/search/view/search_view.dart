@@ -4,7 +4,12 @@ import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/home/view/widget/home%20subscription%20cards/home_subscription_cards.dart';
 import 'package:subsparrow/feature/home/view_model/home_view_model.dart';
 import 'package:subsparrow/feature/search/view/mixin/search_view_mixin.dart';
+import 'package:subsparrow/feature/search/view_model/search_view_model.dart';
 import 'package:subsparrow/product/service/firebase_service.dart';
+
+part './widget/custom_text_field.dart';
+part './widget/search_list.dart';
+part './widget/search_view_app_bar.dart';
 
 /// [SearchView] is a view for searching subscriptions.
 final class SearchView extends StatefulWidget {
@@ -29,40 +34,19 @@ final class SearchView extends StatefulWidget {
   final HomeViewModel homeViewModel;
 }
 
-class _SearchViewState extends State<SearchView> with SearchViewMixin {
+final class _SearchViewState extends State<SearchView> with SearchViewMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Abonelik Ara'),
-      ),
+      appBar: const _SearchViewAppBar(),
       body: Column(
         children: [
-          Padding(
-            padding: context.padding.low,
-            child: TextField(
-              autofocus: true,
-              onChanged: filterList,
-              decoration: const InputDecoration(
-                hintText: 'Aboneliklerimde Ara',
-                prefixIcon: Icon(Icons.search),
-              ),
-            ),
+          _CustomTextField(
+            onChanged: filterList,
           ),
-          ListenableBuilder(
-            listenable: searchViewModel,
-            builder: (context, child) => Expanded(
-              child: ListView.builder(
-                itemCount: searchViewModel.filteredItems.length,
-                itemBuilder: (context, index) {
-                  return SubscriptionCards(
-                    item: searchViewModel.filteredItems[index],
-                    firebaseService: widget.firebaseService,
-                    homeViewModel: widget.homeViewModel,
-                  );
-                },
-              ),
-            ),
+          _SearchList(
+            searchViewModel: searchViewModel,
+            widget: widget,
           ),
         ],
       ),
