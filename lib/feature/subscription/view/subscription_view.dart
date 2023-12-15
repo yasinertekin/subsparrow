@@ -1,18 +1,19 @@
-import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:gen/gen.dart';
 import 'package:gen/src/model/subscription_data/subscription_data.dart';
 import 'package:gen/src/model/subscriptions/subscriptions.dart';
 import 'package:kartal/kartal.dart';
+import 'package:subsparrow/feature/search/view/search_view.dart';
 import 'package:subsparrow/feature/subscription%20detail/view/subscription_detail_view.dart';
 import 'package:subsparrow/feature/subscription/view/mixin/subscription_mixin.dart';
 import 'package:subsparrow/feature/subscription/view_model/subscription_view_model.dart';
+import 'package:subsparrow/product/widget/custom_search_text_field.dart';
+import 'package:subsparrow/product/widget/subscription_view_card.dart';
 
 part 'widget/subscription_app_bar.dart';
 part 'widget/subscription_date_time_button.dart';
 part 'widget/subscription_date_time_picker.dart';
-part 'widget/subscription_view_card.dart';
 
 /// [SubscriptionView] is the view that displays the list of subscriptions
 final class SubscriptionView extends StatefulWidget {
@@ -35,9 +36,27 @@ class _SubscriptionViewState extends State<SubscriptionView> with SubscriptionMi
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final subscriptionData = snapshot.data!;
-            return _SubscriptionList(
-              subscriptionData: subscriptionData,
-              subscriptionViewModel: subscriptionViewModel,
+            return Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                children: [
+                  CustomSearchTextField(
+                    readOnly: true,
+                    onTap: () {
+                      context.route.navigateToPage(
+                        SearchView(
+                          subscriptionData: subscriptionData,
+                          subscriptionViewModel: subscriptionViewModel,
+                        ),
+                      );
+                    },
+                  ),
+                  _SubscriptionList(
+                    subscriptionData: subscriptionData,
+                    subscriptionViewModel: subscriptionViewModel,
+                  ),
+                ],
+              ),
             );
           } else if (snapshot.hasError) {
             return const Center(
@@ -69,7 +88,7 @@ final class _SubscriptionList extends StatelessWidget {
       child: ListView.builder(
         itemCount: subscriptionData.length,
         itemBuilder: (context, index) {
-          return _SubscriptionViewCard(
+          return SubscriptionViewCard(
             subscriptionData: subscriptionData,
             subscriptionViewModel: _subscriptionViewModel,
             index: index,

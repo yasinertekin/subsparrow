@@ -14,9 +14,10 @@ mixin SearchViewMixin on State<SearchView> {
   @override
   void initState() {
     super.initState();
-    subList = widget.subscriptions;
+    subList = widget.subscriptions ?? [];
     searchViewModel = SearchViewModel(
       subscriptions: subList,
+      subscriptionData: widget.subscriptionData ?? [],
     );
   }
 

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gen/src/model/subscription_data/subscription_data.dart';
+import 'package:gen/src/model/subscriptions/subscriptions.dart';
 
 /// SubscriptionViewModel
 final class SubscriptionViewModel extends ChangeNotifier {
@@ -11,6 +12,7 @@ final class SubscriptionViewModel extends ChangeNotifier {
       const Duration(days: 30),
     );
   }
+  List<Subscriptions> subscriptionList = [];
 
   /// selectedDate
   late DateTime selectedDate;

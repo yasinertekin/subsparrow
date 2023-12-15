@@ -9,11 +9,11 @@ import 'package:subsparrow/feature/search/view/search_view.dart';
 import 'package:subsparrow/product/service/firebase_service.dart';
 import 'package:subsparrow/product/utility/constants/string_constants.dart';
 import 'package:subsparrow/product/utility/enum/home_grid.dart';
+import 'package:subsparrow/product/widget/custom_search_text_field.dart';
 
 part 'widget/custom_circle_avatar.dart';
 part 'widget/home_app_bar.dart';
 part 'widget/home_header.dart';
-part 'widget/home_search.dart';
 part 'widget/home_total_price_card.dart';
 
 /// [HomeView] is the main view of the application.
@@ -73,13 +73,17 @@ final class _HomeBody extends StatelessWidget {
       children: [
         Padding(
           padding: context.padding.low,
-          child: Card(
-            elevation: 5,
-            child: _HomeSearch(
-              users: users,
-              firebaseServices: firebaseServices,
-              homeViewModel: homeViewModel,
-            ),
+          child: CustomSearchTextField(
+            readOnly: true,
+            onTap: () {
+              context.route.navigateToPage(
+                SearchView(
+                  homeViewModel: homeViewModel,
+                  subscriptions: users?.subscriptions ?? [],
+                  firebaseService: firebaseServices,
+                ),
+              );
+            },
           ),
         ),
         _HomeHeader(homeViewModel: homeViewModel),

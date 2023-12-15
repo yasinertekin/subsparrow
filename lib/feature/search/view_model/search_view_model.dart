@@ -1,31 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:gen/src/model/subscription_data/subscription_data.dart';
 import 'package:gen/src/model/subscriptions/subscriptions.dart';
 
-/// [SearchViewModel] is a view model for [SearchView].
-final class SearchViewModel extends ChangeNotifier {
-  /// [SearchViewModel]  constructor.
-  SearchViewModel({required this.subscriptions});
+class SearchViewModel extends ChangeNotifier {
+  SearchViewModel({
+    required this.subscriptionData,
+    required this.subscriptions,
+  });
 
-  /// [subscriptions] is a list of subscriptions.
+  final List<SubscriptionData> subscriptionData;
   final List<Subscriptions> subscriptions;
 
-  /// [filteredItems] is a list of filtered subscriptions.
-  List<Subscriptions> filteredItems = [];
+  final List<SubscriptionData> subscriptionsFiltered = [];
 
-  /// [filterList] is a function that filters the list of subscriptions.
-  void filterList(String query) {
+  final List<Subscriptions> filteredItems = [];
+
+  void _filterList(String query) {
     filteredItems.clear();
-    if (query.isNotEmpty) {
-      for (var i = 0; i < subscriptions.length; i++) {
-        if (subscriptions[i].platformName!.toLowerCase().contains(
-              query.toLowerCase(),
-            )) {
-          filteredItems.add(
-            subscriptions[i],
-          );
+    subscriptionsFiltered.clear();
+
+    // Tip kontrolü yaparak subscriptionData listesini filtrele
+    if (subscriptionData.isNotEmpty) {
+      for (final data in subscriptionData) {
+        if (data.id.toLowerCase().contains(query.toLowerCase())) {
+          subscriptionsFiltered.add(data);
         }
       }
     }
+
+    // Tip kontrolü yaparak subscriptions listesini filtrele
+    if (subscriptions.isNotEmpty) {
+      for (final sub in subscriptions) {
+        if (sub.platformName!.toLowerCase().contains(query.toLowerCase())) {
+          filteredItems.add(sub);
+        }
+      }
+    }
+
     notifyListeners();
+  }
+
+  // Dışarıdan çağrılacak olan genel filterList metodu
+  void filterList(String query) {
+    _filterList(query);
   }
 }

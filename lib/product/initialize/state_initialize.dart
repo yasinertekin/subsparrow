@@ -52,6 +52,7 @@ final class StateInitialize extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => SearchViewModel(
             subscriptions: [],
+            subscriptionData: [],
           ),
         ),
         ChangeNotifierProvider<ThemeNotifier>(
