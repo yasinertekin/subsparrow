@@ -6,7 +6,9 @@ import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/subscription/view_model/subscription_view_model.dart';
 import 'package:subsparrow/product/widget/subscription_date_time_button.dart';
 
+/// This is the subscription view card widget
 final class SubscriptionDateTimePicker extends StatelessWidget {
+  /// This is the subscription view card widget
   const SubscriptionDateTimePicker({
     required this.subViewModel,
     required this.subDetail,
@@ -25,18 +27,20 @@ final class SubscriptionDateTimePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Assets.icons.icDatePicker.svg(
-          package: 'gen',
-          height: context.sized.dynamicHeight(0.35),
-        ),
-        SubscriptionDateTimeButton(
-          subscriptionData: subscriptionData,
-          subViewModel: subViewModel,
-        ),
-      ],
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Assets.icons.icDatePicker.svg(
+            package: 'gen',
+            height: context.sized.dynamicHeight(0.35),
+          ),
+          SubscriptionDateTimeButton(
+            subscriptionData: subscriptionData,
+            subViewModel: subViewModel,
+          ),
+        ],
+      ),
     );
   }
 }

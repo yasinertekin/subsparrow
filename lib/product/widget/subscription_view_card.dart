@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gen/src/model/subscription_data/subscription_data.dart';
 import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/subscription/view_model/subscription_view_model.dart';
+import 'package:subsparrow/product/widget/circle_loading.dart';
 import 'package:subsparrow/product/widget/subscription_date_time_picker.dart';
 
 /// SubscriptionViewCard widget
@@ -117,7 +118,7 @@ final class _CustomListTileLeading extends StatelessWidget {
           context.sized.dynamicWidth(0.1),
         ),
         emptyWidget: const Icon(Icons.error),
-        loadingWidget: const CircularProgressIndicator(),
+        loadingWidget: const CircleLoading(),
         imageUrl: subscriptionData[index].data.subIcon,
       ),
     );

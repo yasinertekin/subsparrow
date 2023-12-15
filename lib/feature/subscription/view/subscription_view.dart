@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:gen/gen.dart';
 import 'package:gen/src/model/subscription_data/subscription_data.dart';
-import 'package:gen/src/model/subscriptions/subscriptions.dart';
 import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/search/view/search_view.dart';
-import 'package:subsparrow/feature/subscription%20detail/view/subscription_detail_view.dart';
 import 'package:subsparrow/feature/subscription/view/mixin/subscription_mixin.dart';
 import 'package:subsparrow/feature/subscription/view_model/subscription_view_model.dart';
+import 'package:subsparrow/product/widget/circle_loading.dart';
 import 'package:subsparrow/product/widget/custom_search_text_field.dart';
 import 'package:subsparrow/product/widget/subscription_view_card.dart';
 
 part 'widget/subscription_app_bar.dart';
-part 'widget/subscription_date_time_button.dart';
-part 'widget/subscription_date_time_picker.dart';
 
 /// [SubscriptionView] is the view that displays the list of subscriptions
 final class SubscriptionView extends StatefulWidget {
@@ -63,9 +58,7 @@ class _SubscriptionViewState extends State<SubscriptionView> with SubscriptionMi
               child: Text('Error'),
             );
           } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const CircleLoading();
           }
         },
       ),

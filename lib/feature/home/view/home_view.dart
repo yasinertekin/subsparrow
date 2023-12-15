@@ -9,6 +9,7 @@ import 'package:subsparrow/feature/search/view/search_view.dart';
 import 'package:subsparrow/product/service/firebase_service.dart';
 import 'package:subsparrow/product/utility/constants/string_constants.dart';
 import 'package:subsparrow/product/utility/enum/home_grid.dart';
+import 'package:subsparrow/product/widget/circle_loading.dart';
 import 'package:subsparrow/product/widget/custom_search_text_field.dart';
 
 part 'widget/custom_circle_avatar.dart';
@@ -48,7 +49,7 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
               return Text('Error: ${snapshot.error}');
             }
           }
-          return const CircularProgressIndicator();
+          return const CircleLoading();
         },
       ),
     );

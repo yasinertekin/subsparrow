@@ -5,14 +5,19 @@ import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/subscription%20detail/view/subscription_detail_view.dart';
 import 'package:subsparrow/feature/subscription/view_model/subscription_view_model.dart';
 
+/// This is the subscription view card widget
 final class SubscriptionDateTimeButton extends StatelessWidget {
+  /// This is the subscription view card widget
   const SubscriptionDateTimeButton({
     required this.subViewModel,
     required this.subscriptionData,
     super.key,
   });
 
+  /// This is the subscription view card widget
   final SubscriptionViewModel subViewModel;
+
+  /// This is the subscription view card widget
   final SubscriptionData? subscriptionData;
 
   @override
