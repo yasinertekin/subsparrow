@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:gen/src/model/subscriptions/subscriptions.dart';
 import 'package:kartal/kartal.dart';
@@ -21,14 +22,16 @@ final class SubscriptionCards extends StatefulWidget {
   /// [FirebaseService] instance
   final FirebaseService? firebaseService;
 
+  /// [HomeViewModel] instance
   final HomeViewModel? homeViewModel;
 
   @override
   SubscriptionCardsState createState() => SubscriptionCardsState();
 }
 
+// ignore: lines_longer_than_80_chars
 /// [SubscriptionCards] is the main view of the application.
-class SubscriptionCardsState extends State<SubscriptionCards> with HomeSubscriptionCardsMixin {
+final class SubscriptionCardsState extends State<SubscriptionCards> with HomeSubscriptionCardsMixin {
   @override
   Widget build(BuildContext context) {
     final icon = widget.item?.icon;
@@ -78,10 +81,12 @@ final class _CustomCard extends StatelessWidget {
     return Card(
       elevation: 8,
       child: ListTile(
-        leading: Image.network(
-          icon ?? '',
-          width: 50,
-          height: 50,
+        leading: CustomNetworkImage(
+          imageUrl: icon,
+          size: Size(
+            context.sized.dynamicWidth(0.1),
+            context.sized.dynamicWidth(0.1),
+          ),
         ),
         title: Text(platformName ?? ''),
         subtitle: Text(name ?? ''),

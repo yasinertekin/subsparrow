@@ -101,10 +101,9 @@ final class _CustomListTileLeading extends StatelessWidget {
     return Padding(
       padding: context.padding.low,
       child: CustomNetworkImage(
-        boxFit: BoxFit.contain,
         size: Size(
-          context.sized.dynamicHeight(0.05),
-          context.sized.dynamicHeight(0.10),
+          context.sized.dynamicWidth(0.1),
+          context.sized.dynamicWidth(0.1),
         ),
         emptyWidget: const Icon(Icons.error),
         loadingWidget: const CircularProgressIndicator(),

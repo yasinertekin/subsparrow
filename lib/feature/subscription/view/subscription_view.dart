@@ -65,15 +65,17 @@ final class _SubscriptionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: subscriptionData.length,
-      itemBuilder: (context, index) {
-        return _SubscriptionViewCard(
-          subscriptionData: subscriptionData,
-          subscriptionViewModel: _subscriptionViewModel,
-          index: index,
-        );
-      },
+    return Expanded(
+      child: ListView.builder(
+        itemCount: subscriptionData.length,
+        itemBuilder: (context, index) {
+          return _SubscriptionViewCard(
+            subscriptionData: subscriptionData,
+            subscriptionViewModel: _subscriptionViewModel,
+            index: index,
+          );
+        },
+      ),
     );
   }
 }

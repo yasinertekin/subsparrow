@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:gen/gen.dart';
 import 'package:kartal/kartal.dart';
-import 'package:logger/logger.dart';
+import 'package:provider/provider.dart';
 import 'package:subsparrow/feature/profile/view/mixin/profile_mixin.dart';
 import 'package:subsparrow/feature/profile/view_model/profile_view_model.dart';
+import 'package:subsparrow/product/base/theme_notifier.dart';
+import 'package:subsparrow/product/initialize/theme/custom_dark_theme.dart';
+import 'package:subsparrow/product/initialize/theme/custom_light_theme.dart';
 import 'package:widgets/src/widgets/custom_scaffold_messenger.dart';
 
+part 'widget/change_theme_color_switch_button.dart';
 part 'widget/user_name_text_field.dart';
 
 /// The main profile view widget.
@@ -49,6 +52,7 @@ final class _ProfileViewState extends State<ProfileView> with ProfileMixin {
                 _mailMessenger(context);
               },
             ),
+            const _ChangeThemeColorSwitchButton(),
           ],
         ),
       ),
@@ -59,50 +63,6 @@ final class _ProfileViewState extends State<ProfileView> with ProfileMixin {
     CustomSnackBar.show(
       context: context,
       content: const Text('Mail değiştirme işlemi henüz aktif değil.'),
-    );
-  }
-}
-
-final class _UploadPhoto extends StatelessWidget {
-  const _UploadPhoto({
-    required this.viewModel,
-  });
-  final ProfileViewModel viewModel;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          'Profil Fotoğrafı Eklemek İçin Tıklayınız',
-          style: context.general.textTheme.titleMedium?.copyWith(
-            color: context.general.colorScheme.onSurface,
-          ),
-        ),
-        InkWell(
-          onTap: () {
-            Logger().i(viewModel.image);
-            //    viewModel.firebaseUser?.updatePhotoURL(viewModel.image.toString());
-            viewModel.pickImage();
-          },
-          child: Assets.icons.icPhotoUpload.svg(
-            package: 'gen',
-            width: context.sized.dynamicHeight(0.25),
-          ),
-        ),
-        ListenableBuilder(
-          listenable: viewModel,
-          builder: (context, child) {
-            return viewModel.image != null
-                ? Image.file(
-                    viewModel.image!,
-                    width: context.sized.dynamicHeight(0.3),
-                    height: context.sized.dynamicWidth(0.3),
-                    fit: BoxFit.cover,
-                  )
-                : const SizedBox.shrink();
-          },
-        ),
-      ],
     );
   }
 }
