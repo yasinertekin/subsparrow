@@ -6,13 +6,13 @@ import 'package:subsparrow/product/utility/auth_exception.dart';
 /// [AuthViewModel] view model
 final class AuthViewModel extends ChangeNotifier {
   /// Default constructor
-  AuthViewModel(this._authService);
-  final AuthService _authService;
+  AuthViewModel(this.authService);
+  final AuthService authService;
 
   /// [signIn] Function
   Future<void> signIn(String email, String password) async {
     try {
-      await _authService.signInEmailAndPassword(email, password);
+      await authService.signInEmailAndPassword(email, password);
       // Giriş başarılıysa, burada gerekli bildirimleri yapabilirsiniz.
       notifyListeners();
     } on FirebaseAuthException catch (e) {

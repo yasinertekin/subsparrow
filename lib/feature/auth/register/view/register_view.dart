@@ -28,6 +28,7 @@ class _RegisterViewState extends State<RegisterView> with RegisterMixin {
   Widget build(BuildContext context) {
     final userRegisterViewModel = Provider.of<RegisterViewModel>(context);
     final user = FirebaseAuth.instance.currentUser;
+
     return user == null
         ? Scaffold(
             appBar: const _RegisterAppBar(),

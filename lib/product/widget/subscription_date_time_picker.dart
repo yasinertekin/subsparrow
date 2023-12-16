@@ -20,7 +20,7 @@ final class SubscriptionDateTimePicker extends StatelessWidget {
   final SubscriptionViewModel subViewModel;
 
   /// [subDetail] is a subscription detail.
-  final Subscriptions? subDetail;
+  final List<Subscriptions>? subDetail;
 
   /// [subscriptionData] is a subscription data.
   final SubscriptionData? subscriptionData;

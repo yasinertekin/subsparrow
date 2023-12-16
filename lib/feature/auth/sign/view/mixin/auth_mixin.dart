@@ -55,6 +55,8 @@ mixin AuthMixin on State<AuthView> {
 
   /// [navigateToDashboardView] Function
   void navigateToDashboardView(BuildContext context) {
-    context.route.navigateToPage(const DashboardView());
+    context.route.navigateToPage(
+      const DashboardView(),
+    );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/auth/register/view/register_view.dart';
@@ -9,6 +10,7 @@ import 'package:widgets/src/widgets/custom_scaffold_messenger.dart';
 /// [RegisterMixin] mixin
 mixin RegisterMixin on State<RegisterView> {
   final _formKey = GlobalKey<FormState>();
+  final user = FirebaseAuth.instance.currentUser;
 
   /// [formKey] getter
   GlobalKey<FormState> get formKey => _formKey;
@@ -52,6 +54,15 @@ mixin RegisterMixin on State<RegisterView> {
         context: context,
         content: Text(error.message),
       );
+    }
+
+    initState() {
+      super.initState();
+      if (user != null) {
+        context.route.navigateToPage(
+          const AuthView(),
+        );
+      }
     }
   }
 }

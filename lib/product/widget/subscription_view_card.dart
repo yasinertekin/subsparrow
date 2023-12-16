@@ -59,7 +59,7 @@ final class _CustomListTile extends StatelessWidget {
         context.route.navigateToPage(
           SubscriptionDateTimePicker(
             subViewModel: subscriptionViewModel,
-            subDetail: subscriptionData[index].data.subscriptions?[index],
+            subDetail: subscriptionData[index].data.subscriptions,
             subscriptionData: subscriptionData[index],
           ),
         );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:provider/provider.dart';
+import 'package:subsparrow/feature/auth/sign/view/auth_view.dart';
+import 'package:subsparrow/feature/auth/sign/view_model/auth_view_model.dart';
 import 'package:subsparrow/feature/profile/view/mixin/profile_mixin.dart';
 import 'package:subsparrow/feature/profile/view_model/profile_view_model.dart';
 import 'package:subsparrow/product/base/theme_notifier.dart';
@@ -15,7 +17,6 @@ part 'widget/user_name_text_field.dart';
 final class ProfileView extends StatefulWidget {
   /// [ProfileView] default constructor
   const ProfileView({super.key});
-
   @override
   State<ProfileView> createState() => _ProfileViewState();
 }
@@ -51,6 +52,21 @@ final class _ProfileViewState extends State<ProfileView> with ProfileMixin {
               onPressed: () {
                 _mailMessenger(context);
               },
+            ),
+            Consumer<AuthViewModel>(
+              builder: (context, value, child) => ElevatedButton(
+                onPressed: () {
+                  CustomSnackBar.show(
+                    context: context,
+                    content: const Text('Çıkış yapılıyor...'),
+                  );
+                  value.authService.signOut();
+                  context.route.navigateToPage(
+                    const AuthView(),
+                  );
+                },
+                child: const Text('Çıkış Yap'),
+              ),
             ),
             const _ChangeThemeColorSwitchButton(),
           ],

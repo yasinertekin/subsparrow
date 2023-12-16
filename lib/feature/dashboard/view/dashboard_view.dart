@@ -12,7 +12,6 @@ part 'widget/bottom_app_bar.dart';
 final class DashboardView extends StatefulWidget {
   /// DashboardView
   const DashboardView({super.key});
-
   @override
   State<DashboardView> createState() => _DashboardViewState();
 }

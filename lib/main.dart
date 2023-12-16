@@ -9,7 +9,6 @@ import 'package:widgets/index.dart';
 
 Future<void> main() async {
   await AppInitialize().make();
-
   runApp(
     const StateInitialize(
       child: _MyApp(),
