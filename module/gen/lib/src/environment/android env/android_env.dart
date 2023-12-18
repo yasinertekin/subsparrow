@@ -29,22 +29,18 @@ final class AndroidEnv implements AppConfiguration {
   String get appId => _appId;
 
   @override
-  // TODO: implement authDomain
   String get authDomain => '';
 
   @override
-  // TODO: implement iosBundleId
   String get iosBundleId => '';
 
   @override
-  // TODO: implement measurementId
   String get measurementId => '';
 
   @override
   String get messagingSenderId => _messagingSenderId;
 
   @override
-  // TODO: implement projectId
   String get projectId => _projectId;
 
   @override
