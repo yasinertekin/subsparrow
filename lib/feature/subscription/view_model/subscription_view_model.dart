@@ -12,6 +12,13 @@ final class SubscriptionViewModel extends ChangeNotifier {
       const Duration(days: 30),
     );
   }
+
+  List<SubscriptionData> _subscriptionData = [];
+
+  /// subscriptionData
+  List<SubscriptionData> get subscriptionData => _subscriptionData;
+
+  /// subscriptionList
   List<Subscriptions> subscriptionList = [];
 
   /// selectedDate
@@ -39,41 +46,22 @@ final class SubscriptionViewModel extends ChangeNotifier {
     }
   }
 
-  bool _isRequestSent = false;
-
-  /// isRequestSent
-  bool get isRequestSent => _isRequestSent;
-
   /// getSubscriptionData
   Future<List<SubscriptionData>> getSubscriptionData() async {
-    if (!_isRequestSent) {
-      try {
-        _isRequestSent = true;
+    if (_subscriptionData.isEmpty) {
+      final subscriptions = FirebaseFirestore.instance.collection(
+        'subscription_platforms',
+      );
+      final subscriptionDocs = await subscriptions.get();
 
-        notifyListeners(); // Değişiklik olduğunda dinleyenleri bilgilendir
+      _subscriptionData = subscriptionDocs.docs
+          .map(
+            SubscriptionData.fromFirestore,
+          )
+          .toList();
 
-        final subscriptions = FirebaseFirestore.instance.collection(
-          'subscription_platforms',
-        );
-        final subscriptionDocs = await subscriptions.get();
-
-        _isRequestSent = false;
-        notifyListeners(); // Değişiklik olduğunda dinleyenleri bilgilendir
-
-        return subscriptionDocs.docs
-            .map(
-              SubscriptionData.fromFirestore,
-            )
-            .toList();
-      } catch (error) {
-        _isRequestSent = false;
-
-        notifyListeners(); // Değişiklik olduğunda dinleyenleri bilgilendir
-
-        return <SubscriptionData>[];
-      }
-    } else {
-      return <SubscriptionData>[];
+      notifyListeners();
     }
+    return _subscriptionData;
   }
 }
