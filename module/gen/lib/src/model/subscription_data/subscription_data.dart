@@ -9,7 +9,6 @@ final class SubscriptionData {
     required this.data,
   });
 
-  /// [fromFirestore] is a factory method that creates a [SubscriptionData]
   ///  from a [DocumentSnapshot].
   factory SubscriptionData.fromFirestore(DocumentSnapshot doc) {
     return SubscriptionData(
