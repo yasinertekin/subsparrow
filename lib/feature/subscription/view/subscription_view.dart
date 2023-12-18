@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gen/src/model/subscription_data/subscription_data.dart';
 import 'package:kartal/kartal.dart';
 import 'package:subsparrow/feature/search/view/search_view.dart';
 import 'package:subsparrow/feature/subscription/view/mixin/subscription_mixin.dart';
@@ -20,14 +19,12 @@ final class SubscriptionView extends StatefulWidget {
 }
 
 class _SubscriptionViewState extends State<SubscriptionView> with SubscriptionMixin {
-  /// [SubscriptionView] is the view that displays the list of subscriptions
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const _SubsriptionAppBar(),
       body: FutureBuilder(
-        future: getSubscriptionData(),
+        future: subscriptionViewModel.getSubscriptionData(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final subscriptionData = snapshot.data!;
@@ -47,7 +44,6 @@ class _SubscriptionViewState extends State<SubscriptionView> with SubscriptionMi
                     },
                   ),
                   _SubscriptionList(
-                    subscriptionData: subscriptionData,
                     subscriptionViewModel: subscriptionViewModel,
                   ),
                 ],
@@ -68,21 +64,19 @@ class _SubscriptionViewState extends State<SubscriptionView> with SubscriptionMi
 
 final class _SubscriptionList extends StatelessWidget {
   const _SubscriptionList({
-    required this.subscriptionData,
     required SubscriptionViewModel subscriptionViewModel,
   }) : _subscriptionViewModel = subscriptionViewModel;
 
-  final List<SubscriptionData> subscriptionData;
   final SubscriptionViewModel _subscriptionViewModel;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        itemCount: subscriptionData.length,
+        itemCount: _subscriptionViewModel.subscriptionData.length,
         itemBuilder: (context, index) {
           return SubscriptionViewCard(
-            subscriptionData: subscriptionData,
+            subscriptionData: _subscriptionViewModel.subscriptionData,
             subscriptionViewModel: _subscriptionViewModel,
             index: index,
           );
