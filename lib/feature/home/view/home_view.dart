@@ -15,7 +15,6 @@ import 'package:subsparrow/product/widget/custom_search_text_field.dart';
 part 'widget/custom_circle_avatar.dart';
 part 'widget/home_app_bar.dart';
 part 'widget/home_header.dart';
-part 'widget/home_total_price_card.dart';
 
 /// [HomeView] is the main view of the application.
 final class HomeView extends StatefulWidget {
@@ -30,7 +29,6 @@ final class _HomeViewState extends State<HomeView> with HomeViewMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: const _HomeFloating(),
       appBar: const _HomeAppBar(),
       body: StreamBuilder<DocumentSnapshot<Users>>(
         stream: homeViewModel.userDocument.snapshots(),
@@ -94,20 +92,6 @@ final class _HomeBody extends StatelessWidget {
           homeViewModel: homeViewModel,
         ),
       ],
-    );
-  }
-}
-
-final class _HomeFloating extends StatelessWidget {
-  const _HomeFloating();
-
-  @override
-  Widget build(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () {},
-      child: const Icon(
-        Icons.history,
-      ),
     );
   }
 }
