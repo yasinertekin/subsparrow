@@ -7,6 +7,8 @@ import 'package:subsparrow/product/utility/auth_exception.dart';
 final class AuthViewModel extends ChangeNotifier {
   /// Default constructor
   AuthViewModel(this.authService);
+
+  /// [authService] is the service that is used for authentication.
   final AuthService authService;
 
   /// [signIn] Function
