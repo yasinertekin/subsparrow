@@ -43,6 +43,7 @@ final class ProfileViewModel extends ChangeNotifier {
 
   File? _image;
 
+  /// The current user's profile picture.
   File? get image => _image;
 
   /// Picks an image from the gallery.
@@ -81,11 +82,11 @@ final class ProfileViewModel extends ChangeNotifier {
       // Notify listeners about the change
       notifyListeners();
     } catch (e) {
-      print('Error updating phone number: $e');
       // Handle the error accordingly
     }
   }
 
+  /// The current user's photo URL.
   bool readOnly = true;
 
   ///ChangeReadOnly
