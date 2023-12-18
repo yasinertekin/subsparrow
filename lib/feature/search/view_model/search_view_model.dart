@@ -2,17 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:gen/src/model/subscription_data/subscription_data.dart';
 import 'package:gen/src/model/subscriptions/subscriptions.dart';
 
-class SearchViewModel extends ChangeNotifier {
+/// [SearchViewModel] is the view model of the search view.
+final class SearchViewModel extends ChangeNotifier {
+  /// [SearchViewModel] is the view model of the search view.
   SearchViewModel({
     required this.subscriptionData,
     required this.subscriptions,
   });
 
+  /// [subscriptionData] is the list of subscription data.
   final List<SubscriptionData> subscriptionData;
+
+  /// [subscriptions] is the list of subscriptions.
   final List<Subscriptions> subscriptions;
 
+  /// [subscriptionsFiltered] is the list of filtered subscriptions.
   final List<SubscriptionData> subscriptionsFiltered = [];
 
+  /// [filteredItems] is the list of filtered subscriptions.
   final List<Subscriptions> filteredItems = [];
 
   void _filterList(String query) {
@@ -40,7 +47,7 @@ class SearchViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Dışarıdan çağrılacak olan genel filterList metodu
+  /// [filterList] is the function that filters the list.
   void filterList(String query) {
     _filterList(query);
   }
