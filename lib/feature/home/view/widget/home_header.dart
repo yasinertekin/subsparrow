@@ -13,9 +13,9 @@ final class _HomeHeader extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: HomeGridViewBuilder.values.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        childAspectRatio: 1.5,
+        childAspectRatio: context.sized.dynamicHeight(0.0015),
       ),
       itemBuilder: (BuildContext context, int index) {
         final item = HomeGridViewBuilder.values[index];
