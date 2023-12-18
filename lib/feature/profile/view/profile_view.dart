@@ -1,17 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kartal/kartal.dart';
-import 'package:provider/provider.dart';
-import 'package:subsparrow/feature/auth/sign/view/auth_view.dart';
-import 'package:subsparrow/feature/auth/sign/view_model/auth_view_model.dart';
 import 'package:subsparrow/feature/profile/view/mixin/profile_mixin.dart';
-import 'package:subsparrow/feature/profile/view_model/profile_view_model.dart';
-import 'package:subsparrow/product/base/theme_notifier.dart';
-import 'package:subsparrow/product/initialize/theme/custom_dark_theme.dart';
-import 'package:subsparrow/product/initialize/theme/custom_light_theme.dart';
-import 'package:widgets/src/widgets/custom_scaffold_messenger.dart';
-
-part 'widget/change_theme_color_switch_button.dart';
-part 'widget/user_name_text_field.dart';
+import 'package:subsparrow/product/utility/enum/profile_enum.dart';
+import 'package:subsparrow/product/utility/extensions/profile_extensions.dart';
 
 /// The main profile view widget.
 final class ProfileView extends StatefulWidget {
@@ -33,52 +23,20 @@ final class _ProfileViewState extends State<ProfileView> with ProfileMixin {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _CustomTextField(
-              viewModel: viewModel,
-              textEditingController: viewModel.displayNameController,
-              textFieldTitle: 'Kullanıcı Adı',
-              icon: const Icon(
-                Icons.person,
-              ),
-              onPressed: () => changeNameFunction(viewModel, context),
-            ),
-            _CustomTextField(
-              viewModel: viewModel,
-              textEditingController: viewModel.emailController,
-              textFieldTitle: 'Email',
-              icon: const Icon(
-                Icons.email,
-              ),
-              onPressed: () {
-                _mailMessenger(context);
-              },
-            ),
-            Consumer<AuthViewModel>(
-              builder: (context, value, child) => ElevatedButton(
-                onPressed: () {
-                  CustomSnackBar.show(
+            Expanded(
+              child: ListView.builder(
+                itemCount: ProfileEnum.values.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ProfileEnum.values[index].getProfileListTileTitle(
                     context: context,
-                    content: const Text('Çıkış yapılıyor...'),
-                  );
-                  value.authService.signOut();
-                  context.route.navigateToPage(
-                    const AuthView(),
+                    viewModel: viewModel,
                   );
                 },
-                child: const Text('Çıkış Yap'),
               ),
             ),
-            const _ChangeThemeColorSwitchButton(),
           ],
         ),
       ),
-    );
-  }
-
-  void _mailMessenger(BuildContext context) {
-    CustomSnackBar.show(
-      context: context,
-      content: const Text('Mail değiştirme işlemi henüz aktif değil.'),
     );
   }
 }
